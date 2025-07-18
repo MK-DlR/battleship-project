@@ -12,4 +12,4 @@
 
 7/16/25:
 
-- Basic set up of files
+- Set up basic files that will be needed
