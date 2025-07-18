@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "test": "jest",
+    "start": "live-server . --open=public/"
+  },
+  "jest": {
+    "testMatch": ["**/tests/**/*.test.js"],
+    "collectCoverageFrom": ["src/**/*.js"]
+  }
+}

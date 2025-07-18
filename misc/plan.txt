@@ -1,0 +1,90 @@
+write a test, then make it pass
+
+1. create a Ship class/factory
+    a. ships will be objects that include
+        a1. length
+        a2. # of times they've been hit
+        a3. sunk or not status
+    b. ships should have hit() function
+        c1. that increases the number of hits in ship
+    c. isSunk() function
+        d1. calculates if ship is considered sunk
+            - based on its length and received hits
+Done
+
+2. create a Gameboard class/factory
+    a. note: UI has not yet been created
+        a1. use tests to determine if things are coming together
+            - don't rely on console.log or DOM methods
+    b. Gameboards should be able to place ships
+        b1. at specific coordinates
+            - by calling the ship factory/class
+    c. Gameboards should have receiveAttack() function
+        c1. that takes a pair of coordinates
+        c2. determines whether or not it hits a Ship and then
+            - on success: sends the hit function to the correct ship
+            - on failure: records coordinates of missed shot
+    d. Gameboards should keep track of missed shots
+        d1. so they can display them properly
+    e. Gameboards should be able to report 
+        e1. whether or not all of their ships have been sunk
+Done
+
+3. create a Player class/factory
+    a. there will be 2 types of players
+        a1. "real" players
+        a2. "computer" players
+    b. each player object should contain its own Gameboard
+
+4. import classes/factories into another file
+    a. drive the game using event listeners
+        a1. to interact with objects
+    b. create a module that helps manage actions 
+        b1. that should happen in DOM
+
+5. can start crafting UI
+    a. set up new game by creating players
+        a1. (for now) populate each player's Gameboard
+            - with predetermined coordinates
+            - will implement system to place ships later
+    b. HTML implementation
+        b1. display both player's boards
+            - render them using info from Gameboard class/factory
+            - will need methods to render each Gameboard
+            - so put them in an appropriate module
+    c. event listeners should step through game
+        c1. turn by turn
+        c2. using only methods from other objects
+        c3. if tempted to write a new function
+            - figure out which class or module it should belong to
+    d. for attacks
+        d1. let user click on a coordinate in enemy Gameboard
+            - send user input to methods on objects
+            - and re-render boards to display new information
+        d2. players should take turns by attacking enemy Gameboard
+            - if wanting to keep track of current player's turn
+            - manage that in this module (step 4b)
+            - instead of another mentioned object
+        d3. game is played against computer
+            - so make the computer player capable of making random players
+            - should know if a given move is legal
+                - ie, shouldn't attack the same spot twice
+            - try adjacent slots after getting a hit (xtra credit)
+
+6. create conditions so game ends
+    a. once one player's ship have all been sunk
+    b. this function is appropriate for this module (step 4b)
+
+7. finish by implementing system to allow placing of ships
+    a. examples:
+        - typing coordinates
+        - button to cycle through random placements
+        - drag and drop (xtra credit)
+
+Extra Credit:
+    - drag and drop to place ships
+    - 2 player option w/ "pass device" screen
+    - computer player tries adjacent slots after getting a hit
+
+Notes:
+    - if user selects a spot that's already been hit, let them still have their turn

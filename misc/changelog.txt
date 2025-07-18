@@ -1,0 +1,15 @@
+7/18/25:
+
+- Create allShipsSunk and accompanying test
+- Create receiveAttack and accompanying test
+
+7/17/25:
+
+- Create placeShip and accompanying test
+- Create Gameboard factory and accompanying test
+- Create hit and isSunk functions and accompanying tests
+- Create Ship class constructor and accompanying test
+
+7/16/25:
+
+- Basic set up of files
