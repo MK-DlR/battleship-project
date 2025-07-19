@@ -5,7 +5,6 @@ import { Gameboard } from "./gameboard.js";
 
 const message = "Successfully linked player";
 
-// two types of players in the game, ‘real’ players and ‘computer’ players
 // each player object should contain its own gameboard
 
 // player class constructor

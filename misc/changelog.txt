@@ -1,5 +1,10 @@
+7/19/25:
+
+- Create Player class accompanying test for real and computer players
+
 7/18/25:
 
+- Create Player class
 - Create allShipsSunk and accompanying test
 - Create receiveAttack and accompanying test
 
