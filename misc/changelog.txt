@@ -1,5 +1,7 @@
 7/19/25:
 
+- Set up test to ensure players can't select out of bounds attacks
+- Create clearBoard and accompanying test 
 - Create Player class accompanying test for real and computer players
 
 7/18/25:

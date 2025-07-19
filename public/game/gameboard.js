@@ -103,11 +103,25 @@ function Gameboard() {
     return true;
   };
 
+  const clearBoard = function () {
+    board.length = 0;
+    ships.length = 0;
+    missedAttacks.length = 0;
+    createBoard();
+  };
+
   const getBoard = () => board;
 
   const getMissedAttacks = () => missedAttacks;
 
-  return { placeShip, receiveAttack, getBoard, getMissedAttacks, allShipsSunk };
+  return {
+    placeShip,
+    receiveAttack,
+    getBoard,
+    getMissedAttacks,
+    allShipsSunk,
+    clearBoard,
+  };
 }
 
 // exports
