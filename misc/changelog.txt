@@ -1,5 +1,6 @@
 7/21/25:
 
+- Clarify file names (dom.js to layout.js, main.js to gameController.js)
 - Create test for individual player gameboards
 - Create check that doesn't allow players to select out of bounds attacks and associated test
 
