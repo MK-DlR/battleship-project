@@ -35,6 +35,7 @@ Done
         a1. "real" players
         a2. "computer" players
     b. each player object should contain its own Gameboard
+Done
 
 4. import classes/factories into another file
     a. drive the game using event listeners
@@ -88,4 +89,6 @@ Extra Credit:
 
 Notes:
     - don't let users select out of bounds spots to attack
-    - if user selects a spot that's already been hit, let them still have their turn
+    Done
+    - don't forget to include something that changes the player turn
+      - if user selects a spot that's already been hit, let them still have their turn

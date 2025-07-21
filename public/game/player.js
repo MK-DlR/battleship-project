@@ -12,6 +12,7 @@ class Player {
   constructor(name, type) {
     this.name = name; // player name
     this.type = type; // human or computer
+    this.gameboard = Gameboard(); // new gameboard for player
   }
 }
 
