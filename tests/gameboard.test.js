@@ -85,7 +85,17 @@ test("clearBoard should reset board to initial state after clearing", () => {
 });
 
 test("players cannot pick attack locations outside of the board", () => {
-  // test
+  const valid = freshBoard.receiveAttack(5, 5); // in bounds attack
+  const invalid1 = freshBoard.receiveAttack(12, 12); // general out of bounds attack
+  const invalid2 = freshBoard.receiveAttack(50, 0); // x axis out of bounds attack
+  const invalid3 = freshBoard.receiveAttack(0, 50); // y axis out of bounds attack
+  const invalid4 = freshBoard.receiveAttack(-1, -6); // negative coords out of bounds attack
+
+  expect(valid).toBe("miss");
+  expect(invalid1).toBe("Selection is out of bounds");
+  expect(invalid2).toBe("Selection is out of bounds");
+  expect(invalid3).toBe("Selection is out of bounds");
+  expect(invalid4).toBe("Selection is out of bounds");
 });
 
 // report whether or not all ships have been sunk

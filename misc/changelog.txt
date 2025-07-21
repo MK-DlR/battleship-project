@@ -1,3 +1,7 @@
+7/21/25:
+
+- Create check that doesn't allow players to select out of bounds attacks and associated test
+
 7/19/25:
 
 - Set up test to ensure players can't select out of bounds attacks

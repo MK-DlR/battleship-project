@@ -82,6 +82,11 @@ function Gameboard() {
 
   // take pair of coordinates and determine if attack is a hit
   const receiveAttack = function (x, y) {
+    // ensure coordinates are within board boundaries
+    if (x > 9 || y > 9 || x < 0 || y < 0) {
+      return "Selection is out of bounds";
+    }
+    // check that selected spot hasn't been attacked yet
     if (board[x][y] !== "X" && board[x][y] !== "H" && board[x][y] !== "M") {
       board[x][y].hit();
       board[x][y] = "H";

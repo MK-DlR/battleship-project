@@ -87,4 +87,5 @@ Extra Credit:
     - computer player tries adjacent slots after getting a hit
 
 Notes:
+    - don't let users select out of bounds spots to attack
     - if user selects a spot that's already been hit, let them still have their turn
