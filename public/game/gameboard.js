@@ -1,7 +1,9 @@
 // gameboard.js
 // imports
 import { Ship } from "./ship.js";
+
 const message = "Successfully linked gameboard";
+
 // factory to create Gameboard
 function Gameboard() {
   const rows = 10;

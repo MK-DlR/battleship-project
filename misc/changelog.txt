@@ -1,5 +1,6 @@
 7/22/25:
 
+- Create test to make sure both player boards are populated with 5 unique ships
 - Create test to check that player boards are unique
 - Create helper functions getCell and setCell to help with x/y coordinate clarity
 - Update temporary player ship coordinates to be inverted/mirrored from one another

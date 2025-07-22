@@ -33,18 +33,40 @@ test("both player gameboards are distinct from each other", () => {
   const player1Board = gameData[0].player.gameboard.getBoard();
   const player2Board = gameData[1].player.gameboard.getBoard();
 
-  expect(player1Board[0][0].length).toBe(5); // Carrier is length 5
+  expect(player1Board[0][0].length).toBe(5); // Carrier length 5
   expect(player2Board[0][0]).toBe("X"); // empty
   expect(player1Board[8][5]).toBe("X"); // empty
   expect(player2Board[8][5].length).toBe(2); // Patrol Boat length 2
 });
 
-// Are their ship arrays correctly populated with five ships?
 test("both player gameboards are populated with 5 ships", () => {
-  // test
+  const player1Board = gameData[0].player.gameboard.getBoard();
+  const player2Board = gameData[1].player.gameboard.getBoard();
+
+  const uniqueShips1 = new Set();
+  const uniqueShips2 = new Set();
+
+  for (let row of player1Board) {
+    for (let cell of row) {
+      if (cell !== "X" && cell !== "H" && cell !== "M") {
+        uniqueShips1.add(cell); // store the ship object
+      }
+    }
+  }
+
+  for (let row of player2Board) {
+    for (let cell of row) {
+      if (cell !== "X" && cell !== "H" && cell !== "M") {
+        uniqueShips2.add(cell); // store the ship object
+      }
+    }
+  }
+
+  expect(uniqueShips1.size).toBe(5);
+  expect(uniqueShips2.size).toBe(5);
 });
 
-// Does it place the ships in expected places (during testing phase)?
 test("all 5 ships are correctly placed", () => {
   // test
+  // return coordinates for placed ships
 });
