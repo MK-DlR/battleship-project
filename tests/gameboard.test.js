@@ -108,8 +108,8 @@ test("gameboard reports whether or not all ships have been sunk", () => {
 
   // sink destroyer ship
   freshBoard.receiveAttack(0, 0);
-  freshBoard.receiveAttack(0, 1);
-  freshBoard.receiveAttack(0, 2);
+  freshBoard.receiveAttack(1, 0);
+  freshBoard.receiveAttack(2, 0);
 
   freshBoard.receiveAttack(6, 6); // missed attack to test edge case
 
@@ -117,7 +117,7 @@ test("gameboard reports whether or not all ships have been sunk", () => {
 
   // sink patrol boat ship
   freshBoard.receiveAttack(1, 1);
-  freshBoard.receiveAttack(2, 1);
+  freshBoard.receiveAttack(1, 2);
 
   freshBoard.receiveAttack(4, 2); // missed attack to test edge case
 

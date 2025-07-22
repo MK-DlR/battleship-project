@@ -1,5 +1,16 @@
+7/22/25:
+
+- Create test to check that player boards are unique
+- Create helper functions getCell and setCell to help with x/y coordinate clarity
+- Update temporary player ship coordinates to be inverted/mirrored from one another
+- Fix x/y coordinates being inverted and update relevant tests to pass with fixed code
+
 7/21/25:
 
+- Create placeShipsForTesting and placeAllShips functions to handle placing ships and their coordinates
+- Create basic newGame function to handle calling gameboard and player creation and populating ships
+- Create allShips array to allow createFleet to create ships for players
+- Set up gameController to handle game management and DOM actions
 - Clarify file names (dom.js to layout.js, main.js to gameController.js)
 - Create test for individual player gameboards
 - Create check that doesn't allow players to select out of bounds attacks and associated test
