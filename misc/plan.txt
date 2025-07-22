@@ -44,17 +44,18 @@ Done
         b1. that should happen in DOM
 Wip
 
-5. can start crafting UI
+5. start crafting UI
     a. set up new game by creating players
         a1. (for now) populate each player's Gameboard
             - with predetermined coordinates
             - will implement system to place ships later
-    Wip
+    Done
     b. HTML implementation
         b1. display both player's boards
             - render them using info from Gameboard class/factory
             - will need methods to render each Gameboard
             - so put them in an appropriate module
+    Wip
     c. event listeners should step through game
         c1. turn by turn
         c2. using only methods from other objects
