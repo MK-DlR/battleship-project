@@ -66,7 +66,28 @@ test("both player gameboards are populated with 5 ships", () => {
   expect(uniqueShips2.size).toBe(5);
 });
 
+function verifyShipPlacement(board, ships, coords) {
+  for (let i = 0; i < ships.length; i++) {
+    const ship = ships[i];
+    const [x, y, dir] = coords[i];
+
+    for (let j = 0; j < ship.length; j++) {
+      let cell;
+      if (dir === "horizontal") {
+        cell = board[y][x + j];
+      } else if (dir === "vertical") {
+        cell = board[y + j][x];
+      }
+
+      expect(cell).toBe(ship);
+    }
+  }
+}
+
 test("all 5 ships are correctly placed", () => {
-  // test
-  // return coordinates for placed ships
+  const player1Board = gameData[0].player.gameboard.getBoard();
+  const player2Board = gameData[1].player.gameboard.getBoard();
+
+  verifyShipPlacement(player1Board, gameData[0].ships, player1Coords);
+  verifyShipPlacement(player2Board, gameData[1].ships, player2Coords);
 });
