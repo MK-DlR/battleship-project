@@ -55,12 +55,13 @@ Wip
             - render them using info from Gameboard class/factory
             - will need methods to render each Gameboard
             - so put them in an appropriate module
-    Wip
+    Done
     c. event listeners should step through game
         c1. turn by turn
         c2. using only methods from other objects
         c3. if tempted to write a new function
             - figure out which class or module it should belong to
+    Wip
     d. for attacks
         d1. let user click on a coordinate in enemy Gameboard
             - send user input to methods on objects

@@ -6,7 +6,7 @@
 * #CE0D0E bright red
 * #294163 dark blue
 * #5889AA light blue
-* #D1C6C4 silver
+* #D1C6C4 silver #ece8e7 adjusted silver
 
 * possible palette2
 * #6B212c berry red
@@ -34,11 +34,36 @@ body {
   margin-top: 2rem;
 }
 
+.board-wrapper {
+  display: inline-block;
+  margin: 0 1rem;
+}
+
+.column-labels {
+  padding-left: 0;
+  user-select: none;
+  font-weight: bold;
+  display: grid;
+  grid-template-columns: 30px repeat(10, 30px);
+  column-gap: 0.3px;
+  padding-left: 10px;
+}
+
+.row-labels {
+  padding: 0;
+  user-select: none;
+  font-weight: bold;
+  display: grid;
+  grid-template-rows: repeat(10, 30px);
+  margin-right: 2px;
+  row-gap: 0.3px;
+  padding-top: 10px;
+}
+
 .player-board {
   display: grid;
   grid-template-columns: repeat(10, 30px);
   grid-template-rows: repeat(10, 30px);
-  gap: 2px;
   border: 2px solid #333;
   padding: 0.5rem;
 }
@@ -48,17 +73,18 @@ body {
   height: 30px;
   background-color: lightblue;
   border: 1px solid #ccc;
+  box-sizing: border-box; 
 }
 
 .ship {
-  background-color: navy;
+  background-color: #294163;
 }
 .hit {
-  background-color: red;
+  background-color: #911104;
 }
 .miss {
-  background-color: white;
+  background-color: #5889AA;
 }
 .empty {
-  background-color: lightgray;
+  background-color: #ece8e7;
 }
