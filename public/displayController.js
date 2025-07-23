@@ -3,7 +3,7 @@
 
 import { mainContent } from "./layout.js";
 import { Ship } from "./game/ship.js";
-import { gameData } from "./gameController.js"; // import the game state
+import { newGame, gameData } from "./gameController.js"; // import the game state
 
 function renderGameboards() {
   // create container for both boards
@@ -137,6 +137,40 @@ function renderGameboards() {
 }
 
 renderGameboards();
+
+function renderButtons() {
+  // button container
+  const buttonContainer = document.createElement("div");
+  buttonContainer.classList.add("button-container");
+
+  // new game button
+  const newGameButton = document.createElement("BUTTON");
+  newGameButton.classList.add("button");
+  newGameButton.id = "newGameButton";
+  const newGameText = document.createTextNode("New Game");
+
+  // add event listener to call imported newGame function
+  newGameButton.addEventListener("click", newGame);
+
+  // reset score button
+  const resetScoreButton = document.createElement("BUTTON");
+  resetScoreButton.classList.add("button");
+  resetScoreButton.id = "resetScoreButton";
+  const resetScoreText = document.createTextNode("Reset Score");
+
+  // add event listener to call resetScore function
+  // need to write resetScore function
+  // resetScoreButton.addEventListener("click", resetScore);
+
+  // append everything to DOM
+  mainContent.appendChild(buttonContainer);
+  newGameButton.appendChild(newGameText);
+  buttonContainer.appendChild(newGameButton);
+  resetScoreButton.appendChild(resetScoreText);
+  buttonContainer.appendChild(resetScoreButton);
+}
+
+renderButtons();
 
 export { renderGameboards };
 

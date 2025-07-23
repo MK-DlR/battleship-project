@@ -75,6 +75,7 @@ Wip
             - should know if a given move is legal
                 - ie, shouldn't attack the same spot twice
             - try adjacent slots after getting a hit (xtra credit)
+    Wip
 Wip
 
 6. create conditions so game ends
@@ -97,3 +98,9 @@ Notes:
     Done
     - don't forget to include something that changes the player turn
       - if user selects a spot that's already been hit, let them still have their turn
+    - add name input/s and scoreboard (player 1: SCORE | player 2: score)
+        - see tttgame (name inputs, score display, turn display)
+    - option to reset scoreboard
+        - write reset score function
+        - button is already set up
+    - remember: only one board will be showing at a time, not both!

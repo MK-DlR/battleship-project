@@ -60,6 +60,8 @@ function newGame() {
   const player1Ships = allShips.map(createFleet);
   const player2Ships = allShips.map(createFleet);
 
+  console.log("New game triggered!");
+
   return [
     {
       player: player1,
@@ -114,8 +116,8 @@ function placeAllShips(playerData, coords) {
 placeAllShips(gameData[0], player1Coords);
 placeAllShips(gameData[1], player2Coords);
 
-gameData[0].player.gameboard.receiveAttack(0, 0); // hit
-gameData[0].player.gameboard.receiveAttack(9, 9); // miss
+// gameData[0].player.gameboard.receiveAttack(0, 0); // hit
+// gameData[0].player.gameboard.receiveAttack(9, 9); // miss
 // ends here
 
 export {
