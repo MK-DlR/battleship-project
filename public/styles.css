@@ -21,3 +21,44 @@
     padding: 0;
     margin: 0;
 }
+
+body {
+  font-family: sans-serif;
+  padding: 1rem;
+}
+
+.gameboards-container {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.player-board {
+  display: grid;
+  grid-template-columns: repeat(10, 30px);
+  grid-template-rows: repeat(10, 30px);
+  gap: 2px;
+  border: 2px solid #333;
+  padding: 0.5rem;
+}
+
+.grid-cell {
+  width: 30px;
+  height: 30px;
+  background-color: lightblue;
+  border: 1px solid #ccc;
+}
+
+.ship {
+  background-color: navy;
+}
+.hit {
+  background-color: red;
+}
+.miss {
+  background-color: white;
+}
+.empty {
+  background-color: lightgray;
+}

@@ -1,3 +1,9 @@
+7/23/25:
+
+- Add basic css to display player gameboards and ships
+- Create renderGameboards with renderSingleBoard helper function to handle gameboard creation for each player
+- Create index.js to handle script imports for index.html to control load order
+
 7/22/25:
 
 - Begin basic layout setup

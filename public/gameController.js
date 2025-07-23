@@ -55,6 +55,7 @@ function newGame() {
   // create players - TEMPORARY for testing
   const player1 = new Player("Player 1", "human", player1Gameboard);
   const player2 = new Player("Player 2", "computer", player2Gameboard);
+  // ends here
   // create ships
   const player1Ships = allShips.map(createFleet);
   const player2Ships = allShips.map(createFleet);
@@ -112,6 +113,7 @@ function placeAllShips(playerData, coords) {
 
 placeAllShips(gameData[0], player1Coords);
 placeAllShips(gameData[1], player2Coords);
+// ends here
 
 export {
   message,
@@ -121,4 +123,5 @@ export {
   player1Coords,
   player2Coords,
   placeAllShips,
+  gameData,
 };

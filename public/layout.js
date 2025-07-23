@@ -9,12 +9,6 @@ const mainContent = document.createElement("main");
 mainContent.id = "main-content";
 container.appendChild(mainContent);
 
-// making sure things are properly linked - TEMPORARY
-const debugMessage = document.createElement("p");
-debugMessage.textContent = "bonjour from layout.js";
-container.appendChild(debugMessage);
-// ends here
-
 // export mainContent so others can append inside it
 export { mainContent };
 

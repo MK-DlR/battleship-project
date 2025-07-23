@@ -74,6 +74,7 @@ Wip
             - should know if a given move is legal
                 - ie, shouldn't attack the same spot twice
             - try adjacent slots after getting a hit (xtra credit)
+Wip
 
 6. create conditions so game ends
     a. once one player's ship have all been sunk
