@@ -42,7 +42,7 @@ Done
         a1. to interact with objects
     b. create a module that helps manage actions 
         b1. that should happen in DOM
-Wip
+Done
 
 5. start crafting UI
     a. set up new game by creating players

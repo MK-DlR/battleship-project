@@ -70,9 +70,13 @@ body {
 .grid-cell {
   width: 30px;
   height: 30px;
-  background-color: lightblue;
+  background-color: lightblue; /* fallback color */
   border: 1px solid #ccc;
   box-sizing: border-box; 
+}
+
+.grid-cell:hover {
+  filter: brightness(50%);
 }
 
 .ship {

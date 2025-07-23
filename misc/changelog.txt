@@ -1,5 +1,6 @@
 7/23/25:
 
+- Add darker color to grid cells when hovered for selection clarity
 - Create New Game button and add event listener
 - Add A - J / 1 - 10 gameboard grid coordinates
 - Add basic css to display player gameboards and ships
