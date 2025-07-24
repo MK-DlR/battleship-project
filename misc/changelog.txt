@@ -1,3 +1,8 @@
+7/24/25:
+
+- Add New Game button functionality while keeping test game for development
+- Create appController to handle moving between home screen and gameplay states
+
 7/23/25:
 
 - Add darker color to grid cells when hovered for selection clarity

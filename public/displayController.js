@@ -1,11 +1,46 @@
 // displayController.js
 // renders each players gameboard and ships, ui, etc
+// handle both home and game screens based on app state
 
 import { mainContent } from "./layout.js";
 import { Ship } from "./game/ship.js";
-import { newGame, gameData } from "./gameController.js"; // import the game state
+import { getCurrentGameData } from "./gameController.js"; // Use the getter function
+import { showGameScreen, handleNewGame } from "./appController.js";
+
+function renderHomescreen() {
+  // create home screen elements
+  const homeContainer = document.createElement("div");
+  homeContainer.classList.add("home-container");
+
+  const title = document.createElement("h1");
+  title.textContent = "Let's Play Battleship";
+
+  const buttonContainer = document.createElement("div");
+  buttonContainer.classList.add("button-container");
+
+  // new game button
+  const newGameButton = document.createElement("button");
+  newGameButton.textContent = "New Game";
+  newGameButton.classList.add("button");
+  newGameButton.addEventListener("click", handleNewGame);
+
+  // new player button
+  // ADD - modal form to take player information
+  const newPlayerButton = document.createElement("button");
+  newPlayerButton.textContent = "New Player";
+  newPlayerButton.classList.add("button");
+
+  buttonContainer.appendChild(newGameButton);
+  buttonContainer.appendChild(newPlayerButton);
+  homeContainer.appendChild(title);
+  homeContainer.appendChild(buttonContainer);
+  mainContent.appendChild(homeContainer);
+}
 
 function renderGameboards() {
+  // get current game data (this will be fresh after createNewGame() is called)
+  const gameData = getCurrentGameData();
+
   // create container for both boards
   const gameboardsContainer = document.createElement("div");
   gameboardsContainer.classList.add("gameboards-container");
@@ -87,7 +122,7 @@ function renderGameboards() {
   player2BoardContainer.classList.add("player-board");
   player2BoardContainer.dataset.player = "1";
 
-  // access gameboard data
+  // access gameboard data using current game data
   const player1Board = gameData[0].player.gameboard.getBoard();
   const player2Board = gameData[1].player.gameboard.getBoard();
 
@@ -136,8 +171,6 @@ function renderGameboards() {
   mainContent.appendChild(gameboardsContainer);
 }
 
-renderGameboards();
-
 function renderButtons() {
   // button container
   const buttonContainer = document.createElement("div");
@@ -148,9 +181,7 @@ function renderButtons() {
   newGameButton.classList.add("button");
   newGameButton.id = "newGameButton";
   const newGameText = document.createTextNode("New Game");
-
-  // add event listener to call imported newGame function
-  newGameButton.addEventListener("click", newGame);
+  newGameButton.addEventListener("click", handleNewGame);
 
   // reset score button
   const resetScoreButton = document.createElement("BUTTON");
@@ -170,12 +201,9 @@ function renderButtons() {
   buttonContainer.appendChild(resetScoreButton);
 }
 
-renderButtons();
+function renderGamescreen() {
+  renderGameboards();
+  renderButtons();
+}
 
-export { renderGameboards };
-
-/* notes:
- * displayController.js imports the reference
- * to that element (ie, main-content) from layout.js
- * and appends its dynamic elements (like gameboards) into that
- */
+export { renderHomescreen, renderGameboards, renderButtons, renderGamescreen };

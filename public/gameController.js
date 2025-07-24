@@ -1,7 +1,7 @@
 // gameController.js
 // imports game objects, handles gameplay DOM, manages game flow
+// focused on pure game logic (ships, attacks, win conditions)
 
-// imports
 import { Gameboard } from "./game/gameboard.js";
 import { Player } from "./game/player.js";
 import { Ship } from "./game/ship.js";
@@ -47,20 +47,21 @@ function createFleet(newShip) {
   return new Ship(newShip.name, newShip.length, newShip.hits, newShip.sunk);
 }
 
-// new game function
+// new game function - creates completely fresh game data
 function newGame() {
   // create gameboards
   const player1Gameboard = Gameboard();
   const player2Gameboard = Gameboard();
-  // create players - TEMPORARY for testing
+
+  // manually create players - TEMPORARY for testing (?)
   const player1 = new Player("Player 1", "human", player1Gameboard);
   const player2 = new Player("Player 2", "computer", player2Gameboard);
-  // ends here
+
   // create ships
   const player1Ships = allShips.map(createFleet);
   const player2Ships = allShips.map(createFleet);
 
-  console.log("New game triggered!");
+  console.log("New game created!");
 
   return [
     {
@@ -73,8 +74,6 @@ function newGame() {
     },
   ];
 }
-
-const gameData = newGame();
 
 // manually place ships - TEMPORARY for testing
 function placeShipsForTesting(player, ship, x, y, dir) {
@@ -104,6 +103,7 @@ function placeAllShips(playerData, coords) {
   if (playerData.ships.length !== coords.length) {
     throw new Error("Mismatch between ships and placement coordinates");
   }
+
   playerData.ships.forEach((ship, index) => {
     const [x, y, dir] = coords[index];
     console.log(
@@ -113,12 +113,33 @@ function placeAllShips(playerData, coords) {
   });
 }
 
-placeAllShips(gameData[0], player1Coords);
-placeAllShips(gameData[1], player2Coords);
+// separate function for development testing setup
+function setupTestScenario(gameData) {
+  placeAllShips(gameData[0], player1Coords);
+  placeAllShips(gameData[1], player2Coords);
 
-// gameData[0].player.gameboard.receiveAttack(0, 0); // hit
-// gameData[0].player.gameboard.receiveAttack(9, 9); // miss
-// ends here
+  gameData[0].player.gameboard.receiveAttack(0, 0); // hit
+  gameData[0].player.gameboard.receiveAttack(9, 9); // miss
+
+  return gameData;
+}
+
+// initialize with test scenario for development
+let currentGameData = setupTestScenario(newGame());
+
+function getCurrentGameData() {
+  return currentGameData;
+}
+
+// create completely fresh, blank game (no test setup)
+function createNewGame() {
+  console.log("Creating fresh blank game...");
+  currentGameData = newGame();
+  return currentGameData;
+}
+
+// keep old gameData export for backward compatibility (but it won't update)
+const gameData = currentGameData;
 
 export {
   message,
@@ -128,5 +149,7 @@ export {
   player1Coords,
   player2Coords,
   placeAllShips,
-  gameData,
+  getCurrentGameData,
+  createNewGame,
+  gameData, // initial test data
 };
