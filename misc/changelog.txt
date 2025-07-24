@@ -1,5 +1,6 @@
 7/24/25:
 
+- Create Home button to return to main page from game screen
 - Add New Game button functionality while keeping test game for development
 - Create appController to handle moving between home screen and gameplay states
 

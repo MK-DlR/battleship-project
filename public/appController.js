@@ -15,8 +15,8 @@ let appState = {
 
 // create fresh game data, transition to game screen, and render
 function handleNewGame() {
-  createNewGame(); // This creates fresh game data
-  showGameScreen(); // This renders it
+  createNewGame(); // create fresh game data
+  showGameScreen(); // render it
 }
 
 // screen management functions

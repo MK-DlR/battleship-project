@@ -5,7 +5,11 @@
 import { mainContent } from "./layout.js";
 import { Ship } from "./game/ship.js";
 import { getCurrentGameData } from "./gameController.js"; // Use the getter function
-import { showGameScreen, handleNewGame } from "./appController.js";
+import {
+  showGameScreen,
+  showHomeScreen,
+  handleNewGame,
+} from "./appController.js";
 
 function renderHomescreen() {
   // create home screen elements
@@ -183,6 +187,13 @@ function renderButtons() {
   const newGameText = document.createTextNode("New Game");
   newGameButton.addEventListener("click", handleNewGame);
 
+  // home button
+  const homeButton = document.createElement("BUTTON");
+  homeButton.classList.add("button");
+  homeButton.id = "homeButton";
+  const homeText = document.createTextNode("Home");
+  homeButton.addEventListener("click", showHomeScreen);
+
   // reset score button
   const resetScoreButton = document.createElement("BUTTON");
   resetScoreButton.classList.add("button");
@@ -197,6 +208,8 @@ function renderButtons() {
   mainContent.appendChild(buttonContainer);
   newGameButton.appendChild(newGameText);
   buttonContainer.appendChild(newGameButton);
+  homeButton.appendChild(homeText);
+  buttonContainer.appendChild(homeButton);
   resetScoreButton.appendChild(resetScoreText);
   buttonContainer.appendChild(resetScoreButton);
 }
