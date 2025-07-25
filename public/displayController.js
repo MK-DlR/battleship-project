@@ -4,8 +4,13 @@
 
 import { mainContent } from "./layout.js";
 import { Ship } from "./game/ship.js";
-import { getCurrentGameData } from "./gameController.js"; // Use the getter function
 import {
+  getCurrentGameData,
+  switchPlayerTurn,
+  getActivePlayer,
+} from "./gameController.js";
+import {
+  appState,
   showGameScreen,
   showHomeScreen,
   handleNewGame,
@@ -65,7 +70,7 @@ function renderGameboards() {
     const wrapper = document.createElement("div");
     wrapper.classList.add("board-wrapper");
 
-    // create column labels container with a top-left empty cell
+    // create column labels container
     const colLabels = document.createElement("div");
     colLabels.classList.add("column-labels");
     colLabels.style.display = "grid";
@@ -96,7 +101,7 @@ function renderGameboards() {
     rowLabels.classList.add("row-labels");
     rowLabels.style.display = "grid";
     rowLabels.style.gridTemplateRows = `repeat(10, 30px)`;
-    rowLabels.style.marginRight = "2px"; // gap between row labels and board
+    rowLabels.style.marginRight = "2px";
 
     for (let i = 1; i <= 10; i++) {
       const label = document.createElement("div");
@@ -214,9 +219,30 @@ function renderButtons() {
   buttonContainer.appendChild(resetScoreButton);
 }
 
+// display current scores
+function renderScores() {
+  // create container for scores
+  const mainScoreContainer = document.createElement("div");
+  mainScoreContainer.classList.add("main-score-container");
+
+  const playerScores = document.createElement("p");
+  playerScores.innerHTML = `<h3>Player Scores</h3><br>
+  <b>${appState.player1Name}:</b> ${appState.scores.player1} <font size="5">|</font> <b>${appState.player2Name}:</b> ${appState.scores.player2}`;
+  mainContent.appendChild(document.createElement("br"));
+  mainContent.appendChild(mainScoreContainer);
+  mainScoreContainer.appendChild(playerScores);
+}
+
+// display current player turn
+function renderTurn() {
+  // render turn
+}
+
 function renderGamescreen() {
   renderGameboards();
   renderButtons();
+  renderScores();
+  // renderTurn();
 }
 
 export { renderHomescreen, renderGameboards, renderButtons, renderGamescreen };

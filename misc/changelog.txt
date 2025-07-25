@@ -1,3 +1,8 @@
+7/25/25:
+
+- Add player score display
+- Create switchPlayerTurn and getActivePlayer to handle changing the active player
+
 7/24/25:
 
 - Create Home button to return to main page from game screen

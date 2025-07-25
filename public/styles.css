@@ -120,3 +120,7 @@ body {
   box-shadow: 0 5px #666;
   transform: translateY(1px);
 }
+
+.main-score-container {
+  text-align: center;
+}

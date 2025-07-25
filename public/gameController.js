@@ -126,6 +126,7 @@ function setupTestScenario(gameData) {
 
 // initialize with test scenario for development
 let currentGameData = setupTestScenario(newGame());
+// ends here?
 
 function getCurrentGameData() {
   return currentGameData;
@@ -135,11 +136,19 @@ function getCurrentGameData() {
 function createNewGame() {
   console.log("Creating fresh blank game...");
   currentGameData = newGame();
+  activePlayerIndex = 0;
   return currentGameData;
 }
 
 // keep old gameData export for backward compatibility (but it won't update)
 const gameData = currentGameData;
+
+// handle changing player turn
+let activePlayerIndex = 0;
+const getActivePlayer = () => currentGameData[activePlayerIndex];
+const switchPlayerTurn = () => {
+  activePlayerIndex = activePlayerIndex === 0 ? 1 : 0;
+};
 
 export {
   message,
@@ -150,6 +159,8 @@ export {
   player2Coords,
   placeAllShips,
   getCurrentGameData,
+  switchPlayerTurn,
+  getActivePlayer,
   createNewGame,
   gameData, // initial test data
 };
