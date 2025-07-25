@@ -5,6 +5,7 @@
 import { Gameboard } from "./game/gameboard.js";
 import { Player } from "./game/player.js";
 import { Ship } from "./game/ship.js";
+import { updateTurn } from "./displayController.js";
 
 const message = "Successfully linked gamecontroller";
 
@@ -149,6 +150,7 @@ const getActivePlayer = () => currentGameData[activePlayerIndex];
 const switchPlayerTurn = () => {
   activePlayerIndex = activePlayerIndex === 0 ? 1 : 0;
 };
+// updateTurn();
 
 export {
   message,

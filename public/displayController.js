@@ -74,12 +74,10 @@ function renderGameboards() {
     const colLabels = document.createElement("div");
     colLabels.classList.add("column-labels");
     colLabels.style.display = "grid";
-    colLabels.style.gridTemplateColumns = `30px repeat(10, 30px)`;
 
     // add empty corner cell
     const cornerCell = document.createElement("div");
-    cornerCell.style.width = "30px";
-    cornerCell.style.height = "30px";
+    cornerCell.classList.add("corner-cell");
     colLabels.appendChild(cornerCell);
 
     // add letters A-J as column labels
@@ -100,7 +98,6 @@ function renderGameboards() {
     const rowLabels = document.createElement("div");
     rowLabels.classList.add("row-labels");
     rowLabels.style.display = "grid";
-    rowLabels.style.gridTemplateRows = `repeat(10, 30px)`;
     rowLabels.style.marginRight = "2px";
 
     for (let i = 1; i <= 10; i++) {
@@ -209,6 +206,13 @@ function renderButtons() {
   // need to write resetScore function
   // resetScoreButton.addEventListener("click", resetScore);
 
+  // TEMPORARY - swap player button to test turn changes
+  const changeTurnButton = document.createElement("BUTTON");
+  changeTurnButton.classList.add("button");
+  changeTurnButton.id = "resetScoreButton";
+  const changeTurnText = document.createTextNode("Change Turn");
+  changeTurnButton.addEventListener("click", switchTurnButtonFunc);
+
   // append everything to DOM
   mainContent.appendChild(buttonContainer);
   newGameButton.appendChild(newGameText);
@@ -217,6 +221,8 @@ function renderButtons() {
   buttonContainer.appendChild(homeButton);
   resetScoreButton.appendChild(resetScoreText);
   buttonContainer.appendChild(resetScoreButton);
+  changeTurnButton.appendChild(changeTurnText);
+  buttonContainer.appendChild(changeTurnButton);
 }
 
 // display current scores
@@ -235,14 +241,46 @@ function renderScores() {
 
 // display current player turn
 function renderTurn() {
-  // render turn
+  let activePlayer = getActivePlayer().player.name;
+
+  // create container for turn
+  const turnContainer = document.createElement("div");
+  turnContainer.classList.add("turn-container");
+  turnContainer.innerHTML = `<b>${activePlayer}'s</b> turn...`;
+  mainContent.appendChild(turnContainer);
+}
+
+function updateTurn() {
+  let activePlayer = getActivePlayer().player.name;
+
+  const turnContainer = document.querySelector(".turn-container");
+  if (!turnContainer) {
+    console.warn("Turn container not found");
+    return; // exit early if element doesn't exist
+  }
+
+  turnContainer.innerHTML = `<b>${activePlayer}'s</b> turn...`;
+}
+
+// TEMPORARY - for switching player turn
+function switchTurnButtonFunc() {
+  switchPlayerTurn();
+  updateTurn();
 }
 
 function renderGamescreen() {
+  renderTurn();
   renderGameboards();
   renderButtons();
   renderScores();
-  // renderTurn();
 }
 
-export { renderHomescreen, renderGameboards, renderButtons, renderGamescreen };
+export {
+  renderHomescreen,
+  renderGameboards,
+  renderButtons,
+  renderScores,
+  renderTurn,
+  updateTurn,
+  renderGamescreen,
+};

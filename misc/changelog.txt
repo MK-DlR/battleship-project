@@ -1,5 +1,6 @@
 7/25/25:
 
+- Create button to manually change player turn to test functionality
 - Add player score display
 - Create switchPlayerTurn and getActivePlayer to handle changing the active player
 

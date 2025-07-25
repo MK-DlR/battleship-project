@@ -79,6 +79,11 @@ body {
   filter: brightness(50%);
 }
 
+.corner-cell {
+  width: 30px;
+  height: 30px;
+}
+
 .ship {
   background-color: #294163;
 }
@@ -121,6 +126,6 @@ body {
   transform: translateY(1px);
 }
 
-.main-score-container {
+.main-score-container, .turn-container {
   text-align: center;
 }
