@@ -27,8 +27,11 @@ function renderHomescreen() {
   const title = document.createElement("h1");
   title.textContent = "Let's Play Battleship";
 
-  const buttonContainer = document.createElement("div");
-  buttonContainer.classList.add("button-container");
+  const gameButtonContainer = document.createElement("div");
+  gameButtonContainer.classList.add("button-container");
+
+  const playerButtonContainer = document.createElement("div");
+  playerButtonContainer.classList.add("button-container");
 
   // new game button
   const newGameButton = document.createElement("button");
@@ -36,17 +39,24 @@ function renderHomescreen() {
   newGameButton.classList.add("button");
   newGameButton.addEventListener("click", handleNewGame);
 
-  // new player button
-  // ADD - modal form to take player information
-  const newPlayerButton = document.createElement("button");
-  newPlayerButton.textContent = "New Player";
-  newPlayerButton.classList.add("button");
-  newPlayerButton.addEventListener("click", addNewPlayer);
+  // new player 1 button
+  const newPlayerButton1 = document.createElement("button");
+  newPlayerButton1.textContent = "New Player 1";
+  newPlayerButton1.classList.add("button");
+  newPlayerButton1.addEventListener("click", addNewPlayer1);
 
-  buttonContainer.appendChild(newGameButton);
-  buttonContainer.appendChild(newPlayerButton);
+  // new player 2 button
+  const newPlayerButton2 = document.createElement("button");
+  newPlayerButton2.textContent = "New Player 2";
+  newPlayerButton2.classList.add("button");
+  newPlayerButton2.addEventListener("click", addNewPlayer2);
+
+  gameButtonContainer.appendChild(newGameButton);
+  playerButtonContainer.appendChild(newPlayerButton1);
+  playerButtonContainer.appendChild(newPlayerButton2);
   homeContainer.appendChild(title);
-  homeContainer.appendChild(buttonContainer);
+  homeContainer.appendChild(gameButtonContainer);
+  homeContainer.appendChild(playerButtonContainer);
   mainContent.appendChild(homeContainer);
 }
 
@@ -170,16 +180,16 @@ function renderGameboards() {
             // call the attack
             const result = attackOpponentBoard(x, y);
             if (result === "hit" || result === "miss") {
-              // Valid attack - re-render boards and switch turns
+              // valid attack - re-render boards and switch turns
               switchPlayerTurn();
-              // Clear everything and re-render the entire game screen
+              // clear everything and re-render the entire game screen
               mainContent.innerHTML = "";
               renderGamescreen();
-              // Update turn display
+              // update turn display
               updateTurn();
             } else {
-              // Invalid attack (already attacked, out of bounds, etc.)
-              console.log(result); // Show the error message
+              // invalid attack
+              console.log(result); // show error message
             }
           } else {
             console.log("Please select the enemy board to attack");
@@ -270,17 +280,21 @@ function renderScores() {
 
 // display current player turn
 function renderTurn() {
-  let activePlayer = getActivePlayer().player.name;
+  const activeIndex = activePlayerIndex; // 0 or 1
+  const activeName =
+    activeIndex === 0 ? appState.player1Name : appState.player2Name;
 
   // create container for turn
   const turnContainer = document.createElement("div");
   turnContainer.classList.add("turn-container");
-  turnContainer.innerHTML = `<b>${activePlayer}'s</b> turn...`;
+  turnContainer.innerHTML = `<b>${activeName}'s</b> turn...`;
   mainContent.appendChild(turnContainer);
 }
 
 function updateTurn() {
-  let activePlayer = getActivePlayer().player.name;
+  const activeIndex = activePlayerIndex; // 0 or 1
+  const activeName =
+    activeIndex === 0 ? appState.player1Name : appState.player2Name;
 
   const turnContainer = document.querySelector(".turn-container");
   if (!turnContainer) {
@@ -288,12 +302,12 @@ function updateTurn() {
     return; // exit early if element doesn't exist
   }
 
-  turnContainer.innerHTML = `<b>${activePlayer}'s</b> turn...`;
+  turnContainer.innerHTML = `<b>${activeName}'s</b> turn...`;
 }
 
-function addNewPlayer() {
+function addNewPlayer1() {
   let newPlayer = prompt(
-    "Enter comma separated values (Player Name, Player Type)"
+    "Enter comma separated values (Player Name, Human or Computer)"
   );
 
   // handle case where user cancels the prompt
@@ -302,19 +316,59 @@ function addNewPlayer() {
   }
 
   const playerResponse = newPlayer.split(",");
-
-  // trim whitespace
   let result = playerResponse.map((item) => item.trim());
-  console.log(result);
 
   // only accept 2 values
   if (result.length !== 2) {
-    console.log("Please enter exactly 2 values: Player Name, Player Type");
+    console.log(
+      "Please enter exactly 2 values: Player Name, Human or Computer"
+    );
     return;
   }
 
   const [playerName, playerType] = result;
-  console.log(`Player Name: ${playerName}, Player Type: ${playerType}`);
+
+  // update the actual player names in appState
+  appState.player1Name = playerName; // or determine which player slot to use
+  appState.customPlayer = {
+    name: playerName,
+    type: playerType,
+  };
+
+  console.log(`Stored player 1: ${playerName}, ${playerType}`);
+}
+
+function addNewPlayer2() {
+  let newPlayer = prompt(
+    "Enter comma separated values (Player Name, Human or Computer)"
+  );
+
+  // handle case where user cancels the prompt
+  if (newPlayer === null) {
+    return;
+  }
+
+  const playerResponse = newPlayer.split(",");
+  let result = playerResponse.map((item) => item.trim());
+
+  // only accept 2 values
+  if (result.length !== 2) {
+    console.log(
+      "Please enter exactly 2 values: Player Name, Human or Computer"
+    );
+    return;
+  }
+
+  const [playerName, playerType] = result;
+
+  // update the actual player names in appState
+  appState.player2Name = playerName; // or determine which player slot to use
+  appState.customPlayer = {
+    name: playerName,
+    type: playerType,
+  };
+
+  console.log(`Stored player 2: ${playerName}, ${playerType}`);
 }
 
 function renderGamescreen() {

@@ -98,6 +98,10 @@ body {
   background-color: #ece8e7;
 }
 
+.home-container {
+  text-align: center;
+}
+
 .button-container {
   display: flex;
   justify-content: center;

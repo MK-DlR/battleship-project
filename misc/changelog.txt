@@ -1,5 +1,7 @@
 7/26/25:
 
+- Update score and turn display to reflect custom player names
+- Add new player 2 button
 - Change new game button on gameplay screen to new round
 - Add prompt to get player information
 - Remove manual change turn button

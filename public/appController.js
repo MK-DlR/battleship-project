@@ -11,6 +11,7 @@ let appState = {
   player1Name: "Player 1",
   player2Name: "Player 2",
   scores: { player1: 0, player2: 0 },
+  customPlayer: null,
 };
 
 // create fresh game data, transition to game screen, and render
