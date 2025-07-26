@@ -1,3 +1,7 @@
+7/26/25:
+
+- Add eventListener to grid cells to make them clickable and return the coordinates and board of the clicked cell
+
 7/25/25:
 
 - Create button to manually change player turn to test functionality

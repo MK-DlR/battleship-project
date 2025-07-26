@@ -38,11 +38,14 @@ body {
   margin: 0 1rem;
 }
 
-.column-labels {
-  padding-left: 0;
+.column-labels, .row-labels {
   user-select: none;
   font-weight: bold;
   display: grid;
+}
+
+.column-labels {
+  padding-left: 0;
   grid-template-columns: 30px repeat(10, 30px);
   column-gap: 0.3px;
   padding-left: 10px;
@@ -50,9 +53,6 @@ body {
 
 .row-labels {
   padding: 0;
-  user-select: none;
-  font-weight: bold;
-  display: grid;
   grid-template-rows: repeat(10, 30px);
   margin-right: 2px;
   row-gap: 0.3px;

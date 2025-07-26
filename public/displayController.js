@@ -84,9 +84,7 @@ function renderGameboards() {
     for (let i = 0; i < 10; i++) {
       const label = document.createElement("div");
       label.textContent = String.fromCharCode(65 + i);
-      label.style.width = "30px";
-      label.style.height = "30px";
-      label.style.textAlign = "center";
+      label.classList.add("label");
       colLabels.appendChild(label);
     }
 
@@ -103,10 +101,7 @@ function renderGameboards() {
     for (let i = 1; i <= 10; i++) {
       const label = document.createElement("div");
       label.textContent = i;
-      label.style.width = "30px";
-      label.style.height = "30px";
-      label.style.lineHeight = "30px";
-      label.style.textAlign = "center";
+      label.classList.add("label");
       rowLabels.appendChild(label);
     }
 
@@ -122,11 +117,11 @@ function renderGameboards() {
   // create individual board containers
   const player1BoardContainer = document.createElement("div");
   player1BoardContainer.classList.add("player-board");
-  player1BoardContainer.dataset.player = "0";
+  player1BoardContainer.dataset.player = "1";
 
   const player2BoardContainer = document.createElement("div");
   player2BoardContainer.classList.add("player-board");
-  player2BoardContainer.dataset.player = "1";
+  player2BoardContainer.dataset.player = "2";
 
   // access gameboard data using current game data
   const player1Board = gameData[0].player.gameboard.getBoard();
@@ -143,11 +138,23 @@ function renderGameboards() {
         gridCell.classList.add("grid-cell");
 
         // set data-x attribute to col
-        gridCell.dataset.x = col;
+        gridCell.dataset.x = String.fromCharCode(65 + col);
         // set data-y attribute to row
-        gridCell.dataset.y = row;
+        gridCell.dataset.y = row + 1;
         // get cell content from boardData[row][col]
         const cell = boardData[row][col];
+
+        // make grid cells clickable
+        gridCell.addEventListener("click", (event) => {
+          // extract x from the clicked element's dataset
+          const x = gridCell.dataset.x;
+          // extract y from the clicked element's dataset
+          const y = gridCell.dataset.y;
+          // log the coordinates
+          console.log(
+            `Cell clicked at: ${x}${y} on Player ${boardContainer.dataset.player}'s board`
+          ); // needs to return coords and board
+        });
 
         // determine cell state and add appropriate CSS class
         if (cell === "H") {
