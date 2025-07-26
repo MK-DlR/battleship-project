@@ -1,5 +1,8 @@
 7/26/25:
 
+- Change new game button on gameplay screen to new round
+- Add prompt to get player information
+- Remove manual change turn button
 - Add full attack functionality with board display update and changing turns
 - Add eventListener to grid cells to make them clickable and return the coordinates and board of the clicked cell
 

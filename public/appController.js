@@ -19,6 +19,12 @@ function handleNewGame() {
   showGameScreen(); // render it
 }
 
+// create fresh game data, transition to game screen, and render
+function handleNewRound() {
+  createNewGame(); // create fresh game data
+  showGameScreen(); // render it
+}
+
 // screen management functions
 function clearMainContent() {
   mainContent.innerHTML = "";
@@ -44,4 +50,10 @@ function initApp() {
 
 initApp();
 
-export { appState, handleNewGame, showHomeScreen, showGameScreen };
+export {
+  appState,
+  handleNewGame,
+  handleNewRound,
+  showHomeScreen,
+  showGameScreen,
+};

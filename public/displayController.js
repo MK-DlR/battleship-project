@@ -16,6 +16,7 @@ import {
   showGameScreen,
   showHomeScreen,
   handleNewGame,
+  handleNewRound,
 } from "./appController.js";
 
 function renderHomescreen() {
@@ -40,6 +41,7 @@ function renderHomescreen() {
   const newPlayerButton = document.createElement("button");
   newPlayerButton.textContent = "New Player";
   newPlayerButton.classList.add("button");
+  newPlayerButton.addEventListener("click", addNewPlayer);
 
   buttonContainer.appendChild(newGameButton);
   buttonContainer.appendChild(newPlayerButton);
@@ -218,12 +220,12 @@ function renderButtons() {
   const buttonContainer = document.createElement("div");
   buttonContainer.classList.add("button-container");
 
-  // new game button
-  const newGameButton = document.createElement("BUTTON");
-  newGameButton.classList.add("button");
-  newGameButton.id = "newGameButton";
-  const newGameText = document.createTextNode("New Game");
-  newGameButton.addEventListener("click", handleNewGame);
+  // new round button
+  const newRoundButton = document.createElement("BUTTON");
+  newRoundButton.classList.add("button");
+  newRoundButton.id = "newGameButton";
+  const newRoundText = document.createTextNode("New Round");
+  newRoundButton.addEventListener("click", handleNewRound);
 
   // home button
   const homeButton = document.createElement("BUTTON");
@@ -242,23 +244,14 @@ function renderButtons() {
   // need to write resetScore function
   // resetScoreButton.addEventListener("click", resetScore);
 
-  // TEMPORARY - swap player button to test turn changes
-  const changeTurnButton = document.createElement("BUTTON");
-  changeTurnButton.classList.add("button");
-  changeTurnButton.id = "resetScoreButton";
-  const changeTurnText = document.createTextNode("Change Turn");
-  changeTurnButton.addEventListener("click", switchTurnButtonFunc);
-
   // append everything to DOM
   mainContent.appendChild(buttonContainer);
-  newGameButton.appendChild(newGameText);
-  buttonContainer.appendChild(newGameButton);
+  newRoundButton.appendChild(newRoundText);
+  buttonContainer.appendChild(newRoundButton);
   homeButton.appendChild(homeText);
   buttonContainer.appendChild(homeButton);
   resetScoreButton.appendChild(resetScoreText);
   buttonContainer.appendChild(resetScoreButton);
-  changeTurnButton.appendChild(changeTurnText);
-  buttonContainer.appendChild(changeTurnButton);
 }
 
 // display current scores
@@ -298,10 +291,30 @@ function updateTurn() {
   turnContainer.innerHTML = `<b>${activePlayer}'s</b> turn...`;
 }
 
-// TEMPORARY - for switching player turn
-function switchTurnButtonFunc() {
-  switchPlayerTurn();
-  updateTurn();
+function addNewPlayer() {
+  let newPlayer = prompt(
+    "Enter comma separated values (Player Name, Player Type)"
+  );
+
+  // handle case where user cancels the prompt
+  if (newPlayer === null) {
+    return;
+  }
+
+  const playerResponse = newPlayer.split(",");
+
+  // trim whitespace
+  let result = playerResponse.map((item) => item.trim());
+  console.log(result);
+
+  // only accept 2 values
+  if (result.length !== 2) {
+    console.log("Please enter exactly 2 values: Player Name, Player Type");
+    return;
+  }
+
+  const [playerName, playerType] = result;
+  console.log(`Player Name: ${playerName}, Player Type: ${playerType}`);
 }
 
 function renderGamescreen() {
