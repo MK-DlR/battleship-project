@@ -5,7 +5,7 @@
 import { Gameboard } from "./game/gameboard.js";
 import { Player } from "./game/player.js";
 import { Ship } from "./game/ship.js";
-import { updateTurn } from "./displayController.js";
+import { appState } from "./appController.js";
 
 const message = "Successfully linked gamecontroller";
 
@@ -54,15 +54,22 @@ function newGame() {
   const player1Gameboard = Gameboard();
   const player2Gameboard = Gameboard();
 
-  // manually create players - TEMPORARY for testing (?)
-  const player1 = new Player("Player 1", "human", player1Gameboard);
-  const player2 = new Player("Player 2", "computer", player2Gameboard);
+  // use custom player data from appState, with fallbacks
+  const player1Name = appState.player1Name || "Player 1";
+  const player2Name = appState.player2Name || "Computer";
+  const player1Type = appState.player1Type || "human";
+  const player2Type = appState.player2Type || "computer";
+
+  const player1 = new Player(player1Name, player1Type, player1Gameboard);
+  const player2 = new Player(player2Name, player2Type, player2Gameboard);
 
   // create ships
   const player1Ships = allShips.map(createFleet);
   const player2Ships = allShips.map(createFleet);
 
   console.log("New game created!");
+  console.log(`Player 1: ${player1.name} (${player1.type})`);
+  console.log(`Player 2: ${player2.name} (${player2.type})`);
 
   return [
     {
@@ -125,9 +132,8 @@ function setupTestScenario(gameData) {
   return gameData;
 }
 
-// initialize with test scenario for development
-let currentGameData = setupTestScenario(newGame());
-// ends here?
+// DON'T initialize immediately - wait for createNewGame() to be called
+let currentGameData = null;
 
 function getCurrentGameData() {
   return currentGameData;
@@ -136,13 +142,10 @@ function getCurrentGameData() {
 // create completely fresh, blank game (no test setup)
 function createNewGame() {
   console.log("Creating fresh blank game...");
-  currentGameData = newGame();
+  currentGameData = setupTestScenario(newGame()); // Include test setup for now
   activePlayerIndex = 0;
   return currentGameData;
 }
-
-// keep old gameData export for backward compatibility (but it won't update)
-const gameData = currentGameData;
 
 // handle changing player turn
 let activePlayerIndex = 0;
@@ -150,7 +153,6 @@ const getActivePlayer = () => currentGameData[activePlayerIndex];
 const switchPlayerTurn = () => {
   activePlayerIndex = activePlayerIndex === 0 ? 1 : 0;
 };
-// updateTurn();
 
 // helper function to figure out board to attack
 function attackOpponentBoard(x, y) {
@@ -177,5 +179,4 @@ export {
   getActivePlayer,
   createNewGame,
   attackOpponentBoard,
-  gameData, // initial test data
 };

@@ -9,9 +9,10 @@ import { renderHomescreen, renderGamescreen } from "./displayController.js";
 let appState = {
   currentScreen: "home", // "home" or "playing"
   player1Name: "Player 1",
-  player2Name: "Player 2",
+  player2Name: "Computer",
+  player1Type: "human",
+  player2Type: "computer",
   scores: { player1: 0, player2: 0 },
-  customPlayer: null,
 };
 
 // create fresh game data, transition to game screen, and render
@@ -45,6 +46,10 @@ function showGameScreen() {
 
 // initialize app
 function initApp() {
+  // Create initial game data first
+  createNewGame();
+
+  // Then show the game screen
   showGameScreen(); // temporarily start on game screen instead of home
   // showHomeScreen(); // start on home screen instead of immediately showing game
 }

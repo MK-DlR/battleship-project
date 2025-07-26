@@ -1,5 +1,6 @@
 7/26/25:
 
+- Update Player 2's name display to default to Computer
 - Update score and turn display to reflect custom player names
 - Add new player 2 button
 - Change new game button on gameplay screen to new round

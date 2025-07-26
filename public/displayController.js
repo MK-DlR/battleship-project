@@ -266,13 +266,17 @@ function renderButtons() {
 
 // display current scores
 function renderScores() {
+  const gameData = getCurrentGameData();
+  const player1Name = gameData[0].player.name; // Get from Player instance
+  const player2Name = gameData[1].player.name; // Get from Player instance
+
   // create container for scores
   const mainScoreContainer = document.createElement("div");
   mainScoreContainer.classList.add("main-score-container");
 
   const playerScores = document.createElement("p");
   playerScores.innerHTML = `<h3>Player Scores</h3><br>
-  <b>${appState.player1Name}:</b> ${appState.scores.player1} <font size="5">|</font> <b>${appState.player2Name}:</b> ${appState.scores.player2}`;
+  <b>${player1Name}:</b> ${appState.scores.player1} <font size="5">|</font> <b>${player2Name}:</b> ${appState.scores.player2}`;
   mainContent.appendChild(document.createElement("br"));
   mainContent.appendChild(mainScoreContainer);
   mainScoreContainer.appendChild(playerScores);
@@ -280,9 +284,9 @@ function renderScores() {
 
 // display current player turn
 function renderTurn() {
-  const activeIndex = activePlayerIndex; // 0 or 1
-  const activeName =
-    activeIndex === 0 ? appState.player1Name : appState.player2Name;
+  const gameData = getCurrentGameData();
+  const activePlayer = gameData[activePlayerIndex].player;
+  const activeName = activePlayer.name; // Get from Player instance
 
   // create container for turn
   const turnContainer = document.createElement("div");
@@ -292,9 +296,9 @@ function renderTurn() {
 }
 
 function updateTurn() {
-  const activeIndex = activePlayerIndex; // 0 or 1
-  const activeName =
-    activeIndex === 0 ? appState.player1Name : appState.player2Name;
+  const gameData = getCurrentGameData();
+  const activePlayer = gameData[activePlayerIndex].player;
+  const activeName = activePlayer.name; // Get from Player instance
 
   const turnContainer = document.querySelector(".turn-container");
   if (!turnContainer) {
@@ -306,69 +310,35 @@ function updateTurn() {
 }
 
 function addNewPlayer1() {
-  let newPlayer = prompt(
-    "Enter comma separated values (Player Name, Human or Computer)"
-  );
+  let newPlayer = prompt("Enter player name");
 
   // handle case where user cancels the prompt
   if (newPlayer === null) {
     return;
   }
 
-  const playerResponse = newPlayer.split(",");
-  let result = playerResponse.map((item) => item.trim());
+  const playerName = newPlayer;
 
-  // only accept 2 values
-  if (result.length !== 2) {
-    console.log(
-      "Please enter exactly 2 values: Player Name, Human or Computer"
-    );
-    return;
-  }
+  // update appState
+  appState.player1Name = playerName;
 
-  const [playerName, playerType] = result;
-
-  // update the actual player names in appState
-  appState.player1Name = playerName; // or determine which player slot to use
-  appState.customPlayer = {
-    name: playerName,
-    type: playerType,
-  };
-
-  console.log(`Stored player 1: ${playerName}, ${playerType}`);
+  console.log(`Stored player 1: ${playerName}`);
 }
 
 function addNewPlayer2() {
-  let newPlayer = prompt(
-    "Enter comma separated values (Player Name, Human or Computer)"
-  );
+  let newPlayer = prompt("Enter player name");
 
   // handle case where user cancels the prompt
   if (newPlayer === null) {
     return;
   }
 
-  const playerResponse = newPlayer.split(",");
-  let result = playerResponse.map((item) => item.trim());
+  const playerName = newPlayer;
 
-  // only accept 2 values
-  if (result.length !== 2) {
-    console.log(
-      "Please enter exactly 2 values: Player Name, Human or Computer"
-    );
-    return;
-  }
+  // update appState
+  appState.player2Name = playerName;
 
-  const [playerName, playerType] = result;
-
-  // update the actual player names in appState
-  appState.player2Name = playerName; // or determine which player slot to use
-  appState.customPlayer = {
-    name: playerName,
-    type: playerType,
-  };
-
-  console.log(`Stored player 2: ${playerName}, ${playerType}`);
+  console.log(`Stored player 1: ${playerName}`);
 }
 
 function renderGamescreen() {
