@@ -1,5 +1,6 @@
 7/26/25:
 
+- Add full attack functionality with board display update and changing turns
 - Add eventListener to grid cells to make them clickable and return the coordinates and board of the clicked cell
 
 7/25/25:

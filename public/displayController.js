@@ -7,7 +7,9 @@ import { Ship } from "./game/ship.js";
 import {
   getCurrentGameData,
   switchPlayerTurn,
+  activePlayerIndex,
   getActivePlayer,
+  attackOpponentBoard,
 } from "./gameController.js";
 import {
   appState,
@@ -117,11 +119,11 @@ function renderGameboards() {
   // create individual board containers
   const player1BoardContainer = document.createElement("div");
   player1BoardContainer.classList.add("player-board");
-  player1BoardContainer.dataset.player = "1";
+  player1BoardContainer.dataset.player = "0";
 
   const player2BoardContainer = document.createElement("div");
   player2BoardContainer.classList.add("player-board");
-  player2BoardContainer.dataset.player = "2";
+  player2BoardContainer.dataset.player = "1";
 
   // access gameboard data using current game data
   const player1Board = gameData[0].player.gameboard.getBoard();
@@ -138,22 +140,49 @@ function renderGameboards() {
         gridCell.classList.add("grid-cell");
 
         // set data-x attribute to col
-        gridCell.dataset.x = String.fromCharCode(65 + col);
+        gridCell.dataset.x = col;
         // set data-y attribute to row
-        gridCell.dataset.y = row + 1;
+        gridCell.dataset.y = row;
         // get cell content from boardData[row][col]
         const cell = boardData[row][col];
 
         // make grid cells clickable
         gridCell.addEventListener("click", (event) => {
-          // extract x from the clicked element's dataset
-          const x = gridCell.dataset.x;
-          // extract y from the clicked element's dataset
-          const y = gridCell.dataset.y;
-          // log the coordinates
-          console.log(
-            `Cell clicked at: ${x}${y} on Player ${boardContainer.dataset.player}'s board`
-          ); // needs to return coords and board
+          if (
+            (activePlayerIndex === 0 &&
+              boardContainer.dataset.player === "1") ||
+            (activePlayerIndex === 1 && boardContainer.dataset.player === "0")
+          ) {
+            // extract x and y from the clicked element's dataset
+            const x = parseInt(gridCell.dataset.x);
+            const y = parseInt(gridCell.dataset.y);
+            // convert to display format for logging
+            const displayX = String.fromCharCode(65 + x);
+            const displayY = y + 1;
+            // log the coordinates and board
+            console.log(
+              `Cell clicked at: ${displayX}${displayY} on Board ${boardContainer.dataset.player}.`
+            );
+            // access gameboards
+            getCurrentGameData();
+            // call the attack
+            const result = attackOpponentBoard(x, y);
+            if (result === "hit" || result === "miss") {
+              // Valid attack - re-render boards and switch turns
+              switchPlayerTurn();
+              // Clear everything and re-render the entire game screen
+              mainContent.innerHTML = "";
+              renderGamescreen();
+              // Update turn display
+              updateTurn();
+            } else {
+              // Invalid attack (already attacked, out of bounds, etc.)
+              console.log(result); // Show the error message
+            }
+          } else {
+            console.log("Please select the enemy board to attack");
+            return;
+          }
         });
 
         // determine cell state and add appropriate CSS class

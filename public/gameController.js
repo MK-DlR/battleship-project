@@ -152,6 +152,17 @@ const switchPlayerTurn = () => {
 };
 // updateTurn();
 
+// helper function to figure out board to attack
+function attackOpponentBoard(x, y) {
+  // get opponent's index (opposite of active player)
+  const opponentIndex = activePlayerIndex === 0 ? 1 : 0;
+  // get opponent's gameboard
+  const opponentGameboard = currentGameData[opponentIndex].player.gameboard;
+  // call receiveAttack on the opponent's board
+  const result = opponentGameboard.receiveAttack(x, y);
+  return result; // return "hit", "miss", or error message
+}
+
 export {
   message,
   createFleet,
@@ -162,7 +173,9 @@ export {
   placeAllShips,
   getCurrentGameData,
   switchPlayerTurn,
+  activePlayerIndex,
   getActivePlayer,
   createNewGame,
+  attackOpponentBoard,
   gameData, // initial test data
 };

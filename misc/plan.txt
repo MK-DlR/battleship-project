@@ -100,7 +100,7 @@ Notes:
     - handle changing player turn
         - don't forget to include something that changes the player turn
         - if user selects a spot that's already been hit, let them still have their turn
-    Wip
+    Done
     - add name input/s (on home screen)
         - add modal/form
             - should include name and player type (human or computer)

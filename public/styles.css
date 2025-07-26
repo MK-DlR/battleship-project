@@ -56,7 +56,8 @@ body {
   grid-template-rows: repeat(10, 30px);
   margin-right: 2px;
   row-gap: 0.3px;
-  padding-top: 10px;
+  padding-top: 15px;
+  padding-right: 5px;
 }
 
 .player-board {
