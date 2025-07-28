@@ -142,7 +142,7 @@ function getCurrentGameData() {
 // create completely fresh, blank game (no test setup)
 function createNewGame() {
   console.log("Creating fresh blank game...");
-  currentGameData = setupTestScenario(newGame()); // Include test setup for now
+  currentGameData = setupTestScenario(newGame()); // include test setup for now
   activePlayerIndex = 0;
   return currentGameData;
 }
@@ -154,15 +154,49 @@ const switchPlayerTurn = () => {
   activePlayerIndex = activePlayerIndex === 0 ? 1 : 0;
 };
 
-// helper function to figure out board to attack
+// attack enemy board function
 function attackOpponentBoard(x, y) {
   // get opponent's index (opposite of active player)
   const opponentIndex = activePlayerIndex === 0 ? 1 : 0;
   // get opponent's gameboard
   const opponentGameboard = currentGameData[opponentIndex].player.gameboard;
-  // call receiveAttack on the opponent's board
-  const result = opponentGameboard.receiveAttack(x, y);
-  return result; // return "hit", "miss", or error message
+  // human player attack
+  if (getActivePlayer().player.type === "human") {
+    // call receiveAttack on the opponent's board
+    const result = opponentGameboard.receiveAttack(x, y);
+    return result; // return "hit", "miss", or error message
+    // computer player attack
+  } else if (getActivePlayer().player.type === "computer") {
+    const validCoords = [];
+    let computerX, computerY;
+    // loop through all cells
+    for (let x = 0; x < 10; x++) {
+      for (let y = 0; y < 10; y++) {
+        // find all valid cells
+        let cellValue = opponentGameboard.getCell(x, y);
+        if (cellValue != "H" && cellValue != "M") {
+          // push valid cell coordinates to array
+          validCoords.push([x, y]);
+        }
+      }
+    }
+    if (validCoords.length === 0) {
+      return "No valid attacks left, start a new game.";
+    } else {
+      // if validCoords has items pick a random one
+      let randomCoord =
+        validCoords[Math.floor(Math.random() * validCoords.length)];
+      console.log(randomCoord);
+      // log the coordinates
+      computerX = randomCoord[0];
+      computerY = randomCoord[1];
+    }
+    // use coordinates to attack
+    const result = opponentGameboard.receiveAttack(computerX, computerY);
+    return result;
+  } else {
+    console.log("Player type error");
+  }
 }
 
 export {

@@ -1,3 +1,7 @@
+7/28/25:
+
+- Modify attackOpponentBoard to allow the computer to make basic randomized attacks
+
 7/26/25:
 
 - Update Player 2's name display to default to Computer

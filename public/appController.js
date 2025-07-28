@@ -46,10 +46,9 @@ function showGameScreen() {
 
 // initialize app
 function initApp() {
-  // Create initial game data first
+  // create initial game data first
   createNewGame();
-
-  // Then show the game screen
+  // then show the game screen
   showGameScreen(); // temporarily start on game screen instead of home
   // showHomeScreen(); // start on home screen instead of immediately showing game
 }

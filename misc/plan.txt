@@ -82,6 +82,9 @@ Wip
 6. create conditions so game ends
     a. once one player's ship have all been sunk
     b. this function is appropriate for this module (step 4b)
+    c. win conditions:
+        - c1. all ships on one side sunk
+        - c2. increment player score
 
 7. finish by implementing system to allow placing of ships
     a. examples:
@@ -102,18 +105,22 @@ Notes:
         - if user selects a spot that's already been hit, let them still have their turn
     Done
     - add name input/s (on home screen)
-        - should include name and player type (human or computer)
         - if no input is given, default to human vs computer
-        - need to link to actual player info
-        - info about player/computer/etc info on home page?
-    Wip
+    Done
     - add scoreboard
     Done
     - add option to reset scoreboard
         - write reset score function
         - button is already set up
     Wip
-    - make sure "new round" does NOT clear players or scores
-    - make sure "new game" DOES clear players and scores
+    - make sure "new round" does NOT clear 
+        - players
+        Done
+        - scores
+    - make sure "new game" DOES clear 
+        - players
+        - scores
     - add "home" button of some kind
     Done
+    - manually created players human vs human isnt working right
+        - p2 seems to be counted as computer
