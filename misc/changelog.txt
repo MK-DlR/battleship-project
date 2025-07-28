@@ -1,5 +1,6 @@
 7/28/25:
 
+- Trigger resetScore automatically when new game button is pressed
 - Add resetScore button functionality
 - Change missed attack display color to medium grey
 - Fix player creation to always create human type players

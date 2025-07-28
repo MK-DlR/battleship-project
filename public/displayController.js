@@ -392,4 +392,5 @@ export {
   renderTurn,
   updateTurn,
   renderGamescreen,
+  resetScore,
 };

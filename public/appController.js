@@ -3,7 +3,11 @@
 
 import { mainContent } from "./layout.js";
 import { createNewGame } from "./gameController.js";
-import { renderHomescreen, renderGamescreen } from "./displayController.js";
+import {
+  renderHomescreen,
+  renderGamescreen,
+  resetScore,
+} from "./displayController.js";
 
 // define app state to track current screen
 let appState = {
@@ -18,6 +22,7 @@ let appState = {
 // create fresh game data, transition to game screen, and render
 function handleNewGame() {
   createNewGame(); // create fresh game data
+  resetScore();
   showGameScreen(); // render it
 }
 

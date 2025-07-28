@@ -112,17 +112,16 @@ Notes:
     - add scoreboard
     Done
     - add option to reset scoreboard
-        - write reset score function
-        - button is already set up
-    Wip
+    Done
     - make sure "new round" does NOT clear 
         - players
-        Done
         - scores
-        Wip
+     Done
     - make sure "new game" DOES clear 
-        - players
+        - players; need to make resetPlayers function?
+        Wip
         - scores
+        Done
     Wip
     - add "home" button of some kind
     Done
