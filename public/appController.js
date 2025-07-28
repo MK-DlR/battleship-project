@@ -12,7 +12,7 @@ let appState = {
   player2Name: "Computer",
   player1Type: "human",
   player2Type: "computer",
-  scores: { player1: 0, player2: 0 },
+  scores: { player1: 1, player2: 0 },
 };
 
 // create fresh game data, transition to game screen, and render

@@ -266,7 +266,7 @@ function renderButtons() {
 
   // add event listener to call resetScore function
   // need to write resetScore function
-  // resetScoreButton.addEventListener("click", resetScore);
+  resetScoreButton.addEventListener("click", resetScore);
 
   // append everything to DOM
   mainContent.appendChild(buttonContainer);
@@ -281,18 +281,29 @@ function renderButtons() {
 // display current scores
 function renderScores() {
   const gameData = getCurrentGameData();
-  const player1Name = gameData[0].player.name; // Get from Player instance
-  const player2Name = gameData[1].player.name; // Get from Player instance
+  const player1Name = gameData[0].player.name;
+  const player2Name = gameData[1].player.name;
 
-  // create container for scores
-  const mainScoreContainer = document.createElement("div");
-  mainScoreContainer.classList.add("main-score-container");
+  // check if score container already exists
+  let mainScoreContainer = document.querySelector(".main-score-container");
 
+  if (!mainScoreContainer) {
+    // create new container only if it doesn't exist
+    mainScoreContainer = document.createElement("div");
+    mainScoreContainer.classList.add("main-score-container");
+
+    // add <br> and container to mainContent
+    mainContent.appendChild(document.createElement("br"));
+    mainContent.appendChild(mainScoreContainer);
+  }
+
+  // update content
   const playerScores = document.createElement("p");
   playerScores.innerHTML = `<h3>Player Scores</h3><br>
   <b>${player1Name}:</b> ${appState.scores.player1} <font size="5">|</font> <b>${player2Name}:</b> ${appState.scores.player2}`;
-  mainContent.appendChild(document.createElement("br"));
-  mainContent.appendChild(mainScoreContainer);
+
+  // clear existing content and add new content
+  mainScoreContainer.innerHTML = "";
   mainScoreContainer.appendChild(playerScores);
 }
 
@@ -300,7 +311,7 @@ function renderScores() {
 function renderTurn() {
   const gameData = getCurrentGameData();
   const activePlayer = gameData[activePlayerIndex].player;
-  const activeName = activePlayer.name; // Get from Player instance
+  const activeName = activePlayer.name; // get from Player instance
 
   // create container for turn
   const turnContainer = document.createElement("div");
@@ -312,7 +323,7 @@ function renderTurn() {
 function updateTurn() {
   const gameData = getCurrentGameData();
   const activePlayer = gameData[activePlayerIndex].player;
-  const activeName = activePlayer.name; // Get from Player instance
+  const activeName = activePlayer.name; // get from Player instance
 
   const turnContainer = document.querySelector(".turn-container");
   if (!turnContainer) {
@@ -354,7 +365,16 @@ function addNewPlayer2() {
   appState.player2Name = playerName;
   appState.player2Type = "human";
 
-  console.log(`Stored player 1: ${playerName}`);
+  console.log(`Stored player 2: ${playerName}`);
+}
+
+function resetScore() {
+  // reset scores in appState
+  appState.scores.player1 = 0;
+  appState.scores.player2 = 0;
+
+  //re-render the scores
+  renderScores();
 }
 
 function renderGamescreen() {

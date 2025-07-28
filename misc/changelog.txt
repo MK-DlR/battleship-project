@@ -1,5 +1,6 @@
 7/28/25:
 
+- Add resetScore button functionality
 - Change missed attack display color to medium grey
 - Fix player creation to always create human type players
 - Allow computer attack to happen automatically with small delay for realism

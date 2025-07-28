@@ -76,6 +76,7 @@ Done
             - should know if a given move is legal
                 - ie, shouldn't attack the same spot twice
             - try adjacent slots after getting a hit (xtra credit)
+            Wip
     Wip
 Wip
 
@@ -118,9 +119,11 @@ Notes:
         - players
         Done
         - scores
+        Wip
     - make sure "new game" DOES clear 
         - players
         - scores
+    Wip
     - add "home" button of some kind
     Done
     - fix create player (2) always creating computer player
