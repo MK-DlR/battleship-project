@@ -126,9 +126,6 @@ function setupTestScenario(gameData) {
   placeAllShips(gameData[0], player1Coords);
   placeAllShips(gameData[1], player2Coords);
 
-  gameData[0].player.gameboard.receiveAttack(0, 0); // hit
-  gameData[0].player.gameboard.receiveAttack(9, 9); // miss
-
   return gameData;
 }
 
@@ -198,6 +195,15 @@ function attackOpponentBoard(x, y) {
     console.log("Player type error");
   }
 }
+
+// have computer log the coordinates of successful attack
+// if result = H, store as successfulAttack variable
+// look at successfulAttack before attacking
+// if something in it, pick cell adjacent to it for next attack
+// make sure its still checking within validCoords array
+// adjacent cells will be +/-1 or +/-0
+// if that attack is successful, replace successfulAttack with it
+// otherwise clear it out
 
 export {
   message,
