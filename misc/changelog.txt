@@ -1,5 +1,7 @@
 7/28/25:
 
+- Fix player creation to always create human type players
+- Allow computer attack to happen automatically with small delay for realism
 - Modify attackOpponentBoard to allow the computer to make basic randomized attacks
 
 7/26/25:

@@ -156,20 +156,20 @@ const switchPlayerTurn = () => {
 
 // attack enemy board function
 function attackOpponentBoard(x, y) {
-  // get opponent's index (opposite of active player)
+  // get opponent's index (opposite of active player) and gameboard
   const opponentIndex = activePlayerIndex === 0 ? 1 : 0;
-  // get opponent's gameboard
   const opponentGameboard = currentGameData[opponentIndex].player.gameboard;
+
   // human player attack
   if (getActivePlayer().player.type === "human") {
-    // call receiveAttack on the opponent's board
     const result = opponentGameboard.receiveAttack(x, y);
     return result; // return "hit", "miss", or error message
-    // computer player attack
-  } else if (getActivePlayer().player.type === "computer") {
+  }
+  // computer player attack
+  if (getActivePlayer().player.type === "computer") {
     const validCoords = [];
     let computerX, computerY;
-    // loop through all cells
+
     for (let x = 0; x < 10; x++) {
       for (let y = 0; y < 10; y++) {
         // find all valid cells

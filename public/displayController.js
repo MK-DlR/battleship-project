@@ -180,13 +180,27 @@ function renderGameboards() {
             // call the attack
             const result = attackOpponentBoard(x, y);
             if (result === "hit" || result === "miss") {
-              // valid attack - re-render boards and switch turns
+              // valid attack - switch turns
               switchPlayerTurn();
-              // clear everything and re-render the entire game screen
+
+              // immediately re-render to show the human's attack
               mainContent.innerHTML = "";
               renderGamescreen();
-              // update turn display
               updateTurn();
+
+              const nextPlayer = getActivePlayer().player;
+              if (nextPlayer.type === "computer") {
+                setTimeout(() => {
+                  const computerResult = attackOpponentBoard();
+                  console.log(`Computer move: ${computerResult}`);
+                  switchPlayerTurn();
+
+                  // re-render after computer finishes
+                  mainContent.innerHTML = "";
+                  renderGamescreen();
+                  updateTurn();
+                }, 500);
+              }
             } else {
               // invalid attack
               console.log(result); // show error message
@@ -321,6 +335,7 @@ function addNewPlayer1() {
 
   // update appState
   appState.player1Name = playerName;
+  appState.player1Type = "human";
 
   console.log(`Stored player 1: ${playerName}`);
 }
@@ -337,6 +352,7 @@ function addNewPlayer2() {
 
   // update appState
   appState.player2Name = playerName;
+  appState.player2Type = "human";
 
   console.log(`Stored player 1: ${playerName}`);
 }

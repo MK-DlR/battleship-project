@@ -96,6 +96,7 @@ Extra Credit:
     - drag and drop to place ships
     - 2 player option w/ "pass device" screen
     - computer player tries adjacent slots after getting a hit
+    Wip
 
 Notes:
     - don't let users select out of bounds spots to attack
@@ -122,5 +123,5 @@ Notes:
         - scores
     - add "home" button of some kind
     Done
-    - manually created players human vs human isnt working right
-        - p2 seems to be counted as computer
+    - fix create player (2) always creating computer player
+    Done
