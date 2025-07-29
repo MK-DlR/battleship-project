@@ -2,7 +2,7 @@
 // manages overall app flow, player data, screen transitions
 
 import { mainContent } from "./layout.js";
-import { createNewGame } from "./gameController.js";
+import { createNewGame, getCurrentGameData } from "./gameController.js";
 import {
   renderHomescreen,
   renderGamescreen,
@@ -22,14 +22,39 @@ let appState = {
 // new game (new players, new score)
 function handleNewGame() {
   createNewGame(); // create fresh game data
-  resetScore();
+  resetScore(); // reset player scores
+  // resetPlayers(); // reset players
+
+  // sync with appState
+  const gameData = getCurrentGameData();
+  gameData[0].player.name = appState.player1Name;
+  gameData[1].player.name = appState.player2Name;
+  gameData[0].player.type = appState.player1Type;
+  gameData[1].player.type = appState.player2Type;
+
   showGameScreen(); // render it
 }
 
 // new round (same players, keep score)
 function handleNewRound() {
   createNewGame(); // create fresh game data
+
+  // sync with appState
+  const gameData = getCurrentGameData();
+  gameData[0].player.name = appState.player1Name;
+  gameData[1].player.name = appState.player2Name;
+  gameData[0].player.type = appState.player1Type;
+  gameData[1].player.type = appState.player2Type;
+
   showGameScreen(); // render it
+}
+
+// reset player names and types
+function resetPlayers() {
+  appState.player1Name = "Player 1";
+  appState.player2Name = "Computer";
+  appState.player1Type = "human";
+  appState.player2Type = "computer";
 }
 
 // screen management functions
@@ -39,6 +64,7 @@ function clearMainContent() {
 
 function showHomeScreen() {
   appState.currentScreen = "home";
+  resetPlayers(); // reset players
   clearMainContent();
   renderHomescreen();
 }

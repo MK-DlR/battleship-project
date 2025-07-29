@@ -263,9 +263,6 @@ function renderButtons() {
   resetScoreButton.classList.add("button");
   resetScoreButton.id = "resetScoreButton";
   const resetScoreText = document.createTextNode("Reset Score");
-
-  // add event listener to call resetScore function
-  // need to write resetScore function
   resetScoreButton.addEventListener("click", resetScore);
 
   // append everything to DOM
