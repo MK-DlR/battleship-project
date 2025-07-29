@@ -217,7 +217,15 @@ function renderGameboards() {
         } else if (cell === "M") {
           gridCell.classList.add("miss");
         } else if (cell instanceof Ship) {
-          gridCell.classList.add("ship");
+          if (
+            shouldHideShips(boardContainer.dataset.player, activePlayerIndex)
+          ) {
+            // hide the ship - make it look like an empty cell
+            gridCell.classList.add("empty");
+          } else {
+            // show the ship normally
+            gridCell.classList.add("ship");
+          }
         } else if (cell === "X") {
           gridCell.classList.add("empty");
         }
@@ -225,6 +233,31 @@ function renderGameboards() {
         boardContainer.appendChild(gridCell);
       }
     }
+  }
+
+  function shouldHideShips(boardPlayerIndex, activePlayerIndex) {
+    const boardIndex = parseInt(boardPlayerIndex);
+    const gameData = getCurrentGameData();
+
+    // get player types
+    const player1Type = gameData[0].player.type;
+    const player2Type = gameData[1].player.type;
+
+    // if human vs computer, always show own ships (never hide)
+    if (
+      (player1Type === "human" && player2Type === "computer") ||
+      (player1Type === "computer" && player2Type === "human")
+    ) {
+      return false; // never hide ships in human vs computer
+    }
+
+    // if human vs human, hide opponent's ships
+    if (player1Type === "human" && player2Type === "human") {
+      return boardIndex !== activePlayerIndex; // hide opponent's ships
+    }
+
+    // default fallback
+    return boardIndex !== activePlayerIndex;
   }
 
   renderSingleBoard(player1Board, player1BoardContainer);

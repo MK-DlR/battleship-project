@@ -119,14 +119,14 @@ Notes:
         - scores
      Done
     - make sure "new game" DOES clear 
-        - players; need to make resetPlayers function?
-        Wip
+        - players
         - scores
-        Done
-    Wip
+    Done
     - add "home" button of some kind
     Done
     - fix create player (2) always creating computer player
     Done
-    - make sure enemy ships are hidden 
+    - make sure enemy ships are hidden
+    Done
+    - make it so player ships are always visible for human vs computer
     - notification for "you sunk my [___]"?

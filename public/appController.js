@@ -23,7 +23,6 @@ let appState = {
 function handleNewGame() {
   createNewGame(); // create fresh game data
   resetScore(); // reset player scores
-  // resetPlayers(); // reset players
 
   // sync with appState
   const gameData = getCurrentGameData();

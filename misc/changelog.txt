@@ -1,5 +1,6 @@
 7/29/25:
 
+- Change display to hide enemy ships in human vs human games
 - Fix new game starting with stored player information after returning to home from the play screen
 - Create checkEndgame and triggerEndgame to check for end game conditions and trigger end of game when all ships on one board are sunk
 - Add computer AI to target cells adjacent to successful attacks
