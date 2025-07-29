@@ -81,6 +81,7 @@ function Gameboard() {
     }
   };
   const missedAttacks = []; // track missed attack coordinates
+
   // take pair of coordinates and determine if attack is a hit
   const receiveAttack = function (x, y) {
     // ensure coordinates are within board boundaries
@@ -90,7 +91,16 @@ function Gameboard() {
     const cell = getCell(x, y);
     // check that selected spot hasn't been attacked yet
     if (cell !== "X" && cell !== "H" && cell !== "M") {
+      const wasSunk = cell.sunk; // check status before hit
       cell.hit();
+
+      // check if ship just became sunk
+      if (!wasSunk && cell.sunk) {
+        const sunkInfo = shipSunk(cell);
+        setCell(x, y, "H");
+        return sunkInfo; // return ship sunk info instead of just "hit"
+      }
+
       setCell(x, y, "H");
       return "hit";
     }
@@ -102,6 +112,14 @@ function Gameboard() {
       return "Location has already been attacked, choose a different location";
     }
   };
+
+  const shipSunk = function (ship) {
+    return {
+      type: "ship_sunk",
+      shipName: ship.name,
+    };
+  };
+
   const allShipsSunk = function () {
     for (const ship of ships) {
       if (!ship.sunk) return false;
@@ -127,5 +145,6 @@ function Gameboard() {
     setCell,
   };
 }
+
 // exports
 export { message, Gameboard };

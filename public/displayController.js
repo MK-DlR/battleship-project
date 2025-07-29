@@ -179,7 +179,24 @@ function renderGameboards() {
             getCurrentGameData();
             // call the attack
             const result = attackOpponentBoard(x, y);
-            if (result === "hit" || result === "miss") {
+            if (
+              result === "hit" ||
+              result === "miss" ||
+              (result && result.type === "ship_sunk")
+            ) {
+              if (result && result.type === "ship_sunk") {
+                const gameData = getCurrentGameData();
+                const opponentIndex = activePlayerIndex === 0 ? 1 : 0;
+                const opponentName = gameData[opponentIndex].player.name;
+
+                // handle ship sunk notification
+                console.log(`Ship sunk: ${result.shipName}`);
+                alert(
+                  `${getActivePlayer().player.name} sunk ${opponentName}'s ${
+                    result.shipName
+                  }!`
+                );
+              }
               // valid attack - switch turns
               switchPlayerTurn();
 

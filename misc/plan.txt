@@ -129,4 +129,6 @@ Notes:
     - make sure enemy ships are hidden
     Done
     - make it so player ships are always visible for human vs computer
-    - notification for "you sunk my [___]"?
+    Done
+    - notification for "you sunk my [___]"
+    Done
