@@ -61,7 +61,10 @@ function newGame() {
   const player2Type = appState.player2Type || "computer";
 
   const player1 = new Player(player1Name, player1Type, player1Gameboard);
+  player1.score = 0; // initialize score
+
   const player2 = new Player(player2Name, player2Type, player2Gameboard);
+  player2.score = 0; // initialize score
 
   // create ships
   const player1Ships = allShips.map(createFleet);
@@ -132,6 +135,8 @@ function setupTestScenario(gameData) {
 // DON'T initialize immediately - wait for createNewGame() to be called
 let currentGameData = null;
 
+let isGameOver = false;
+
 function getCurrentGameData() {
   return currentGameData;
 }
@@ -141,6 +146,8 @@ function createNewGame() {
   console.log("Creating fresh blank game...");
   currentGameData = setupTestScenario(newGame()); // include test setup for now
   activePlayerIndex = 0;
+  isGameOver = false; // reset on new game
+  successfulAttack = undefined; // reset computer memory
   return currentGameData;
 }
 
@@ -159,9 +166,14 @@ function attackOpponentBoard(x, y) {
   const opponentIndex = activePlayerIndex === 0 ? 1 : 0;
   const opponentGameboard = currentGameData[opponentIndex].player.gameboard;
 
+  // check if game is over
+  if (isGameOver) {
+    return;
+  }
   // human player attack
   if (getActivePlayer().player.type === "human") {
     const result = opponentGameboard.receiveAttack(x, y);
+    checkEndgame(); // check for endgame conditions
     return result; // return "hit", "miss", or error message
   }
   // computer player attack
@@ -206,15 +218,11 @@ function attackOpponentBoard(x, y) {
           successfulAttack[0] + offsetX,
           successfulAttack[1] + offsetY,
         ]);
-        console.log("Previous successful attack:", successfulAttack);
-        console.log("Valid coords count:", validCoords.length);
-        console.log("Possible adjacent attacks:", possibleAttacks);
         // filter possibleAttacks against validCoords
         let filteredAttacks = possibleAttacks.filter(([x, y]) => {
           if (x < 0 || x > 9 || y < 0 || y > 9) return false;
           return validCoords.some(([vx, vy]) => vx === x && vy === y);
         });
-        console.log("Filtered adjacent attacks:", filteredAttacks);
         // then randomly select from filtered options
         let targetedCoord;
         if (filteredAttacks.length > 0) {
@@ -239,20 +247,44 @@ function attackOpponentBoard(x, y) {
       }
     }
     console.log(`Computer attacking (${computerX}, ${computerY}) → ${result}`);
-    return result;
+    checkEndgame(); // check for endgame conditions
+    return result; // return "hit", "miss", or error message
   } else {
     console.log("Player type error");
   }
 }
 
-// have computer log the coordinates of successful attack
-// if result = H, store as successfulAttack variable
-// look at successfulAttack before attacking
-// if something in it, pick cell adjacent to it for next attack
-// make sure its still checking within validCoords array
-// adjacent cells will be +/-1 or +/-0
-// if that attack is successful, replace successfulAttack with it
-// otherwise clear it out
+// end game conditions
+function checkEndgame() {
+  // get opponent's index (opposite of active player) and gameboard
+  const opponentIndex = activePlayerIndex === 0 ? 1 : 0;
+  const opponentGameboard = currentGameData[opponentIndex].player.gameboard;
+
+  if (opponentGameboard.allShipsSunk()) {
+    console.log("All ships sunk");
+    triggerEndgame();
+  } else {
+    console.log("Ships still present");
+  }
+}
+
+// trigger game over
+function triggerEndgame() {
+  // display game over notification and winner
+  alert(`Game over! 🎉 ${getActivePlayer().player.name} wins! 🎉`);
+  // increment player score
+  getActivePlayer().player.score += 1;
+
+  // update the appState scores for UI sync
+  if (activePlayerIndex === 0) {
+    appState.scores.player1 += 1;
+  } else {
+    appState.scores.player2 += 1;
+  }
+
+  // set game status to game over
+  isGameOver = true;
+}
 
 export {
   message,

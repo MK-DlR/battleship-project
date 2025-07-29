@@ -76,9 +76,8 @@ Done
             - should know if a given move is legal
                 - ie, shouldn't attack the same spot twice
             - try adjacent slots after getting a hit (xtra credit)
-            Wip
-    Wip
-Wip
+        Done
+Done
 
 6. create conditions so game ends
     a. once one player's ship have all been sunk
@@ -86,6 +85,7 @@ Wip
     c. win conditions:
         - c1. all ships on one side sunk
         - c2. increment player score
+Done
 
 7. finish by implementing system to allow placing of ships
     a. examples:
@@ -96,8 +96,9 @@ Wip
 Extra Credit:
     - drag and drop to place ships
     - 2 player option w/ "pass device" screen
-    - computer player tries adjacent slots after getting a hit
     Wip
+    - computer player tries adjacent slots after getting a hit
+    Done
 
 Notes:
     - don't let users select out of bounds spots to attack
@@ -128,3 +129,4 @@ Notes:
     - fix create player (2) always creating computer player
     Done
     - make sure enemy ships are hidden 
+    - notification for "you sunk my [___]"?
