@@ -13,20 +13,20 @@ import {
 let appState = {
   currentScreen: "home", // "home" or "playing"
   player1Name: "Player 1",
-  player2Name: "Computer",
+  player2Name: "Computer", // set player 2 to computer by default
   player1Type: "human",
-  player2Type: "computer",
-  scores: { player1: 1, player2: 0 },
+  player2Type: "computer", // set player 2 to computer by default
+  scores: { player1: 0, player2: 0 },
 };
 
-// create fresh game data, transition to game screen, and render
+// new game (new players, new score)
 function handleNewGame() {
   createNewGame(); // create fresh game data
   resetScore();
   showGameScreen(); // render it
 }
 
-// create fresh game data, transition to game screen, and render
+// new round (same players, keep score)
 function handleNewRound() {
   createNewGame(); // create fresh game data
   showGameScreen(); // render it

@@ -127,3 +127,4 @@ Notes:
     Done
     - fix create player (2) always creating computer player
     Done
+    - make sure enemy ships are hidden 

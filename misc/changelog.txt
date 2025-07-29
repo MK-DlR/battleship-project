@@ -1,3 +1,7 @@
+7/29/25:
+
+- Add computer AI to target cells adjacent to successful attacks
+
 7/28/25:
 
 - Trigger resetScore automatically when new game button is pressed

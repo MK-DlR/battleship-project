@@ -151,6 +151,8 @@ const switchPlayerTurn = () => {
   activePlayerIndex = activePlayerIndex === 0 ? 1 : 0;
 };
 
+let successfulAttack;
+
 // attack enemy board function
 function attackOpponentBoard(x, y) {
   // get opponent's index (opposite of active player) and gameboard
@@ -166,6 +168,7 @@ function attackOpponentBoard(x, y) {
   if (getActivePlayer().player.type === "computer") {
     const validCoords = [];
     let computerX, computerY;
+    let result;
 
     for (let x = 0; x < 10; x++) {
       for (let y = 0; y < 10; y++) {
@@ -180,16 +183,62 @@ function attackOpponentBoard(x, y) {
     if (validCoords.length === 0) {
       return "No valid attacks left, start a new game.";
     } else {
-      // if validCoords has items pick a random one
-      let randomCoord =
-        validCoords[Math.floor(Math.random() * validCoords.length)];
-      console.log(randomCoord);
-      // log the coordinates
-      computerX = randomCoord[0];
-      computerY = randomCoord[1];
+      // if no previous successful attack, proceed normally
+      if (successfulAttack === undefined) {
+        // if validCoords has items pick a random one
+        let randomCoord =
+          validCoords[Math.floor(Math.random() * validCoords.length)];
+        console.log(randomCoord);
+        // log the coordinates
+        computerX = randomCoord[0];
+        computerY = randomCoord[1];
+        // if previous successful attack
+      } else if (successfulAttack != undefined) {
+        console.log("Previous successful attack:", successfulAttack);
+        const adjacentCoords = [
+          [0, -1], // north
+          [0, +1], // south
+          [+1, 0], // east
+          [-1, 0], // west
+        ];
+        // generate adjacent coordinates from successfulAttack
+        let possibleAttacks = adjacentCoords.map(([offsetX, offsetY]) => [
+          successfulAttack[0] + offsetX,
+          successfulAttack[1] + offsetY,
+        ]);
+        console.log("Previous successful attack:", successfulAttack);
+        console.log("Valid coords count:", validCoords.length);
+        console.log("Possible adjacent attacks:", possibleAttacks);
+        // filter possibleAttacks against validCoords
+        let filteredAttacks = possibleAttacks.filter(([x, y]) => {
+          if (x < 0 || x > 9 || y < 0 || y > 9) return false;
+          return validCoords.some(([vx, vy]) => vx === x && vy === y);
+        });
+        console.log("Filtered adjacent attacks:", filteredAttacks);
+        // then randomly select from filtered options
+        let targetedCoord;
+        if (filteredAttacks.length > 0) {
+          targetedCoord =
+            filteredAttacks[Math.floor(Math.random() * filteredAttacks.length)];
+        } else {
+          // fallback to random selection from validCoords if no valid attacks
+          targetedCoord =
+            validCoords[Math.floor(Math.random() * validCoords.length)];
+          successfulAttack = undefined;
+        }
+        // log the coordinates
+        computerX = targetedCoord[0];
+        computerY = targetedCoord[1];
+      }
+      // use coordinates to attack
+      result = opponentGameboard.receiveAttack(computerX, computerY);
+      // store coordinates if attack is a hit
+      if (result === "hit") {
+        successfulAttack = [computerX, computerY];
+        console.log(successfulAttack);
+      }
     }
-    // use coordinates to attack
-    const result = opponentGameboard.receiveAttack(computerX, computerY);
+    console.log(`Computer attacking (${computerX}, ${computerY}) → ${result}`);
     return result;
   } else {
     console.log("Player type error");
