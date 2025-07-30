@@ -1,5 +1,8 @@
 7/30/25:
 
+- Opposing player ships are hidden during placement phase
+- Add player 1 and player 2 confirmation buttons for ship placement
+- Add game state tracking to appController to allow buttons to be shown conditionally
 - Add randomize player 1 and player 2 ship placement functionality
 
 7/29/25:

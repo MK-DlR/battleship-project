@@ -178,6 +178,7 @@ function randomizeShips1() {
     }
   }
   console.log("Player 1 ships randomized!");
+  appState.shipsPlaced.player1 = true;
 }
 
 // player 2 randomize ship placement
@@ -202,6 +203,7 @@ function randomizeShips2() {
     }
   }
   console.log("Player 2 ships randomized!");
+  appState.shipsPlaced.player2 = true;
 }
 // start game
 function startGame() {

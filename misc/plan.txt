@@ -88,22 +88,31 @@ Done
 Done
 
 7. finish by implementing system to allow placing of ships
-    a. examples:
-        a1. typing coordinates
-        a2. "randomize ships" button to cycle through random placements
-            - have button only show during placement phase
-            - add "start game" button for once placement is done
-                - don't let attacks be made until "start game" is pressed
-            - "randomize ships" + "start game" buttons 
-                - are hidden once "start game" is pressed
-            - take into account for human vs human players
-                - utilize "pass device" screen
-                - and correct ship hiding
-                - player 2 currently cant see ships being placed
-            - hide player 2 randomize ships button if p2 is computer
-            - make sure computer ships are randomized and placed automatically
-                - and stay hidden from player 1
+    a. "randomize ships" button to cycle through random placements
+    Done
+    b. once "start game" button is pressed
+        b1. p1 randomize, start game, p2 randomize buttons are hidden
+        Done
+        b2. disable attacking before button is pressed
+        b3. only have "start game" button appear once both boards have ships
+        Done
+    c. when randomizing
+        c1. don't let p1 see p2's ship placement, vice versa
+            - implement "pass device" alert and confirmation
+            - p1 randomize ships -> "confirm" -> pass device -> p2 randomize ships -> confirm -> start game
+    Done
+    d. for human vs computer
+        d1. make sure computer ships are automatically randomized and placed
+        d2. and p1 can't see computer's ship placements
 Wip
+
+8. finishing touches
+    a. make sure game starts on home screen
+    b. make sure "pass device" screen shows when/where necessary
+        b1. when placing ships
+        b2. between attacks/turns
+    c. figure out styling/css
+    d. remove unnecessary comments/testing code
 
 Extra Credit:
     - drag and drop to place ships

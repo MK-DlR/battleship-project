@@ -266,17 +266,53 @@ function renderGameboards() {
     const player1Type = gameData[0].player.type;
     const player2Type = gameData[1].player.type;
 
-    // if human vs computer, always show own ships (never hide)
-    if (
-      (player1Type === "human" && player2Type === "computer") ||
-      (player1Type === "computer" && player2Type === "human")
-    ) {
-      return false; // never hide ships in human vs computer
+    // DURING SHIP PLACEMENT PHASE (before game starts)
+    if (!appState.gameStarted) {
+      // Human vs Human placement phase
+      if (player1Type === "human" && player2Type === "human") {
+        // P1 placement phase: show P1 ships, hide P2 ships
+        if (!appState.shipsConfirmed.player1) {
+          return boardIndex === 1; // hide P2 board (index 1)
+        }
+        // P2 placement phase: hide P1 ships, show P2 ships
+        else if (
+          appState.shipsConfirmed.player1 &&
+          !appState.shipsConfirmed.player2
+        ) {
+          return boardIndex === 0; // hide P1 board (index 0)
+        }
+        // Both confirmed: hide both (shouldn't see this state long)
+        else {
+          return true;
+        }
+      }
+
+      // Human vs Computer placement phase
+      if (
+        (player1Type === "human" && player2Type === "computer") ||
+        (player1Type === "computer" && player2Type === "human")
+      ) {
+        // Always hide computer ships, show human ships during placement
+        const humanPlayerIndex = player1Type === "human" ? 0 : 1;
+        return boardIndex !== humanPlayerIndex;
+      }
     }
 
-    // if human vs human, hide opponent's ships
-    if (player1Type === "human" && player2Type === "human") {
-      return boardIndex !== activePlayerIndex; // hide opponent's ships
+    // DURING ACTUAL GAMEPLAY (after game starts)
+    else {
+      // Human vs Computer gameplay: always hide computer ships
+      if (
+        (player1Type === "human" && player2Type === "computer") ||
+        (player1Type === "computer" && player2Type === "human")
+      ) {
+        const humanPlayerIndex = player1Type === "human" ? 0 : 1;
+        return boardIndex !== humanPlayerIndex;
+      }
+
+      // Human vs Human gameplay: hide opponent's ships
+      if (player1Type === "human" && player2Type === "human") {
+        return boardIndex !== activePlayerIndex;
+      }
     }
 
     // default fallback
@@ -300,48 +336,102 @@ function renderGameboards() {
 // rememeber to account for 2 human players both placing ships
 // start game can only trigger when both boards have ships on them
 function renderTempButtons() {
-  // button container
-  const buttonContainer = document.createElement("div");
-  buttonContainer.classList.add("button-container");
+  if (appState.gameStarted === true) {
+    return;
+  } else {
+    // button container
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("button-container");
 
-  // player 1 randomize ship placement button
-  const randomizePlacementButton1 = document.createElement("BUTTON");
-  randomizePlacementButton1.classList.add("button");
-  randomizePlacementButton1.id = "randomizePlacementButton1";
-  const randomizePlacementText1 = document.createTextNode("P1 Randomize Ships");
-  randomizePlacementButton1.addEventListener("click", () => {
-    randomizeShips1();
-    mainContent.innerHTML = ""; // clear everything first
-    renderGamescreen(); // render entire game screen
-  });
+    mainContent.appendChild(buttonContainer);
 
-  // start game button
-  const startGameButton = document.createElement("BUTTON");
-  startGameButton.classList.add("button");
-  startGameButton.id = "startGameButton";
-  const startGameText = document.createTextNode("Start Game");
-  startGameButton.addEventListener("click", startGame);
+    // PHASE 1: Player 1 setup (always shows first)
+    // player 1 randomize ship placement button
+    if (appState.shipsConfirmed.player1 === false) {
+      const randomizePlacementButton1 = document.createElement("BUTTON");
+      randomizePlacementButton1.classList.add("button");
+      randomizePlacementButton1.id = "randomizePlacementButton1";
+      const randomizePlacementText1 =
+        document.createTextNode("P1 Randomize Ships");
+      randomizePlacementButton1.addEventListener("click", () => {
+        randomizeShips1();
+        mainContent.innerHTML = ""; // clear everything first
+        renderGamescreen(); // render entire game screen
+      });
 
-  // player 2 randomize ship placement button
-  // hide this button if p2 is a computer
-  const randomizePlacementButton2 = document.createElement("BUTTON");
-  randomizePlacementButton2.classList.add("button");
-  randomizePlacementButton2.id = "randomizePlacementButton";
-  const randomizePlacementText2 = document.createTextNode("P2 Randomize Ships");
-  randomizePlacementButton2.addEventListener("click", () => {
-    randomizeShips2();
-    mainContent.innerHTML = ""; // clear everything first
-    renderGamescreen(); // render entire game screen
-  });
+      randomizePlacementButton1.appendChild(randomizePlacementText1);
+      buttonContainer.appendChild(randomizePlacementButton1);
+    }
 
-  // append everything to DOM
-  mainContent.appendChild(buttonContainer);
-  randomizePlacementButton1.appendChild(randomizePlacementText1);
-  buttonContainer.appendChild(randomizePlacementButton1);
-  startGameButton.appendChild(startGameText);
-  buttonContainer.appendChild(startGameButton);
-  randomizePlacementButton2.appendChild(randomizePlacementText2);
-  buttonContainer.appendChild(randomizePlacementButton2);
+    // player 1 confirm button - shows up AFTER ships are placed
+    if (
+      appState.shipsPlaced.player1 === true &&
+      appState.shipsConfirmed.player1 === false
+    ) {
+      const confirmButton1 = document.createElement("BUTTON");
+      confirmButton1.classList.add("button");
+      confirmButton1.textContent = "Confirm P1 Ships";
+      confirmButton1.addEventListener("click", () => {
+        appState.shipsConfirmed.player1 = true;
+        mainContent.innerHTML = "";
+        renderGamescreen();
+        alert("Please pass device to the other player after pressing OK");
+      });
+      buttonContainer.appendChild(confirmButton1);
+    }
+
+    // PHASE 3: Start game (only when both confirmed)
+    if (appState.shipsConfirmed.player1 && appState.shipsConfirmed.player2) {
+      const startGameButton = document.createElement("BUTTON");
+      startGameButton.classList.add("button");
+      startGameButton.id = "startGameButton";
+      const startGameText = document.createTextNode("Start Game");
+      startGameButton.addEventListener("click", startGame);
+      startGameButton.appendChild(startGameText);
+      buttonContainer.appendChild(startGameButton);
+    }
+
+    // PHASE 2: Player 2 setup (only after P1 confirmed)
+    // player 2 randomize ship placement button
+    if (
+      appState.shipsConfirmed.player1 === true &&
+      appState.shipsConfirmed.player2 === false &&
+      appState.player2Type === "human"
+    ) {
+      const randomizePlacementButton2 = document.createElement("BUTTON");
+      randomizePlacementButton2.classList.add("button");
+      randomizePlacementButton2.id = "randomizePlacementButton2";
+      const randomizePlacementText2 =
+        document.createTextNode("P2 Randomize Ships");
+      randomizePlacementButton2.addEventListener("click", () => {
+        randomizeShips2();
+        mainContent.innerHTML = ""; // clear everything first
+        renderGamescreen(); // render entire game screen
+      });
+
+      randomizePlacementButton2.appendChild(randomizePlacementText2);
+      buttonContainer.appendChild(randomizePlacementButton2);
+    }
+
+    // player 2 confirm button
+    if (
+      appState.shipsConfirmed.player1 === true &&
+      appState.shipsPlaced.player2 === true &&
+      appState.shipsConfirmed.player2 === false &&
+      appState.player2Type === "human"
+    ) {
+      const confirmButton2 = document.createElement("BUTTON");
+      confirmButton2.classList.add("button");
+      confirmButton2.textContent = "Confirm P2 Ships";
+      confirmButton2.addEventListener("click", () => {
+        appState.shipsConfirmed.player2 = true;
+        mainContent.innerHTML = "";
+        renderGamescreen();
+        alert("Please pass device to the other player after pressing OK");
+      });
+      buttonContainer.appendChild(confirmButton2);
+    }
+  }
 }
 
 // new round, home, and reset score buttons

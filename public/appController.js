@@ -17,6 +17,9 @@ let appState = {
   player1Type: "human",
   player2Type: "computer", // set player 2 to computer by default
   scores: { player1: 0, player2: 0 },
+  shipsPlaced: { player1: false, player2: false },
+  shipsConfirmed: { player1: false, player2: false },
+  gameStarted: false,
 };
 
 // new game (new players, new score)
@@ -30,6 +33,12 @@ function handleNewGame() {
   gameData[1].player.name = appState.player2Name;
   gameData[0].player.type = appState.player1Type;
   gameData[1].player.type = appState.player2Type;
+  // reset ship placement state
+  appState.shipsPlaced.player1 = false;
+  appState.shipsPlaced.player2 = false;
+  appState.shipsConfirmed.player1 = false;
+  appState.shipsConfirmed.player2 = false;
+  appState.gameStarted = false;
 
   showGameScreen(); // render it
 }
@@ -44,6 +53,12 @@ function handleNewRound() {
   gameData[1].player.name = appState.player2Name;
   gameData[0].player.type = appState.player1Type;
   gameData[1].player.type = appState.player2Type;
+  // reset ship placement state
+  appState.shipsPlaced.player1 = false;
+  appState.shipsPlaced.player2 = false;
+  appState.shipsConfirmed.player1 = false;
+  appState.shipsConfirmed.player2 = false;
+  appState.gameStarted = false;
 
   showGameScreen(); // render it
 }
