@@ -94,16 +94,19 @@ Done
         b1. p1 randomize, start game, p2 randomize buttons are hidden
         Done
         b2. disable attacking before button is pressed
+        Wip
         b3. only have "start game" button appear once both boards have ships
         Done
+    Wip
     c. when randomizing
         c1. don't let p1 see p2's ship placement, vice versa
             - implement "pass device" alert and confirmation
-            - p1 randomize ships -> "confirm" -> pass device -> p2 randomize ships -> confirm -> start game
+        c2. make sure ships show back up when attacking
     Done
     d. for human vs computer
         d1. make sure computer ships are automatically randomized and placed
         d2. and p1 can't see computer's ship placements
+    Wip
 Wip
 
 8. finishing touches

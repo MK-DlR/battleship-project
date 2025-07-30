@@ -207,11 +207,29 @@ function randomizeShips2() {
 }
 // start game
 function startGame() {
-  // code
-  console.log("start game");
-  // make sure both boards have ships placed
-  // else alert saying ships need to be placed
-  // check if each board has the expected number of ships placed
+  console.log("Starting game...");
+
+  // check if both players have ships placed
+  if (!appState.shipsConfirmed.player1 || !appState.shipsConfirmed.player2) {
+    alert("Both players must place and confirm their ships before starting!");
+    return;
+  }
+
+  // set game as started
+  appState.gameStarted = true;
+
+  // reset active player to player 1
+  activePlayerIndex = 0;
+
+  // re-render the game screen to reflect the new game state
+  import("./displayController.js").then(({ renderGamescreen }) => {
+    import("./layout.js").then(({ mainContent }) => {
+      mainContent.innerHTML = "";
+      renderGamescreen();
+    });
+  });
+
+  console.log("Game started! It's Player 1's turn.");
 }
 
 // handle changing player turn
