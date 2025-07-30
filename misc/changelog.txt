@@ -1,5 +1,7 @@
 7/30/25:
 
+- Add "pass device" screen for human vs human games between player turns and when placing ships 
+- Add auto-randomization and placement for ships if player 2 is computer
 - Add start game button functionality
 - Opposing player ships are hidden during placement phase
 - Add player 1 and player 2 confirmation buttons for ship placement

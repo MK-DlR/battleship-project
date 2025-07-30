@@ -20,6 +20,8 @@ import {
   showHomeScreen,
   handleNewGame,
   handleNewRound,
+  showPassScreen,
+  continueFromPassScreen,
 } from "./appController.js";
 
 function renderHomescreen() {
@@ -374,10 +376,13 @@ function renderTempButtons() {
       confirmButton1.textContent = "Confirm P1 Ships";
       confirmButton1.addEventListener("click", () => {
         appState.shipsConfirmed.player1 = true;
-        mainContent.innerHTML = "";
-        renderGamescreen();
+
         if (appState.player2Type === "human") {
-          alert("Please pass device to the other player after pressing OK");
+          // show pass screen instead of just an alert
+          showPassScreen("Player 2", 1);
+        } else {
+          mainContent.innerHTML = "";
+          renderGamescreen();
         }
       });
       buttonContainer.appendChild(confirmButton1);
@@ -428,9 +433,7 @@ function renderTempButtons() {
       confirmButton2.textContent = "Confirm P2 Ships";
       confirmButton2.addEventListener("click", () => {
         appState.shipsConfirmed.player2 = true;
-        mainContent.innerHTML = "";
-        renderGamescreen();
-        alert("Please pass device to the other player after pressing OK");
+        showPassScreen("Player 1", 0);
       });
       buttonContainer.appendChild(confirmButton2);
     }
@@ -501,6 +504,23 @@ function renderScores() {
   // clear existing content and add new content
   mainScoreContainer.innerHTML = "";
   mainScoreContainer.appendChild(playerScores);
+}
+
+function renderPassScreen() {
+  const passContainer = document.createElement("div");
+  passContainer.classList.add("pass-container");
+
+  const message = document.createElement("h2");
+  message.textContent = `Pass device to ${appState.nextPlayerName}`;
+
+  const continueButton = document.createElement("button");
+  continueButton.textContent = "Continue";
+  continueButton.classList.add("button");
+  continueButton.addEventListener("click", continueFromPassScreen);
+
+  passContainer.appendChild(message);
+  passContainer.appendChild(continueButton);
+  mainContent.appendChild(passContainer);
 }
 
 // display current player turn
@@ -585,6 +605,7 @@ export {
   renderHomescreen,
   renderGameboards,
   renderButtons,
+  renderPassScreen,
   renderScores,
   renderTurn,
   updateTurn,

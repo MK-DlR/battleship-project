@@ -111,6 +111,7 @@ Done
     b. make sure "pass device" screen shows when/where necessary
         b1. when placing ships
         b2. between attacks/turns
+    Done
     c. figure out styling/css
     d. remove unnecessary comments/testing code
 
