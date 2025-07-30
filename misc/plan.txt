@@ -89,9 +89,21 @@ Done
 
 7. finish by implementing system to allow placing of ships
     a. examples:
-        - typing coordinates
-        - button to cycle through random placements
-        - drag and drop (xtra credit)
+        a1. typing coordinates
+        a2. "randomize ships" button to cycle through random placements
+            - have button only show during placement phase
+            - add "start game" button for once placement is done
+                - don't let attacks be made until "start game" is pressed
+            - "randomize ships" + "start game" buttons 
+                - are hidden once "start game" is pressed
+            - take into account for human vs human players
+                - utilize "pass device" screen
+                - and correct ship hiding
+                - player 2 currently cant see ships being placed
+            - hide player 2 randomize ships button if p2 is computer
+            - make sure computer ships are randomized and placed automatically
+                - and stay hidden from player 1
+Wip
 
 Extra Credit:
     - drag and drop to place ships

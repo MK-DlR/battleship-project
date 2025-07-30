@@ -1,5 +1,11 @@
+7/30/25:
+
+- Add randomize player 1 and player 2 ship placement functionality
+
 7/29/25:
 
+- Begin general set up of randomizeShips and startGame functions for associated buttons
+- Create Player 1 + Player 2 Randomize Ships buttons and Start Game buttons
 - Add notification for when a player's ship is sunk
 - Change display to hide enemy ships in human vs human games
 - Fix new game starting with stored player information after returning to home from the play screen

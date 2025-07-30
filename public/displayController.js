@@ -6,6 +6,9 @@ import { mainContent } from "./layout.js";
 import { Ship } from "./game/ship.js";
 import {
   getCurrentGameData,
+  randomizeShips1,
+  randomizeShips2,
+  startGame,
   switchPlayerTurn,
   activePlayerIndex,
   getActivePlayer,
@@ -61,6 +64,9 @@ function renderHomescreen() {
 }
 
 function renderGameboards() {
+  // clear previous boards first
+  mainContent.querySelector(".gameboards-container")?.remove();
+
   // get current game data (this will be fresh after createNewGame() is called)
   const gameData = getCurrentGameData();
 
@@ -289,6 +295,56 @@ function renderGameboards() {
   mainContent.appendChild(gameboardsContainer);
 }
 
+// ship placement and start game buttons
+// should all be hidden once "start game" is pressed
+// rememeber to account for 2 human players both placing ships
+// start game can only trigger when both boards have ships on them
+function renderTempButtons() {
+  // button container
+  const buttonContainer = document.createElement("div");
+  buttonContainer.classList.add("button-container");
+
+  // player 1 randomize ship placement button
+  const randomizePlacementButton1 = document.createElement("BUTTON");
+  randomizePlacementButton1.classList.add("button");
+  randomizePlacementButton1.id = "randomizePlacementButton1";
+  const randomizePlacementText1 = document.createTextNode("P1 Randomize Ships");
+  randomizePlacementButton1.addEventListener("click", () => {
+    randomizeShips1();
+    mainContent.innerHTML = ""; // clear everything first
+    renderGamescreen(); // render entire game screen
+  });
+
+  // start game button
+  const startGameButton = document.createElement("BUTTON");
+  startGameButton.classList.add("button");
+  startGameButton.id = "startGameButton";
+  const startGameText = document.createTextNode("Start Game");
+  startGameButton.addEventListener("click", startGame);
+
+  // player 2 randomize ship placement button
+  // hide this button if p2 is a computer
+  const randomizePlacementButton2 = document.createElement("BUTTON");
+  randomizePlacementButton2.classList.add("button");
+  randomizePlacementButton2.id = "randomizePlacementButton";
+  const randomizePlacementText2 = document.createTextNode("P2 Randomize Ships");
+  randomizePlacementButton2.addEventListener("click", () => {
+    randomizeShips2();
+    mainContent.innerHTML = ""; // clear everything first
+    renderGamescreen(); // render entire game screen
+  });
+
+  // append everything to DOM
+  mainContent.appendChild(buttonContainer);
+  randomizePlacementButton1.appendChild(randomizePlacementText1);
+  buttonContainer.appendChild(randomizePlacementButton1);
+  startGameButton.appendChild(startGameText);
+  buttonContainer.appendChild(startGameButton);
+  randomizePlacementButton2.appendChild(randomizePlacementText2);
+  buttonContainer.appendChild(randomizePlacementButton2);
+}
+
+// new round, home, and reset score buttons
 function renderButtons() {
   // button container
   const buttonContainer = document.createElement("div");
@@ -427,6 +483,7 @@ function resetScore() {
 function renderGamescreen() {
   renderTurn();
   renderGameboards();
+  renderTempButtons();
   renderButtons();
   renderScores();
 }

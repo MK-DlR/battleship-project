@@ -86,6 +86,7 @@ function newGame() {
   ];
 }
 
+/*
 // manually place ships - TEMPORARY for testing
 function placeShipsForTesting(player, ship, x, y, dir) {
   player.gameboard.placeShip(ship, x, y, dir);
@@ -108,6 +109,7 @@ let player2Coords = [
   [6, 7, "vertical"], // Submarine (length 3)
   [5, 8, "vertical"], // Patrol Boat (length 2)
 ];
+*/
 
 function placeAllShips(playerData, coords) {
   // error if ship and coords are not same length
@@ -120,10 +122,11 @@ function placeAllShips(playerData, coords) {
     console.log(
       `Placing ${ship.name} for ${playerData.player.name} at (${x}, ${y}) ${dir}`
     );
-    placeShipsForTesting(playerData.player, ship, x, y, dir);
+    placeShip(playerData.player, ship, x, y, dir);
   });
 }
 
+/*
 // separate function for development testing setup
 function setupTestScenario(gameData) {
   placeAllShips(gameData[0], player1Coords);
@@ -131,6 +134,7 @@ function setupTestScenario(gameData) {
 
   return gameData;
 }
+  */
 
 // DON'T initialize immediately - wait for createNewGame() to be called
 let currentGameData = null;
@@ -144,11 +148,68 @@ function getCurrentGameData() {
 // create completely fresh, blank game (no test setup)
 function createNewGame() {
   console.log("Creating fresh blank game...");
-  currentGameData = setupTestScenario(newGame()); // include test setup for now
+  // currentGameData = setupTestScenario(newGame()); // include test setup for now
+  currentGameData = newGame();
   activePlayerIndex = 0;
   isGameOver = false; // reset on new game
   successfulAttack = undefined; // reset computer memory
   return currentGameData;
+}
+
+// player 1 randomize ship placement
+function randomizeShips1() {
+  // clear existing ships
+  currentGameData[0].player.gameboard.clearBoard();
+  // currentGameData[0].ships.length = 0;
+  // reset and repopulate ship array
+  currentGameData[0].ships = allShips.map(createFleet);
+
+  console.log("Randomizing ships for Player 1...");
+
+  // loop through each ship in fleet and attempt random placement until successful
+  for (let ship of currentGameData[0].ships) {
+    let placed = false;
+    while (!placed) {
+      const x = Math.floor(Math.random() * 10); // random x coords
+      const y = Math.floor(Math.random() * 10); // random y coords
+      const dir = Math.random() < 0.5 ? "horizontal" : "vertical";
+
+      placed = currentGameData[0].player.gameboard.placeShip(ship, x, y, dir);
+    }
+  }
+  console.log("Player 1 ships randomized!");
+}
+
+// player 2 randomize ship placement
+function randomizeShips2() {
+  // clear existing ships
+  currentGameData[1].player.gameboard.clearBoard();
+  // currentGameData[0].ships.length = 0;
+  // reset and repopulate ship array
+  currentGameData[1].ships = allShips.map(createFleet);
+
+  console.log("Randomizing ships for Player 2...");
+
+  // loop through each ship in fleet and attempt random placement until successful
+  for (let ship of currentGameData[1].ships) {
+    let placed = false;
+    while (!placed) {
+      const x = Math.floor(Math.random() * 10); // random x coords
+      const y = Math.floor(Math.random() * 10); // random y coords
+      const dir = Math.random() < 0.5 ? "horizontal" : "vertical";
+
+      placed = currentGameData[1].player.gameboard.placeShip(ship, x, y, dir);
+    }
+  }
+  console.log("Player 2 ships randomized!");
+}
+// start game
+function startGame() {
+  // code
+  console.log("start game");
+  // make sure both boards have ships placed
+  // else alert saying ships need to be placed
+  // check if each board has the expected number of ships placed
 }
 
 // handle changing player turn
@@ -290,12 +351,15 @@ export {
   message,
   createFleet,
   newGame,
-  placeShipsForTesting,
-  player1Coords,
-  player2Coords,
+  // placeShipsForTesting,
+  // player1Coords,
+  // player2Coords,
   placeAllShips,
   getCurrentGameData,
   switchPlayerTurn,
+  randomizeShips1,
+  randomizeShips2,
+  startGame,
   activePlayerIndex,
   getActivePlayer,
   createNewGame,
