@@ -13,6 +13,7 @@ import {
   activePlayerIndex,
   getActivePlayer,
   attackOpponentBoard,
+  isBothPlayersHuman,
 } from "./gameController.js";
 import {
   appState,
@@ -191,6 +192,7 @@ function renderGameboards() {
             getCurrentGameData();
             // call the attack
             const result = attackOpponentBoard(x, y);
+
             if (
               result === "hit" ||
               result === "miss" ||
@@ -209,26 +211,39 @@ function renderGameboards() {
                   }!`
                 );
               }
+
               // valid attack - switch turns
               switchPlayerTurn();
 
-              // immediately re-render to show the human's attack
-              mainContent.innerHTML = "";
-              renderGamescreen();
-              updateTurn();
+              // check if pass screen is needed (both players human)
+              const gameData = getCurrentGameData();
+              if (
+                gameData[0].player.type === "human" &&
+                gameData[1].player.type === "human"
+              ) {
+                const nextPlayer = gameData[activePlayerIndex].player;
 
-              const nextPlayer = getActivePlayer().player;
-              if (nextPlayer.type === "computer") {
-                setTimeout(() => {
-                  const computerResult = attackOpponentBoard();
-                  console.log(`Computer move: ${computerResult}`);
-                  switchPlayerTurn();
+                // show pass screen instead of immediate re-render
+                showPassScreen(nextPlayer.name, activePlayerIndex);
+              } else {
+                // human vs computer - immediate re-render
+                mainContent.innerHTML = "";
+                renderGamescreen();
+                updateTurn();
 
-                  // re-render after computer finishes
-                  mainContent.innerHTML = "";
-                  renderGamescreen();
-                  updateTurn();
-                }, 500);
+                const nextPlayer = getActivePlayer().player;
+                if (nextPlayer.type === "computer") {
+                  setTimeout(() => {
+                    const computerResult = attackOpponentBoard();
+                    console.log(`Computer move: ${computerResult}`);
+                    switchPlayerTurn();
+
+                    // re-render after computer finishes
+                    mainContent.innerHTML = "";
+                    renderGamescreen();
+                    updateTurn();
+                  }, 500);
+                }
               }
             } else {
               // invalid attack

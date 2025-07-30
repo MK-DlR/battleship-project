@@ -1,5 +1,6 @@
 7/30/25:
 
+- Fix pass device screen not showing during turn switch
 - Add "pass device" screen for human vs human games between player turns and when placing ships 
 - Add auto-randomization and placement for ships if player 2 is computer
 - Add start game button functionality

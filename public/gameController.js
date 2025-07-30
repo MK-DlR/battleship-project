@@ -335,6 +335,14 @@ function attackOpponentBoard(x, y) {
   }
 }
 
+// check if both players are human
+function isBothPlayersHuman() {
+  const gameData = getCurrentGameData();
+  return (
+    gameData[0].player.type === "human" && gameData[1].player.type === "human"
+  );
+}
+
 // end game conditions
 function checkEndgame() {
   // get opponent's index (opposite of active player) and gameboard
@@ -379,6 +387,7 @@ export {
   switchPlayerTurn,
   randomizeShips1,
   randomizeShips2,
+  isBothPlayersHuman,
   startGame,
   activePlayerIndex,
   getActivePlayer,
