@@ -166,6 +166,10 @@ function renderGameboards() {
 
         // make grid cells clickable
         gridCell.addEventListener("click", (event) => {
+          if (appState.gameStarted === false) {
+            alert("Please place ships and press Start Game to play!");
+            return;
+          }
           if (
             (activePlayerIndex === 0 &&
               boardContainer.dataset.player === "1") ||
@@ -332,9 +336,6 @@ function renderGameboards() {
 }
 
 // ship placement and start game buttons
-// should all be hidden once "start game" is pressed
-// rememeber to account for 2 human players both placing ships
-// start game can only trigger when both boards have ships on them
 function renderTempButtons() {
   if (appState.gameStarted === true) {
     return;
@@ -375,12 +376,14 @@ function renderTempButtons() {
         appState.shipsConfirmed.player1 = true;
         mainContent.innerHTML = "";
         renderGamescreen();
-        alert("Please pass device to the other player after pressing OK");
+        if (appState.player2Type === "human") {
+          alert("Please pass device to the other player after pressing OK");
+        }
       });
       buttonContainer.appendChild(confirmButton1);
     }
 
-    // PHASE 3: Start game (only when both confirmed)
+    // PHASE 3: start game (only when both confirmed)
     if (appState.shipsConfirmed.player1 && appState.shipsConfirmed.player2) {
       const startGameButton = document.createElement("BUTTON");
       startGameButton.classList.add("button");
@@ -413,7 +416,7 @@ function renderTempButtons() {
       buttonContainer.appendChild(randomizePlacementButton2);
     }
 
-    // player 2 confirm button
+    // player 2 confirm button - shows up AFTER ships are placed
     if (
       appState.shipsConfirmed.player1 === true &&
       appState.shipsPlaced.player2 === true &&

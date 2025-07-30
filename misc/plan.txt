@@ -70,13 +70,12 @@ Done
             - if wanting to keep track of current player's turn
             - manage that in this module (step 4b)
             - instead of another mentioned object
-        Done
         d3. game is played against computer
             - so make the computer player capable of making random plays
             - should know if a given move is legal
                 - ie, shouldn't attack the same spot twice
             - try adjacent slots after getting a hit (xtra credit)
-        Done
+    Done
 Done
 
 6. create conditions so game ends
@@ -92,12 +91,9 @@ Done
     Done
     b. once "start game" button is pressed
         b1. p1 randomize, start game, p2 randomize buttons are hidden
-        Done
         b2. disable attacking before button is pressed
-        Wip
         b3. only have "start game" button appear once both boards have ships
-        Done
-    Wip
+    Done
     c. when randomizing
         c1. don't let p1 see p2's ship placement, vice versa
             - implement "pass device" alert and confirmation
@@ -106,8 +102,9 @@ Done
     d. for human vs computer
         d1. make sure computer ships are automatically randomized and placed
         d2. and p1 can't see computer's ship placements
-    Wip
-Wip
+        d3. make sure "start game" button shows up
+    Done
+Done
 
 8. finishing touches
     a. make sure game starts on home screen

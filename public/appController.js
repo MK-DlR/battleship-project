@@ -1,8 +1,11 @@
 // appController.js
 // manages overall app flow, player data, screen transitions
-
 import { mainContent } from "./layout.js";
-import { createNewGame, getCurrentGameData } from "./gameController.js";
+import {
+  createNewGame,
+  getCurrentGameData,
+  randomizeShips2,
+} from "./gameController.js";
 import {
   renderHomescreen,
   renderGamescreen,
@@ -27,18 +30,24 @@ function handleNewGame() {
   createNewGame(); // create fresh game data
   resetScore(); // reset player scores
 
-  // sync with appState
-  const gameData = getCurrentGameData();
-  gameData[0].player.name = appState.player1Name;
-  gameData[1].player.name = appState.player2Name;
-  gameData[0].player.type = appState.player1Type;
-  gameData[1].player.type = appState.player2Type;
-  // reset ship placement state
+  // reset ship placement state for player 1
   appState.shipsPlaced.player1 = false;
-  appState.shipsPlaced.player2 = false;
   appState.shipsConfirmed.player1 = false;
-  appState.shipsConfirmed.player2 = false;
   appState.gameStarted = false;
+
+  // Get the current game data to check player types
+  const gameData = getCurrentGameData();
+
+  // if player 2 is computer, auto-place and confirm their ships
+  if (gameData[1].player.type === "computer") {
+    randomizeShips2();
+    appState.shipsPlaced.player2 = true;
+    appState.shipsConfirmed.player2 = true;
+  } else {
+    // reset player 2 state for human vs human
+    appState.shipsPlaced.player2 = false;
+    appState.shipsConfirmed.player2 = false;
+  }
 
   showGameScreen(); // render it
 }
@@ -47,18 +56,24 @@ function handleNewGame() {
 function handleNewRound() {
   createNewGame(); // create fresh game data
 
-  // sync with appState
-  const gameData = getCurrentGameData();
-  gameData[0].player.name = appState.player1Name;
-  gameData[1].player.name = appState.player2Name;
-  gameData[0].player.type = appState.player1Type;
-  gameData[1].player.type = appState.player2Type;
-  // reset ship placement state
+  // reset ship placement state for player 1
   appState.shipsPlaced.player1 = false;
-  appState.shipsPlaced.player2 = false;
   appState.shipsConfirmed.player1 = false;
-  appState.shipsConfirmed.player2 = false;
   appState.gameStarted = false;
+
+  // Get the current game data to check player types
+  const gameData = getCurrentGameData();
+
+  // if player 2 is computer, auto-place and confirm their ships
+  if (gameData[1].player.type === "computer") {
+    randomizeShips2();
+    appState.shipsPlaced.player2 = true;
+    appState.shipsConfirmed.player2 = true;
+  } else {
+    // reset player 2 state for human vs human
+    appState.shipsPlaced.player2 = false;
+    appState.shipsConfirmed.player2 = false;
+  }
 
   showGameScreen(); // render it
 }
@@ -93,6 +108,15 @@ function showGameScreen() {
 function initApp() {
   // create initial game data first
   createNewGame();
+
+  // auto-place computer ships if default setup
+  const gameData = getCurrentGameData();
+  if (gameData[1].player.type === "computer") {
+    randomizeShips2();
+    appState.shipsPlaced.player2 = true;
+    appState.shipsConfirmed.player2 = true;
+  }
+
   // then show the game screen
   showGameScreen(); // temporarily start on game screen instead of home
   // showHomeScreen(); // start on home screen instead of immediately showing game
