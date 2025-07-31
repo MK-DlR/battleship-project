@@ -1,5 +1,6 @@
 7/31/25:
 
+- Round corners of gameboards in css
 - Remove initial testing set up functions
 - Remove unnecessary comments
 - Add alert notification when computer sinks a player ship

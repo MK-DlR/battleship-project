@@ -47,7 +47,7 @@ body {
   padding-left: 0;
   grid-template-columns: 30px repeat(10, 30px);
   column-gap: 0.3px;
-  padding-left: 10px;
+  padding-left: 12px;
 }
 
 .row-labels {
@@ -61,6 +61,7 @@ body {
 
 .player-board {
   display: grid;
+  border-radius: 4px;
   grid-template-columns: repeat(10, 30px);
   grid-template-rows: repeat(10, 30px);
   border: 2px solid #333;
