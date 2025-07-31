@@ -1,6 +1,5 @@
 /* styles.css */
 
-
 /* possible palette1
 * #911104 dark red
 * #CE0D0E bright red
@@ -88,12 +87,15 @@ body {
 .ship {
   background-color: #294163;
 }
+
 .hit {
   background-color: #911104;
 }
+
 .miss {
   background-color: #b6b4b4;
 }
+
 .empty {
   background-color: #ece8e7;
 }

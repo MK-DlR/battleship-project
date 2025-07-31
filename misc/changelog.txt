@@ -1,6 +1,8 @@
 7/31/25:
 
--Add alert notification when computer sinks a player ship
+- Remove initial testing set up functions
+- Remove unnecessary comments
+- Add alert notification when computer sinks a player ship
 
 7/30/25:
 

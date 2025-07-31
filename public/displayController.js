@@ -289,7 +289,7 @@ function renderGameboards() {
 
     // DURING SHIP PLACEMENT PHASE (before game starts)
     if (!appState.gameStarted) {
-      // Human vs Human placement phase
+      // human vs human placement phase
       if (player1Type === "human" && player2Type === "human") {
         // P1 placement phase: show P1 ships, hide P2 ships
         if (!appState.shipsConfirmed.player1) {
@@ -302,18 +302,18 @@ function renderGameboards() {
         ) {
           return boardIndex === 0; // hide P1 board (index 0)
         }
-        // Both confirmed: hide both (shouldn't see this state long)
+        // both confirmed: hide both until game is started
         else {
           return true;
         }
       }
 
-      // Human vs Computer placement phase
+      // human vs computer placement phase
       if (
         (player1Type === "human" && player2Type === "computer") ||
         (player1Type === "computer" && player2Type === "human")
       ) {
-        // Always hide computer ships, show human ships during placement
+        // always hide computer ships, show human ships during placement
         const humanPlayerIndex = player1Type === "human" ? 0 : 1;
         return boardIndex !== humanPlayerIndex;
       }
@@ -321,7 +321,7 @@ function renderGameboards() {
 
     // DURING ACTUAL GAMEPLAY (after game starts)
     else {
-      // Human vs Computer gameplay: always hide computer ships
+      // human vs computer gameplay: always hide computer ships
       if (
         (player1Type === "human" && player2Type === "computer") ||
         (player1Type === "computer" && player2Type === "human")
@@ -330,7 +330,7 @@ function renderGameboards() {
         return boardIndex !== humanPlayerIndex;
       }
 
-      // Human vs Human gameplay: hide opponent's ships
+      // human vs human gameplay: hide opponent's ships
       if (player1Type === "human" && player2Type === "human") {
         return boardIndex !== activePlayerIndex;
       }

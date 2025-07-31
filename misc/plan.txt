@@ -108,12 +108,14 @@ Done
 
 8. finishing touches
     a. make sure game starts on home screen
+    Done
     b. make sure "pass device" screen shows when/where necessary
         b1. when placing ships
         b2. between attacks/turns
     Done
     c. figure out styling/css
     d. remove unnecessary comments/testing code
+    Done
 
 Extra Credit:
     - drag and drop to place ships

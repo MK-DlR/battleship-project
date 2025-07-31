@@ -38,10 +38,10 @@ function handleNewGame() {
   appState.shipsConfirmed.player1 = false;
   appState.gameStarted = false;
 
-  // Get the current game data to check player types
+  // get the current game data to check player types
   const gameData = getCurrentGameData();
 
-  // if player 2 is computer, auto-place and confirm their ships
+  // if player 2 is computer, auto-place and confirm ships
   if (gameData[1].player.type === "computer") {
     randomizeShips2();
     appState.shipsPlaced.player2 = true;
@@ -120,9 +120,7 @@ function initApp() {
     appState.shipsConfirmed.player2 = true;
   }
 
-  // then show the game screen
-  showGameScreen(); // temporarily start on game screen instead of home
-  // showHomeScreen(); // start on home screen instead of immediately showing game
+  showHomeScreen(); // start on home screen
 }
 
 // pass device screen

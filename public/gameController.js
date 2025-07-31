@@ -86,31 +86,6 @@ function newGame() {
   ];
 }
 
-/*
-// manually place ships - TEMPORARY for testing
-function placeShipsForTesting(player, ship, x, y, dir) {
-  player.gameboard.placeShip(ship, x, y, dir);
-}
-
-// player 1 - horizontal ships placed on different rows, no overlap
-let player1Coords = [
-  [0, 0, "horizontal"], // Carrier (length 5)
-  [0, 1, "horizontal"], // Battleship (length 4)
-  [0, 2, "horizontal"], // Destroyer (length 3)
-  [0, 3, "horizontal"], // Submarine (length 3)
-  [0, 4, "horizontal"], // Patrol Boat (length 2)
-];
-
-// player 2 - vertical ships placed on different columns, no overlap
-let player2Coords = [
-  [9, 5, "vertical"], // Carrier (length 5)
-  [8, 6, "vertical"], // Battleship (length 4)
-  [7, 7, "vertical"], // Destroyer (length 3)
-  [6, 7, "vertical"], // Submarine (length 3)
-  [5, 8, "vertical"], // Patrol Boat (length 2)
-];
-*/
-
 function placeAllShips(playerData, coords) {
   // error if ship and coords are not same length
   if (playerData.ships.length !== coords.length) {
@@ -126,16 +101,6 @@ function placeAllShips(playerData, coords) {
   });
 }
 
-/*
-// separate function for development testing setup
-function setupTestScenario(gameData) {
-  placeAllShips(gameData[0], player1Coords);
-  placeAllShips(gameData[1], player2Coords);
-
-  return gameData;
-}
-  */
-
 // DON'T initialize immediately - wait for createNewGame() to be called
 let currentGameData = null;
 
@@ -148,7 +113,6 @@ function getCurrentGameData() {
 // create completely fresh, blank game (no test setup)
 function createNewGame() {
   console.log("Creating fresh blank game...");
-  // currentGameData = setupTestScenario(newGame()); // include test setup for now
   currentGameData = newGame();
   activePlayerIndex = 0;
   isGameOver = false; // reset on new game
@@ -160,7 +124,6 @@ function createNewGame() {
 function randomizeShips1() {
   // clear existing ships
   currentGameData[0].player.gameboard.clearBoard();
-  // currentGameData[0].ships.length = 0;
   // reset and repopulate ship array
   currentGameData[0].ships = allShips.map(createFleet);
 
@@ -185,7 +148,6 @@ function randomizeShips1() {
 function randomizeShips2() {
   // clear existing ships
   currentGameData[1].player.gameboard.clearBoard();
-  // currentGameData[0].ships.length = 0;
   // reset and repopulate ship array
   currentGameData[1].ships = allShips.map(createFleet);
 
@@ -334,7 +296,7 @@ function attackOpponentBoard(x, y) {
         alert(`${computerName} sunk ${opponentName}'s ${result.shipName}!`);
       }
 
-      // store coordinates if attack is a hit (keep existing AI logic)
+      // store coordinates if attack is a hit
       if (result === "hit") {
         successfulAttack = [computerX, computerY];
         console.log(successfulAttack);
@@ -393,9 +355,6 @@ export {
   message,
   createFleet,
   newGame,
-  // placeShipsForTesting,
-  // player1Coords,
-  // player2Coords,
   placeAllShips,
   getCurrentGameData,
   switchPlayerTurn,
