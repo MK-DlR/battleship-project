@@ -1,3 +1,7 @@
+7/31/25:
+
+-Add alert notification when computer sinks a player ship
+
 7/30/25:
 
 - Fix pass device screen not showing during turn switch

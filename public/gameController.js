@@ -321,13 +321,27 @@ function attackOpponentBoard(x, y) {
       }
       // use coordinates to attack
       result = opponentGameboard.receiveAttack(computerX, computerY);
-      // store coordinates if attack is a hit
+
+      // handle ship sunk notification for computer
+      if (result && result.type === "ship_sunk") {
+        const gameData = getCurrentGameData();
+        const opponentIndex = activePlayerIndex === 0 ? 1 : 0;
+        const opponentName = gameData[opponentIndex].player.name;
+        const computerName = getActivePlayer().player.name;
+
+        // handle ship sunk notification
+        console.log(`Ship sunk: ${result.shipName}`);
+        alert(`${computerName} sunk ${opponentName}'s ${result.shipName}!`);
+      }
+
+      // store coordinates if attack is a hit (keep existing AI logic)
       if (result === "hit") {
         successfulAttack = [computerX, computerY];
         console.log(successfulAttack);
       }
     }
     console.log(`Computer attacking (${computerX}, ${computerY}) → ${result}`);
+
     checkEndgame(); // check for endgame conditions
     return result; // return "hit", "miss", or error message
   } else {
