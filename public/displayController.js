@@ -25,6 +25,8 @@ import {
   continueFromPassScreen,
 } from "./appController.js";
 
+let gameContainer;
+
 function renderHomescreen() {
   // create home screen elements
   const homeContainer = document.createElement("div");
@@ -41,7 +43,7 @@ function renderHomescreen() {
   gameButtonContainer.classList.add("button-container");
 
   const playerButtonContainer = document.createElement("div");
-  playerButtonContainer.classList.add("button-container");
+  playerButtonContainer.classList.add("player-button-container");
 
   // new game button
   const newGameButton = document.createElement("button");
@@ -354,7 +356,7 @@ function renderGameboards() {
   // append boards to container
   gameboardsContainer.appendChild(player1Wrapper);
   gameboardsContainer.appendChild(player2Wrapper);
-  mainContent.appendChild(gameboardsContainer);
+  gameContainer.appendChild(gameboardsContainer);
 }
 
 // ship placement and start game buttons
@@ -364,9 +366,9 @@ function renderTempButtons() {
   } else {
     // button container
     const buttonContainer = document.createElement("div");
-    buttonContainer.classList.add("button-container");
+    buttonContainer.classList.add("temp-button-container");
 
-    mainContent.appendChild(buttonContainer);
+    gameContainer.appendChild(buttonContainer);
 
     // PHASE 1: Player 1 setup (always shows first)
     // player 1 randomize ship placement button
@@ -374,8 +376,7 @@ function renderTempButtons() {
       const randomizePlacementButton1 = document.createElement("BUTTON");
       randomizePlacementButton1.classList.add("button");
       randomizePlacementButton1.id = "randomizePlacementButton1";
-      const randomizePlacementText1 =
-        document.createTextNode("P1 Randomize Ships");
+      const randomizePlacementText1 = document.createTextNode("P1 Place Ships");
       randomizePlacementButton1.addEventListener("click", () => {
         randomizeShips1();
         mainContent.innerHTML = ""; // clear everything first
@@ -399,7 +400,8 @@ function renderTempButtons() {
 
         if (appState.player2Type === "human") {
           // show pass screen instead of just an alert
-          showPassScreen("Player 2", 1);
+          const gameData = getCurrentGameData();
+          showPassScreen(gameData[1].player.name, 1);
         } else {
           mainContent.innerHTML = "";
           renderGamescreen();
@@ -429,8 +431,7 @@ function renderTempButtons() {
       const randomizePlacementButton2 = document.createElement("BUTTON");
       randomizePlacementButton2.classList.add("button");
       randomizePlacementButton2.id = "randomizePlacementButton2";
-      const randomizePlacementText2 =
-        document.createTextNode("P2 Randomize Ships");
+      const randomizePlacementText2 = document.createTextNode("P2 Place Ships");
       randomizePlacementButton2.addEventListener("click", () => {
         randomizeShips2();
         mainContent.innerHTML = ""; // clear everything first
@@ -453,7 +454,8 @@ function renderTempButtons() {
       confirmButton2.textContent = "Confirm P2 Ships";
       confirmButton2.addEventListener("click", () => {
         appState.shipsConfirmed.player2 = true;
-        showPassScreen("Player 1", 0);
+        const gameData = getCurrentGameData();
+        showPassScreen(gameData[0].player.name, 0);
       });
       buttonContainer.appendChild(confirmButton2);
     }
@@ -468,21 +470,21 @@ function renderButtons() {
 
   // new round button
   const newRoundButton = document.createElement("BUTTON");
-  newRoundButton.classList.add("button");
-  newRoundButton.id = "newGameButton";
+  newRoundButton.classList.add("dark-button");
+  newRoundButton.id = "newRoundButton";
   const newRoundText = document.createTextNode("New Round");
   newRoundButton.addEventListener("click", handleNewRound);
 
   // home button
-  const homeButton = document.createElement("BUTTON");
-  homeButton.classList.add("button");
-  homeButton.id = "homeButton";
-  const homeText = document.createTextNode("Home");
-  homeButton.addEventListener("click", showHomeScreen);
+  const newGameButton = document.createElement("BUTTON");
+  newGameButton.classList.add("dark-button");
+  newGameButton.id = "newGameButton";
+  const newGameText = document.createTextNode("New Game");
+  newGameButton.addEventListener("click", showHomeScreen);
 
   // reset score button
   const resetScoreButton = document.createElement("BUTTON");
-  resetScoreButton.classList.add("button");
+  resetScoreButton.classList.add("dark-button");
   resetScoreButton.id = "resetScoreButton";
   const resetScoreText = document.createTextNode("Reset Score");
   resetScoreButton.addEventListener("click", resetScore);
@@ -491,8 +493,8 @@ function renderButtons() {
   mainContent.appendChild(buttonContainer);
   newRoundButton.appendChild(newRoundText);
   buttonContainer.appendChild(newRoundButton);
-  homeButton.appendChild(homeText);
-  buttonContainer.appendChild(homeButton);
+  newGameButton.appendChild(newGameText);
+  buttonContainer.appendChild(newGameButton);
   resetScoreButton.appendChild(resetScoreText);
   buttonContainer.appendChild(resetScoreButton);
 }
@@ -511,35 +513,106 @@ function renderScores() {
     mainScoreContainer = document.createElement("div");
     mainScoreContainer.classList.add("main-score-container");
 
-    // add <br> and container to mainContent
-    mainContent.appendChild(document.createElement("br"));
-    mainContent.appendChild(mainScoreContainer);
+    // Remove the <br> element and just append the container
+    gameContainer.appendChild(mainScoreContainer);
   }
 
   // update content
-  const playerScores = document.createElement("p");
-  playerScores.innerHTML = `<h3>Player Scores</h3><br>
-  <b>${player1Name}:</b> ${appState.scores.player1} <font size="5">|</font> <b>${player2Name}:</b> ${appState.scores.player2}`;
+  const player1Score = document.createElement("p");
+  player1Score.innerHTML = `<b>${player1Name}<br>
+  <span style="color:#294163;">${appState.scores.player1}</span></b>`;
+
+  // update content
+  const player2Score = document.createElement("p");
+  player2Score.innerHTML = `<b>${player2Name}<br>
+  <span style="color:#294163;">${appState.scores.player2}</span></b>`;
 
   // clear existing content and add new content
   mainScoreContainer.innerHTML = "";
-  mainScoreContainer.appendChild(playerScores);
+  mainScoreContainer.appendChild(player1Score);
+  mainScoreContainer.appendChild(player2Score);
 }
 
 function renderPassScreen() {
+  // add CSS styles to the document head if not already present
+  if (!document.querySelector("#pass-screen-styles")) {
+    const style = document.createElement("style");
+    style.id = "pass-screen-styles";
+    style.textContent = `
+      body {
+        background-color: #D10F0D;
+      }
+      .container {
+        width: 40px;
+        margin: 70px auto;
+      }
+      .dot {
+        width: 20px;
+        height: 20px;
+        margin: 7px;
+        display: inline-block;
+        border-radius: 100%;
+      }
+      .dot1 {
+        background-color: #D10F0D;
+        animation: jump-up 0.6s 0.1s linear infinite;
+      }
+      .dot2 {
+        background-color: #53829C;
+        animation: jump-up 0.6s 0.2s linear infinite;
+      }
+      .dot3 {
+        background-color: #294163;
+        animation: jump-up 0.6s 0.3s linear infinite;
+      }
+      @keyframes jump-up{
+        50%{
+          transform: translate(0,15px);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
   const passContainer = document.createElement("div");
   passContainer.classList.add("pass-container");
 
-  const message = document.createElement("h2");
-  message.textContent = `Pass device to ${appState.nextPlayerName}`;
+  const title = document.createElement("h2");
+  title.classList.add("pass-title");
+  title.textContent = "Pass the device to";
+
+  const playerName = document.createElement("div");
+  playerName.classList.add("player-name");
+  playerName.textContent = appState.nextPlayerName;
+
+  // create animated loading dots
+  const loadingContainer = document.createElement("div");
+  loadingContainer.classList.add("loading-container");
+
+  const dot1 = document.createElement("div");
+  dot1.classList.add("dot", "dot1");
+
+  const dot2 = document.createElement("div");
+  dot2.classList.add("dot", "dot2");
+
+  const dot3 = document.createElement("div");
+  dot3.classList.add("dot", "dot3");
+
+  loadingContainer.appendChild(dot1);
+  loadingContainer.appendChild(dot2);
+  loadingContainer.appendChild(dot3);
 
   const continueButton = document.createElement("button");
-  continueButton.textContent = "Continue";
-  continueButton.classList.add("button");
+  continueButton.textContent = "Continue Game";
+  continueButton.classList.add("button", "continue-button");
   continueButton.addEventListener("click", continueFromPassScreen);
 
-  passContainer.appendChild(message);
+  // assemble everything
+  passContainer.appendChild(title);
+  passContainer.appendChild(playerName);
+  passContainer.appendChild(loadingContainer);
   passContainer.appendChild(continueButton);
+
   mainContent.appendChild(passContainer);
 }
 
@@ -553,7 +626,7 @@ function renderTurn() {
   const turnContainer = document.createElement("div");
   turnContainer.classList.add("turn-container");
   turnContainer.innerHTML = `<b>${activeName}'s</b> turn...`;
-  mainContent.appendChild(turnContainer);
+  gameContainer.appendChild(turnContainer);
 }
 
 function updateTurn() {
@@ -609,11 +682,18 @@ function resetScore() {
   appState.scores.player1 = 0;
   appState.scores.player2 = 0;
 
-  //re-render the scores
-  renderScores();
+  // only re-render scores if we're currently on the game screen
+  if (gameContainer) {
+    renderScores();
+  }
 }
 
 function renderGamescreen() {
+  gameContainer = document.createElement("div");
+  gameContainer.classList.add("game-container");
+
+  mainContent.appendChild(gameContainer);
+
   renderTurn();
   renderGameboards();
   renderTempButtons();
@@ -632,3 +712,4 @@ export {
   renderGamescreen,
   resetScore,
 };
+0;

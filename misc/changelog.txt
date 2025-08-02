@@ -1,5 +1,8 @@
 8/2/25:
 
+- Adjust home page and pass device page styling
+- Add pass device page styling
+- Fix pass device screen not displaying custom player names
 - Add home page styling
 
 7/31/25:

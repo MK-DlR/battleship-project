@@ -1,39 +1,17 @@
 /* styles.css */
 
-/* possible palette1
-* #911104 dark red
-* #CE0D0E bright red
-* #294163 dark blue
-* #5889AA light blue
-* #D1C6C4 silver #ece8e7 adjusted silver
-
-* possible palette2
-* #6B212c berry red
-* #685652 light brown
-* #DCE0E8 snowflake
-* #8EA1AE light blue
-* #27363F dark blue
-*/
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;300;400;500;700&display=swap');
 
 * {
-    padding: 0;
-    margin: 0;
-    color: #2F2C2C;
-    background-color: #D10F0D;
+  padding: 0;
+  margin: 0;
+  color: #2F2C2C;
+  font-family: 'Roboto Mono', monospace;
 }
 
 body {
-  font-family: sans-serif;
   padding: 1rem;
-}
-
-.gameboards-container {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin-top: 2rem;
+  background-color: #D10F0D;
 }
 
 .board-wrapper {
@@ -76,7 +54,7 @@ body {
   width: 30px;
   height: 30px;
   background-color: lightblue; /* fallback color */
-  border: 1px solid #ccc;
+  border: 1px solid #C7BBBA;
   box-sizing: border-box; 
 }
 
@@ -98,69 +76,83 @@ body {
 }
 
 .miss {
-  background-color: #b6b4b4;
+  background-color: #918988;
 }
 
 .empty {
-  background-color: #ece8e7;
+  background-color: #D8C9C6;
 }
 
-.home-container {
-  font-family: 'Roboto Mono', monospace;
+.home-container, .pass-container, .game-container {
+  background-color: #E9DDDB;
   font-size: 18px;
   text-align: center;
   border-radius: 10px;
   margin: 5vh auto 0 auto;
-  padding-top: 25vh;
-  height: 45vh;
-  width: 45vw;
+  width: 900px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.home-container, .title1, .title2, .button-container {
-  background-color: #E9DDDB;
+.game-container {
+  height: 800px;
+  position: relative;
+}
+
+.home-container, .pass-container {
+  padding-top: 250px;
+  height: 550px;
+}
+
+.turn-container {
+  padding: 40px;
 }
 
 .title1 {
-  font-size: 3vh;
+  font-size: 25px;
 }
 
-.title2 {
-  font-size: 5vh;
+.title2, .player-name {
+  font-size: 50px;
   font-style: italic;
+  font-weight: bold;
 }
 
-.button-container {
+.temp-button-container {
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
 
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.player-button-container {
+  margin: 20px;
+}
+
 .button, .dark-button {
-font-family: 'Roboto Mono', monospace;
   font-size: 18px;
   font-weight: bold;
   border: none;
   border-radius: 4px;
-  padding: 8px 20px 8px 20px;
+  height: 40px;
+  width: 250px;
   margin: 4px;
   transition-duration: 0.4s;
   cursor: pointer;
-  box-shadow: 0 3px #999;
 }
 
 .button {
   background-color: #5889AA;
 }
 
-.button:hover {
-  background-color: #041E43; 
-  color: #E9DDDB;
-}
-
-.button:active {
-  background-color: #041E43;
-  box-shadow: 0 5px #666;
-  transform: translateY(1px);
+.button:hover, .dark-button:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .dark-button {
@@ -168,17 +160,25 @@ font-family: 'Roboto Mono', monospace;
   color: #E9DDDB;
 }
 
-.dark-button:hover {
-  background-color: #5889AA; 
-  color: #2F2C2C;
-}
-
-.dark-button:active {
-  background-color: #5889AA;
-  box-shadow: 0 5px #666;
-  transform: translateY(1px);
-}
-
-.main-score-container, .turn-container {
+.main-score-container, .turn-container, .pass-container {
   text-align: center;
+}
+
+.main-score-container {
+  display: flex;
+  justify-content: space-around;
+  font-size: 30px;
+  text-align: center;
+  position: absolute;
+  bottom: 180px; /* fixed distance from bottom of game container */
+  left: 0;
+  right: 0;
+}
+
+.dot {
+  margin-top: 25px;
+}
+
+.continue-button {
+  margin-top: 45px;
 }
