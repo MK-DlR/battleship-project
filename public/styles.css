@@ -15,9 +15,13 @@
 * #27363F dark blue
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;300;400;500;700&display=swap');
+
 * {
     padding: 0;
     margin: 0;
+    color: #2F2C2C;
+    background-color: #D10F0D;
 }
 
 body {
@@ -102,7 +106,27 @@ body {
 }
 
 .home-container {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 18px;
   text-align: center;
+  border-radius: 10px;
+  margin: 5vh auto 0 auto;
+  padding-top: 25vh;
+  height: 45vh;
+  width: 45vw;
+}
+
+.home-container, .title1, .title2, .button-container {
+  background-color: #E9DDDB;
+}
+
+.title1 {
+  font-size: 3vh;
+}
+
+.title2 {
+  font-size: 5vh;
+  font-style: italic;
 }
 
 .button-container {
@@ -111,25 +135,46 @@ body {
   margin-top: 20px;
 }
 
-.button {
-  background-color: #5889AA;
-  font-size: 14px;
+.button, .dark-button {
+font-family: 'Roboto Mono', monospace;
+  font-size: 18px;
+  font-weight: bold;
   border: none;
   border-radius: 4px;
-  padding: 8px;
+  padding: 8px 20px 8px 20px;
   margin: 4px;
   transition-duration: 0.4s;
   cursor: pointer;
   box-shadow: 0 3px #999;
 }
 
+.button {
+  background-color: #5889AA;
+}
+
 .button:hover {
-  background-color: #294163; 
-  color: #ece8e7;
+  background-color: #041E43; 
+  color: #E9DDDB;
 }
 
 .button:active {
-  background-color: #294163;
+  background-color: #041E43;
+  box-shadow: 0 5px #666;
+  transform: translateY(1px);
+}
+
+.dark-button {
+  background-color: #041E43;
+  color: #E9DDDB;
+}
+
+.dark-button:hover {
+  background-color: #5889AA; 
+  color: #2F2C2C;
+}
+
+.dark-button:active {
+  background-color: #5889AA;
   box-shadow: 0 5px #666;
   transform: translateY(1px);
 }

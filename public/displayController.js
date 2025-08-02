@@ -30,8 +30,12 @@ function renderHomescreen() {
   const homeContainer = document.createElement("div");
   homeContainer.classList.add("home-container");
 
-  const title = document.createElement("h1");
-  title.textContent = "Let's Play Battleship";
+  const title1 = document.createElement("h1");
+  title1.classList.add("title1");
+  title1.innerHTML = `Let's play<br>`;
+  const title2 = document.createElement("h1");
+  title2.classList.add("title2");
+  title2.textContent = "BATTLESHIP!!!";
 
   const gameButtonContainer = document.createElement("div");
   gameButtonContainer.classList.add("button-container");
@@ -42,25 +46,26 @@ function renderHomescreen() {
   // new game button
   const newGameButton = document.createElement("button");
   newGameButton.textContent = "New Game";
-  newGameButton.classList.add("button");
+  newGameButton.classList.add("dark-button");
   newGameButton.addEventListener("click", handleNewGame);
 
   // new player 1 button
   const newPlayerButton1 = document.createElement("button");
-  newPlayerButton1.textContent = "New Player 1";
+  newPlayerButton1.textContent = "Set Player 1";
   newPlayerButton1.classList.add("button");
   newPlayerButton1.addEventListener("click", addNewPlayer1);
 
   // new player 2 button
   const newPlayerButton2 = document.createElement("button");
-  newPlayerButton2.textContent = "New Player 2";
+  newPlayerButton2.textContent = "Set Player 2";
   newPlayerButton2.classList.add("button");
   newPlayerButton2.addEventListener("click", addNewPlayer2);
 
   gameButtonContainer.appendChild(newGameButton);
   playerButtonContainer.appendChild(newPlayerButton1);
   playerButtonContainer.appendChild(newPlayerButton2);
-  homeContainer.appendChild(title);
+  homeContainer.appendChild(title1);
+  homeContainer.appendChild(title2);
   homeContainer.appendChild(gameButtonContainer);
   homeContainer.appendChild(playerButtonContainer);
   mainContent.appendChild(homeContainer);
