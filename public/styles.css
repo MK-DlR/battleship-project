@@ -6,12 +6,12 @@
   padding: 0;
   margin: 0;
   color: #2F2C2C;
-  font-family: 'Roboto Mono', monospace;
 }
 
 body {
   padding: 1rem;
   background-color: #D10F0D;
+  font-family: 'Roboto Mono', monospace;
 }
 
 .board-wrapper {
@@ -23,13 +23,14 @@ body {
   user-select: none;
   font-weight: bold;
   display: grid;
+  font-family: 'Roboto Mono', monospace;
 }
 
 .column-labels {
   padding-left: 0;
   grid-template-columns: 30px repeat(10, 30px);
   column-gap: 0.3px;
-  padding-left: 12px;
+  padding-left: 10px;
 }
 
 .row-labels {
@@ -37,7 +38,7 @@ body {
   grid-template-rows: repeat(10, 30px);
   margin-right: 2px;
   row-gap: 0.3px;
-  padding-top: 15px;
+  padding-top: 10px;
   padding-right: 5px;
 }
 
@@ -71,12 +72,33 @@ body {
   background-color: #294163;
 }
 
-.hit {
-  background-color: #911104;
+.hit, .miss {
+  position: relative;
+  background-color: #D8C9C6; /* match empty cell color */
 }
 
-.miss {
+.hit::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background-color: #911104;
+  border-radius: 50%;
+}
+
+.miss::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
   background-color: #918988;
+  border-radius: 50%;
 }
 
 .empty {
@@ -96,6 +118,7 @@ body {
 .game-container {
   height: 800px;
   position: relative;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 .home-container, .pass-container {
@@ -105,6 +128,7 @@ body {
 
 .turn-container {
   padding: 40px;
+  font-size: 25px;
 }
 
 .title1 {
@@ -123,12 +147,19 @@ body {
   margin-top: 20px;
 }
 
+.home-button-container {
+  padding-top: 10px;
+}
+
 .button-container {
+  position: absolute;
+  left: 120px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
+  gap: 10px;
+  z-index: 10;
 }
 
 .player-button-container {
@@ -139,9 +170,9 @@ body {
   font-size: 18px;
   font-weight: bold;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   height: 40px;
-  width: 250px;
+  width: 225px;
   margin: 4px;
   transition-duration: 0.4s;
   cursor: pointer;

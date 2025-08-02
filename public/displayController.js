@@ -40,7 +40,7 @@ function renderHomescreen() {
   title2.textContent = "BATTLESHIP!!!";
 
   const gameButtonContainer = document.createElement("div");
-  gameButtonContainer.classList.add("button-container");
+  gameButtonContainer.classList.add("home-button-container");
 
   const playerButtonContainer = document.createElement("div");
   playerButtonContainer.classList.add("player-button-container");
