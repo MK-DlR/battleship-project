@@ -1,7 +1,7 @@
 {
   "scripts": {
     "test": "jest",
-    "start": "live-server . --open=public/"
+    "start": "live-server public"
   },
   "jest": {
     "testMatch": ["**/tests/**/*.test.js"],

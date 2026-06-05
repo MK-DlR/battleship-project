@@ -1,6 +1,6 @@
-// appController.js
-// manages overall app flow, player data, screen transitions
-import { mainContent } from "./layout.js";
+// src/controllers/appController.js
+
+import { mainContent } from "../layout.js";
 import {
   createNewGame,
   getCurrentGameData,
@@ -12,6 +12,8 @@ import {
   resetScore,
   renderPassScreen,
 } from "./displayController.js";
+
+console.log("APP CONTROLLER LOADED");
 
 // define app state to track current screen
 let appState = {

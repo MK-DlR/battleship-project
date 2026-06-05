@@ -1,7 +1,7 @@
-// layout.js
-// static page setup (header, footer, initial structure, styling setup)
+// src/layout.js
 
-// layout.js
+console.log("LAYOUT LOADED");
+
 const container = document.getElementById("container");
 
 // create main content container

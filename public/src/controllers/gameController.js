@@ -1,10 +1,8 @@
-// gameController.js
-// imports game objects, handles gameplay DOM, manages game flow
-// focused on pure game logic (ships, attacks, win conditions)
+// src/controllers/gameController.js
 
-import { Gameboard } from "./game/gameboard.js";
-import { Player } from "./game/player.js";
-import { Ship } from "./game/ship.js";
+import { Gameboard } from "../game/gameboard.js";
+import { Player } from "../game/player.js";
+import { Ship } from "../game/ship.js";
 import { appState } from "./appController.js";
 
 const message = "Successfully linked gamecontroller";
@@ -95,7 +93,7 @@ function placeAllShips(playerData, coords) {
   playerData.ships.forEach((ship, index) => {
     const [x, y, dir] = coords[index];
     console.log(
-      `Placing ${ship.name} for ${playerData.player.name} at (${x}, ${y}) ${dir}`
+      `Placing ${ship.name} for ${playerData.player.name} at (${x}, ${y}) ${dir}`,
     );
     placeShip(playerData.player, ship, x, y, dir);
   });
@@ -185,7 +183,7 @@ function startGame() {
 
   // re-render the game screen to reflect the new game state
   import("./displayController.js").then(({ renderGamescreen }) => {
-    import("./layout.js").then(({ mainContent }) => {
+    import("../layout.js").then(({ mainContent }) => {
       mainContent.innerHTML = "";
       renderGamescreen();
     });

@@ -1,4 +1,4 @@
-// player.js
+// src/game/player.js
 
 const message = "Successfully linked player";
 

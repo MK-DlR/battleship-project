@@ -1,9 +1,7 @@
-// displayController.js
-// renders each players gameboard and ships, ui, etc
-// handle both home and game screens based on app state
+// src/controllers/displayController.js
 
-import { mainContent } from "./layout.js";
-import { Ship } from "./game/ship.js";
+import { mainContent } from "../layout.js";
+import { Ship } from "../game/ship.js";
 import {
   getCurrentGameData,
   randomizeShips1,
@@ -193,7 +191,7 @@ function renderGameboards() {
             const displayY = y + 1;
             // log the coordinates and board
             console.log(
-              `Cell clicked at: ${displayX}${displayY} on Board ${boardContainer.dataset.player}.`
+              `Cell clicked at: ${displayX}${displayY} on Board ${boardContainer.dataset.player}.`,
             );
             // access gameboards
             getCurrentGameData();
@@ -215,7 +213,7 @@ function renderGameboards() {
                 alert(
                   `${getActivePlayer().player.name} sunk ${opponentName}'s ${
                     result.shipName
-                  }!`
+                  }!`,
                 );
               }
 

@@ -1,5 +1,5 @@
-// gameboard.js
-// imports
+// src/game/gameboard.js
+
 import { Ship } from "./ship.js";
 
 const message = "Successfully linked gameboard";

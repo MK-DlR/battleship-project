@@ -1,4 +1,4 @@
-// ship.js
+// src/game/ship.js
 
 const message = "Successfully linked ship";
 
