@@ -517,13 +517,13 @@ function renderScores() {
 
   // update content
   const player1Score = document.createElement("p");
-  player1Score.innerHTML = `<b>${player1Name}<br>
-  <span style="color:#294163;">${appState.scores.player1}</span></b>`;
+  player1Score.innerHTML = `${player1Name}<br>
+  <span style="color:#1B2A4A;">${appState.scores.player1}</span>`;
 
   // update content
   const player2Score = document.createElement("p");
-  player2Score.innerHTML = `<b>${player2Name}<br>
-  <span style="color:#294163;">${appState.scores.player2}</span></b>`;
+  player2Score.innerHTML = `${player2Name}<br>
+  <span style="color:#1B2A4A;">${appState.scores.player2}</span>`;
 
   // clear existing content and add new content
   mainScoreContainer.innerHTML = "";
@@ -583,7 +583,7 @@ function renderTurn() {
   // create container for turn
   const turnContainer = document.createElement("div");
   turnContainer.classList.add("turn-container");
-  turnContainer.innerHTML = `<b>${activeName}'s</b> turn...`;
+  turnContainer.innerHTML = `<span style="font-weight: 600">${activeName}'s turn</span>`;
   gameContainer.appendChild(turnContainer);
 }
 
@@ -598,7 +598,7 @@ function updateTurn() {
     return; // exit early if element doesn't exist
   }
 
-  turnContainer.innerHTML = `<b>${activeName}'s</b> turn...`;
+  turnContainer.innerHTML = `<span style="font-weight: 600">${activeName}'s turn</span>`;
 }
 
 function addNewPlayer1() {
