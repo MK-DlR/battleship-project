@@ -246,8 +246,39 @@ body {
 }
 
 /* pass screen loading dots */
+.loading-container {
+  width: 120px;
+  margin: 70px auto;
+}
+
 .dot {
   margin-top: 25px;
+  width: 20px;
+  height: 20px;
+  margin: 7px;
+  display: inline-block;
+  border-radius: 100%;
+}
+
+.dot1 {
+  background-color: #B01020;
+  animation: jump-up 0.6s 0.1s linear infinite;
+}
+
+.dot2 {
+  background-color: #C4B99A;
+  animation: jump-up 0.6s 0.2s linear infinite;
+}
+
+.dot3 {
+  background-color: #1B2A4A;
+  animation: jump-up 0.6s 0.3s linear infinite;
+}
+
+@keyframes jump-up{
+  50%{
+    transform: translate(0,15px);
+  }
 }
 
 /* pass screen continue button */

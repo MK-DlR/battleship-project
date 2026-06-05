@@ -532,46 +532,6 @@ function renderScores() {
 }
 
 function renderPassScreen() {
-  // add CSS styles to the document head if not already present
-  if (!document.querySelector("#pass-screen-styles")) {
-    const style = document.createElement("style");
-    style.id = "pass-screen-styles";
-    style.textContent = `
-      body {
-        background-color: #D10F0D;
-      }
-      .container {
-        width: 40px;
-        margin: 70px auto;
-      }
-      .dot {
-        width: 20px;
-        height: 20px;
-        margin: 7px;
-        display: inline-block;
-        border-radius: 100%;
-      }
-      .dot1 {
-        background-color: #D10F0D;
-        animation: jump-up 0.6s 0.1s linear infinite;
-      }
-      .dot2 {
-        background-color: #53829C;
-        animation: jump-up 0.6s 0.2s linear infinite;
-      }
-      .dot3 {
-        background-color: #294163;
-        animation: jump-up 0.6s 0.3s linear infinite;
-      }
-      @keyframes jump-up{
-        50%{
-          transform: translate(0,15px);
-        }
-      }
-    `;
-    document.head.appendChild(style);
-  }
-
   const passContainer = document.createElement("div");
   passContainer.classList.add("pass-container");
 
