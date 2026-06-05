@@ -1,38 +1,41 @@
-/* styles.css */
+/* public/styles.css */
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;300;400;500;700&display=swap');
-
+/* reset */
 * {
   padding: 0;
   margin: 0;
-  color: #2F2C2C;
+  color: #3A3020;
 }
 
+/* base body */
 body {
+  font-family: 'EB Garamond', serif;
   padding: 1rem;
-  background-color: #D10F0D;
-  font-family: 'Roboto Mono', monospace;
+  background: radial-gradient(ellipse at center, #C41020 0%, #6B0010 100%);
 }
 
+/* board wrapper - holds labels + grid together */
 .board-wrapper {
   display: inline-block;
   margin: 0 1rem;
 }
 
+/* axis labels - shared base styles */
 .column-labels, .row-labels {
+  font-family: 'Cinzel', serif;
   user-select: none;
-  font-weight: bold;
+  font-weight: 600;
   display: grid;
-  font-family: 'Roboto Mono', monospace;
 }
 
+/* column labels - A-J across the top */
 .column-labels {
-  padding-left: 0;
   grid-template-columns: 30px repeat(10, 30px);
   column-gap: 0.3px;
   padding-left: 10px;
 }
 
+/* row labels - 1-10 down the side */
 .row-labels {
   padding: 0;
   grid-template-rows: repeat(10, 30px);
@@ -42,41 +45,48 @@ body {
   padding-right: 5px;
 }
 
+/* grid container */
 .player-board {
   display: grid;
   border-radius: 4px;
   grid-template-columns: repeat(10, 30px);
   grid-template-rows: repeat(10, 30px);
-  border: 2px solid #333;
+  background-color: #E8E0D0;
+  border: 2px solid #D4AF6A;
   padding: 0.5rem;
 }
 
+/* individual grid cell */
 .grid-cell {
   width: 30px;
   height: 30px;
-  background-color: lightblue; /* fallback color */
-  border: 1px solid #C7BBBA;
+  background-color: #E8E0D0; /* fallback color */
+  border: 1px solid #C4B99A;
   box-sizing: border-box; 
 }
 
+/* cell hover effect */
 .grid-cell:hover {
   filter: brightness(50%);
 }
 
+/* corner spacer cell - top-left of label grid */
 .corner-cell {
   width: 30px;
   height: 30px;
 }
 
+/* cell states */
 .ship {
-  background-color: #294163;
+  background-color: #1B2A4A;
 }
 
 .hit, .miss {
   position: relative;
-  background-color: #D8C9C6; /* match empty cell color */
+  background-color: #E8E0D0; /* match empty cell color */
 }
 
+/* hit marker - red circle */
 .hit::before {
   content: '';
   position: absolute;
@@ -85,10 +95,11 @@ body {
   transform: translate(-50%, -50%);
   width: 20px;
   height: 20px;
-  background-color: #911104;
+  background-color: #B01020;
   border-radius: 50%;
 }
 
+/* miss marker - grey circle */
 .miss::before {
   content: '';
   position: absolute;
@@ -97,16 +108,18 @@ body {
   transform: translate(-50%, -50%);
   width: 20px;
   height: 20px;
-  background-color: #918988;
+  background-color: #9E9890;
   border-radius: 50%;
 }
 
+/* empty/hidden cell */
 .empty {
-  background-color: #D8C9C6;
+  background-color: #E8E0D0;
 }
 
+/* main screen containers - home, pass, and game */
 .home-container, .pass-container, .game-container {
-  background-color: #E9DDDB;
+  background-color: #F5F0E8;
   font-size: 18px;
   text-align: center;
   border-radius: 10px;
@@ -115,42 +128,52 @@ body {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+/* game container overrides */
 .game-container {
   height: 800px;
   position: relative;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
+/* home and pass container overrides */
 .home-container, .pass-container {
   padding-top: 250px;
   height: 550px;
 }
 
+/* current turn indicator */
 .turn-container {
+  font-family: 'Cinzel', serif;
+  font-size: 25px;
   padding: 40px;
-  font-size: 25px;
+  border-bottom: 1px solid #C4B99A
 }
 
+/* home screen title */
 .title1 {
+  font-family: 'Cinzel', serif;
   font-size: 25px;
 }
 
+/* home screen title and pass screen player name */
 .title2, .player-name {
+  font-family: 'Cinzel', serif;
   font-size: 50px;
   font-style: italic;
-  font-weight: bold;
 }
 
+/* ship placement buttons (randomize, confirm) */
 .temp-button-container {
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
 
+/* new game button on home screen */
 .home-button-container {
   padding-top: 10px;
 }
 
+/* sidebar button container - new round, new game, reset score */
 .button-container {
   position: absolute;
   left: 120px;
@@ -162,15 +185,16 @@ body {
   z-index: 10;
 }
 
+/* set player buttons on home screen */
 .player-button-container {
   margin: 20px;
 }
 
+/* shared button base styles */
 .button, .dark-button {
+  font-family: 'Cinzel', serif;
   font-size: 18px;
-  font-weight: bold;
-  border: none;
-  border-radius: 10px;
+  border-radius: 4px;
   height: 40px;
   width: 225px;
   margin: 4px;
@@ -178,38 +202,55 @@ body {
   cursor: pointer;
 }
 
+/* light button variant */
 .button {
-  background-color: #5889AA;
+  background: transparent;
+  color: #1B2A4A;
+  border: 1.5px solid #1B2A4A;
 }
 
-.button:hover, .dark-button:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+/* button hover effects */
+.button:hover {
+  background-color: #E8E0D0
 }
 
+.dark-button:hover {
+  filter: brightness(1.15);
+}
+
+
+/* dark button variant */
 .dark-button {
-  background-color: #041E43;
-  color: #E9DDDB;
+  background-color: #1B2A4A;
+  color: #D4AF6A;
+  border: 1.5px solid #D4AF6A;
 }
 
+/* centered text containers */
 .main-score-container, .turn-container, .pass-container {
   text-align: center;
 }
 
+/* score display - positioned near the bottom of the game container */
 .main-score-container {
+  font-family: 'Cinzel', serif;
   display: flex;
   justify-content: space-around;
   font-size: 30px;
   text-align: center;
+  border-top: 1px solid #C4B99A;
   position: absolute;
   bottom: 180px; /* fixed distance from bottom of game container */
   left: 0;
   right: 0;
 }
 
+/* pass screen loading dots */
 .dot {
   margin-top: 25px;
 }
 
+/* pass screen continue button */
 .continue-button {
   margin-top: 45px;
 }
