@@ -83,18 +83,6 @@ function renderGameboards() {
   const gameboardsContainer = document.createElement("div");
   gameboardsContainer.classList.add("gameboards-container");
 
-  // create wrappers for both boards
-  const boardWrapper1 = document.createElement("div");
-  boardWrapper1.classList.add("board-wrapper");
-  const boardWrapper2 = document.createElement("div");
-  boardWrapper2.classList.add("board-wrapper");
-
-  // create labels for both boards
-  const columnLabels = document.createElement("div");
-  columnLabels.classList.add("column-labels");
-  const rowLabels = document.createElement("div");
-  rowLabels.classList.add("row-labels");
-
   // create individual board containers
   const player1BoardContainer = document.createElement("div");
   player1BoardContainer.classList.add("player-board");
