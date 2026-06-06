@@ -1,5 +1,6 @@
 // src/controllers/passController.js
 
+// imports
 import { mainContent } from "../layout.js";
 import { appState, continueFromPassScreen } from "./appController.js";
 

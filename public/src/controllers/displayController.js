@@ -1,6 +1,8 @@
 // src/controllers/displayController.js
 
+// imports
 import { mainContent } from "../layout.js";
+
 import {
   appState,
   showGameScreen,
@@ -22,6 +24,7 @@ import {
   isBothPlayersHuman,
 } from "./gameController.js";
 import { renderPassScreen } from "./passController.js";
+
 import { Ship } from "../game/ship.js";
 
 import { createBoardWrapper } from "../helpers/domHelpers.js";

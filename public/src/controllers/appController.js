@@ -1,5 +1,6 @@
 // src/controllers/appController.js
 
+// imports
 import { mainContent } from "../layout.js";
 import {
   createNewGame,
