@@ -480,4 +480,3 @@ export {
   renderGamescreen,
   resetScore,
 };
-0;
