@@ -1,7 +1,5 @@
 // src/layout.js
 
-console.log("LAYOUT LOADED");
-
 const container = document.getElementById("container");
 
 // create main content container
