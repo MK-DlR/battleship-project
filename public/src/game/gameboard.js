@@ -34,19 +34,16 @@ function Gameboard() {
   const placeShip = function (ship, x, y, dir) {
     // check if ship is already placed
     if (ships.includes(ship)) {
-      console.log("Ship already placed");
       return false;
     }
     if (dir === "horizontal") {
       // directional check
       if (x + ship.length > columns) {
-        console.log("Ship won't fit horizontally");
         return false;
       }
       // check if cells are free
       for (let i = 0; i < ship.length; i++) {
         if (getCell(x + i, y) !== "X") {
-          console.log("Space already occupied");
           return false;
         }
       }
@@ -59,13 +56,11 @@ function Gameboard() {
     } else if (dir === "vertical") {
       // directional check
       if (y + ship.length > rows) {
-        console.log("Ship won't fit vertically");
         return false;
       }
       // check if cells are free
       for (let i = 0; i < ship.length; i++) {
         if (getCell(x, y + i) !== "X") {
-          console.log("Space already occupied");
           return false;
         }
       }
@@ -76,7 +71,6 @@ function Gameboard() {
       ships.push(ship);
       return true;
     } else {
-      console.log("Invalid direction");
       return false;
     }
   };

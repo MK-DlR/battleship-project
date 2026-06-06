@@ -13,8 +13,6 @@ import {
   renderPassScreen,
 } from "./displayController.js";
 
-console.log("APP CONTROLLER LOADED");
-
 // define app state to track current screen
 let appState = {
   currentScreen: "home", // "home", "playing", or "passing"

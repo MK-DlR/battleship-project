@@ -31,10 +31,6 @@ function newGame() {
   const player1Ships = allShips.map(createFleet);
   const player2Ships = allShips.map(createFleet);
 
-  console.log("New game created!");
-  console.log(`Player 1: ${player1.name} (${player1.type})`);
-  console.log(`Player 2: ${player2.name} (${player2.type})`);
-
   return [
     {
       player: player1,
@@ -73,7 +69,6 @@ function getCurrentGameData() {
 
 // create completely fresh, blank game (no test setup)
 function createNewGame() {
-  console.log("Creating fresh blank game...");
   currentGameData = newGame();
   activePlayerIndex = 0;
   isGameOver = false; // reset on new game
@@ -88,8 +83,6 @@ function randomizeShips1() {
   // reset and repopulate ship array
   currentGameData[0].ships = allShips.map(createFleet);
 
-  console.log("Randomizing ships for Player 1...");
-
   // loop through each ship in fleet and attempt random placement until successful
   for (let ship of currentGameData[0].ships) {
     let placed = false;
@@ -101,7 +94,6 @@ function randomizeShips1() {
       placed = currentGameData[0].player.gameboard.placeShip(ship, x, y, dir);
     }
   }
-  console.log("Player 1 ships randomized!");
   appState.shipsPlaced.player1 = true;
 }
 
@@ -111,8 +103,6 @@ function randomizeShips2() {
   currentGameData[1].player.gameboard.clearBoard();
   // reset and repopulate ship array
   currentGameData[1].ships = allShips.map(createFleet);
-
-  console.log("Randomizing ships for Player 2...");
 
   // loop through each ship in fleet and attempt random placement until successful
   for (let ship of currentGameData[1].ships) {
@@ -125,13 +115,10 @@ function randomizeShips2() {
       placed = currentGameData[1].player.gameboard.placeShip(ship, x, y, dir);
     }
   }
-  console.log("Player 2 ships randomized!");
   appState.shipsPlaced.player2 = true;
 }
 // start game
 function startGame() {
-  console.log("Starting game...");
-
   // check if both players have ships placed
   if (!appState.shipsConfirmed.player1 || !appState.shipsConfirmed.player2) {
     alert("Both players must place and confirm their ships before starting!");
@@ -151,8 +138,6 @@ function startGame() {
       renderGamescreen();
     });
   });
-
-  console.log("Game started! It's Player 1's turn.");
 }
 
 // handle changing player turn
@@ -204,13 +189,11 @@ function attackOpponentBoard(x, y) {
         // if validCoords has items pick a random one
         let randomCoord =
           validCoords[Math.floor(Math.random() * validCoords.length)];
-        console.log(randomCoord);
         // log the coordinates
         computerX = randomCoord[0];
         computerY = randomCoord[1];
         // if previous successful attack
       } else if (successfulAttack != undefined) {
-        console.log("Previous successful attack:", successfulAttack);
         const adjacentCoords = [
           [0, -1], // north
           [0, +1], // south
@@ -253,17 +236,14 @@ function attackOpponentBoard(x, y) {
         const computerName = getActivePlayer().player.name;
 
         // handle ship sunk notification
-        console.log(`Ship sunk: ${result.shipName}`);
         alert(`${computerName} sunk ${opponentName}'s ${result.shipName}!`);
       }
 
       // store coordinates if attack is a hit
       if (result === "hit") {
         successfulAttack = [computerX, computerY];
-        console.log(successfulAttack);
       }
     }
-    console.log(`Computer attacking (${computerX}, ${computerY}) → ${result}`);
 
     checkEndgame(); // check for endgame conditions
     return result; // return "hit", "miss", or error message
