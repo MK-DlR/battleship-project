@@ -69,6 +69,7 @@ function renderHomescreen() {
   newPlayerButton2.classList.add("button");
   newPlayerButton2.addEventListener("click", addNewPlayer2);
 
+  // append everything
   gameButtonContainer.appendChild(newGameButton);
   playerButtonContainer.appendChild(newPlayerButton1);
   playerButtonContainer.appendChild(newPlayerButton2);
@@ -80,7 +81,7 @@ function renderHomescreen() {
 }
 
 function renderGameboards() {
-  // clear previous boards first
+  // find and clear previous boards first
   mainContent.querySelector(".gameboards-container")?.remove();
 
   // get current game data (this will be fresh after createNewGame() is called)
@@ -374,7 +375,7 @@ function renderButtons() {
   const resetScoreText = document.createTextNode("Reset Score");
   resetScoreButton.addEventListener("click", resetScore);
 
-  // append everything to DOM
+  // append everything
   mainContent.appendChild(buttonContainer);
   newRoundButton.appendChild(newRoundText);
   buttonContainer.appendChild(newRoundButton);
@@ -398,7 +399,7 @@ function renderScores() {
     mainScoreContainer = document.createElement("div");
     mainScoreContainer.classList.add("main-score-container");
 
-    // Remove the <br> element and just append the container
+    // remove the <br> element and just append the container
     gameContainer.appendChild(mainScoreContainer);
   }
 
@@ -412,7 +413,7 @@ function renderScores() {
   player2Score.innerHTML = `${player2Name}<br>
   <span style="color:#1B2A4A;">${appState.scores.player2}</span>`;
 
-  // clear existing content and add new content
+  // clear existing content and append new content
   mainScoreContainer.innerHTML = "";
   mainScoreContainer.appendChild(player1Score);
   mainScoreContainer.appendChild(player2Score);
@@ -426,8 +427,11 @@ function renderTurn() {
 
   // create container for turn
   const turnContainer = document.createElement("div");
+
   turnContainer.classList.add("turn-container");
   turnContainer.innerHTML = `<span style="font-weight: 600">${activeName}'s turn</span>`;
+
+  // append everything
   gameContainer.appendChild(turnContainer);
 }
 
@@ -436,7 +440,9 @@ function updateTurn() {
   const activePlayer = gameData[activePlayerIndex].player;
   const activeName = activePlayer.name; // get from Player instance
 
+  // find container for turn
   const turnContainer = document.querySelector(".turn-container");
+
   if (!turnContainer) {
     console.warn("Turn container not found");
     return; // exit early if element doesn't exist
@@ -456,7 +462,7 @@ function resetScore() {
   }
 }
 
-// TODO: render battlelog for side panel
+// render battlelog for side panel
 function renderBattleLog() {
   // create container for battle log
   const battleLogContainer = document.createElement("div");
@@ -471,17 +477,53 @@ function renderBattleLog() {
   const battleLogEntries = document.createElement("div");
   battleLogEntries.classList.add("battle-log-entries");
 
+  // append everything
   battleLogContainer.appendChild(battleLogHeader);
   battleLogContainer.appendChild(battleLogEntries);
   mainContent.appendChild(battleLogContainer);
 }
 
+// TODO: add battle log entry
+function addBattleLogEntry(attackerName, result, coordinates, shipName) {
+  // find container for entries
+  const battleLogEntries = document.querySelector(".battle-log-entries");
+
+  // create entry
+  const battleLogEntry = document.createElement("div");
+  battleLogEntry.classList.add("battle-log-entry");
+
+  const battleLogTurn = document.createElement("div");
+  battleLogTurn.classList.add("battle-log-turn");
+
+  const battleLogText = document.createElement("div");
+  battleLogText.classList.add("battle-log-text");
+
+  // TODO:
+  // for sunk entries, add battle-log-sunk class for styling
+
+  battleLogTurn.textContent = attackerName;
+  battleLogText.textContent = `${result} at ${coordinates}`;
+
+  // build entry
+  battleLogEntry.appendChild(battleLogTurn);
+  battleLogEntry.appendChild(battleLogText);
+
+  // append to log
+  battleLogEntries.appendChild(battleLogEntry);
+
+  // scroll to newest entry
+  battleLogEntries.scrollTop = battleLogEntries.scrollHeight;
+}
+
+// render full gamescreen
 function renderGamescreen() {
   gameContainer = document.createElement("div");
   gameContainer.classList.add("game-container");
 
+  // append everything
   mainContent.appendChild(gameContainer);
 
+  // call individual part functions to assemble full gamescreen
   renderTurn();
   renderGameboards();
   renderTempButtons();
@@ -500,5 +542,6 @@ export {
   updateTurn,
   resetScore,
   renderBattleLog,
+  addBattleLogEntry,
   renderGamescreen,
 };
