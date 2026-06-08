@@ -185,20 +185,50 @@ body {
   padding-top: 10px;
 }
 
-/* sidebar button container - new round, new game, reset score */
-.button-container {
+/* shared sidebar container styles */
+.button-container,
+.battle-log-container {
+  position: absolute;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  position: absolute;
+  background-color: #F5F0E8;
   top: 50%;
   width: 260px;
-  background-color: #F5F0E8;
+  transform: translateY(-50%);
   border-radius: 10px;
   padding: 16px;
-  transform: translateY(-50%);
-  gap: 10px;
   z-index: 10;
+}
+
+/* sidebar button container - new round, new game, reset score */
+.button-container {
+  align-items: center;
+  left: 80px;
+  gap: 10px;
+}
+
+/* sidebar battle log display */
+.battle-log-container {
+  right: 80px;
+  gap: 8px;
+}
+
+.battle-log-header {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: #8B7355;
+  text-transform: uppercase;
+  border-bottom: 1px solid #C4B99A;
+  padding-bottom: 8px;
+}
+
+.battle-log-entries {
+  overflow-y: auto;
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 /* set player buttons on home screen */
