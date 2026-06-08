@@ -456,6 +456,26 @@ function resetScore() {
   }
 }
 
+// TODO: render battlelog for side panel
+function renderBattleLog() {
+  // create container for battle log
+  const battleLogContainer = document.createElement("div");
+  battleLogContainer.classList.add("battle-log-container");
+
+  // create header for battle log
+  const battleLogHeader = document.createElement("div");
+  battleLogHeader.classList.add("battle-log-header");
+  battleLogHeader.innerHTML = `Battle Log`;
+
+  // create scrollable div for battle log
+  const battleLogEntries = document.createElement("div");
+  battleLogEntries.classList.add("battle-log-entries");
+
+  battleLogContainer.appendChild(battleLogHeader);
+  battleLogContainer.appendChild(battleLogEntries);
+  mainContent.appendChild(battleLogContainer);
+}
+
 function renderGamescreen() {
   gameContainer = document.createElement("div");
   gameContainer.classList.add("game-container");
@@ -466,6 +486,7 @@ function renderGamescreen() {
   renderGameboards();
   renderTempButtons();
   renderButtons();
+  renderBattleLog();
   renderScores();
 }
 
@@ -477,6 +498,7 @@ export {
   renderScores,
   renderTurn,
   updateTurn,
-  renderGamescreen,
   resetScore,
+  renderBattleLog,
+  renderGamescreen,
 };
