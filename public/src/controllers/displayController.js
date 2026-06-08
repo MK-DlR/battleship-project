@@ -135,15 +135,19 @@ function renderGameboards() {
             // extract x and y from the clicked element's dataset
             const x = parseInt(gridCell.dataset.x);
             const y = parseInt(gridCell.dataset.y);
+
             // convert to display format for logging
             const displayX = String.fromCharCode(65 + x);
             const displayY = y + 1;
+
             // log the coordinates and board
             console.log(
               `Cell clicked at: ${displayX}${displayY} on Board ${boardContainer.dataset.player}.`,
             );
+
             // access gameboards
             getCurrentGameData();
+
             // call the attack
             const result = attackOpponentBoard(x, y);
 
