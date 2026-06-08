@@ -32,6 +32,7 @@ import { addNewPlayer1, addNewPlayer2 } from "../helpers/playerSetup.js";
 import { shouldHideShips } from "../helpers/visibilityHelpers.js";
 
 let gameContainer;
+let battleLogs = [];
 
 function renderHomescreen() {
   // create home screen elements
@@ -140,6 +141,8 @@ function renderGameboards() {
             const displayX = String.fromCharCode(65 + x);
             const displayY = y + 1;
 
+            const coordinates = displayX + displayY;
+
             // log the coordinates and board
             console.log(
               `Cell clicked at: ${displayX}${displayY} on Board ${boardContainer.dataset.player}.`,
@@ -156,7 +159,14 @@ function renderGameboards() {
               result === "miss" ||
               (result && result.type === "ship_sunk")
             ) {
-              if (result && result.type === "ship_sunk") {
+              if (result === "hit") {
+                // hit sunk battle log call
+                addBattleLogEntry(
+                  getActivePlayer().player.name,
+                  result,
+                  coordinates,
+                );
+              } else if (result && result.type === "ship_sunk") {
                 const gameData = getCurrentGameData();
                 const opponentIndex = activePlayerIndex === 0 ? 1 : 0;
                 const opponentName = gameData[opponentIndex].player.name;
@@ -167,6 +177,21 @@ function renderGameboards() {
                   `${getActivePlayer().player.name} sunk ${opponentName}'s ${
                     result.shipName
                   }!`,
+                );
+
+                // ship sunk battle log call
+                addBattleLogEntry(
+                  getActivePlayer().player.name,
+                  result,
+                  coordinates,
+                  result.shipName,
+                );
+              } else {
+                // miss battle log call
+                addBattleLogEntry(
+                  getActivePlayer().player.name,
+                  result,
+                  coordinates,
                 );
               }
 
@@ -190,6 +215,7 @@ function renderGameboards() {
                 updateTurn();
 
                 const nextPlayer = getActivePlayer().player;
+
                 if (nextPlayer.type === "computer") {
                   setTimeout(() => {
                     const computerResult = attackOpponentBoard();
@@ -468,55 +494,72 @@ function resetScore() {
 
 // render battlelog for side panel
 function renderBattleLog() {
-  // create container for battle log
-  const battleLogContainer = document.createElement("div");
-  battleLogContainer.classList.add("battle-log-container");
+  let battleLogContainer = document.querySelector(".battle-log-container");
 
-  // create header for battle log
-  const battleLogHeader = document.createElement("div");
-  battleLogHeader.classList.add("battle-log-header");
-  battleLogHeader.innerHTML = `Battle Log`;
+  if (!battleLogContainer) {
+    // create container for battle log
+    battleLogContainer = document.createElement("div");
+    battleLogContainer.classList.add("battle-log-container");
 
-  // create scrollable div for battle log
-  const battleLogEntries = document.createElement("div");
-  battleLogEntries.classList.add("battle-log-entries");
+    // create header for battle log
+    const battleLogHeader = document.createElement("div");
+    battleLogHeader.classList.add("battle-log-header");
+    battleLogHeader.innerHTML = `Battle Log`;
 
-  // append everything
-  battleLogContainer.appendChild(battleLogHeader);
-  battleLogContainer.appendChild(battleLogEntries);
-  mainContent.appendChild(battleLogContainer);
+    // create scrollable div for battle log
+    const battleLogEntries = document.createElement("div");
+    battleLogEntries.classList.add("battle-log-entries");
+
+    // append everything
+    battleLogContainer.appendChild(battleLogHeader);
+    battleLogContainer.appendChild(battleLogEntries);
+
+    mainContent.appendChild(battleLogContainer);
+  }
+
+  const battleLogEntries = battleLogContainer.querySelector(
+    ".battle-log-entries",
+  );
+
+  if (!battleLogEntries) return;
+
+  battleLogEntries.innerHTML = "";
+
+  for (const log of battleLogs) {
+    const entry = document.createElement("div");
+    entry.classList.add("battle-log-entry");
+
+    const turn = document.createElement("div");
+    turn.classList.add("battle-log-turn");
+    turn.textContent = log.attackerName;
+
+    const text = document.createElement("div");
+    text.classList.add("battle-log-text");
+
+    const resultText =
+      typeof log.result === "object" ? log.result.type : log.result;
+
+    text.textContent = `${resultText} at ${log.coordinates}`;
+
+    entry.appendChild(turn);
+    entry.appendChild(text);
+
+    battleLogEntries.appendChild(entry);
+  }
+
+  battleLogEntries.scrollTop = battleLogEntries.scrollHeight;
 }
 
-// TODO: add battle log entry
+// add battle log entry
 function addBattleLogEntry(attackerName, result, coordinates, shipName) {
-  // find container for entries
-  const battleLogEntries = document.querySelector(".battle-log-entries");
+  battleLogs.push({
+    attackerName,
+    result,
+    coordinates,
+    shipName,
+  });
 
-  // create entry
-  const battleLogEntry = document.createElement("div");
-  battleLogEntry.classList.add("battle-log-entry");
-
-  const battleLogTurn = document.createElement("div");
-  battleLogTurn.classList.add("battle-log-turn");
-
-  const battleLogText = document.createElement("div");
-  battleLogText.classList.add("battle-log-text");
-
-  // TODO:
-  // for sunk entries, add battle-log-sunk class for styling
-
-  battleLogTurn.textContent = attackerName;
-  battleLogText.textContent = `${result} at ${coordinates}`;
-
-  // build entry
-  battleLogEntry.appendChild(battleLogTurn);
-  battleLogEntry.appendChild(battleLogText);
-
-  // append to log
-  battleLogEntries.appendChild(battleLogEntry);
-
-  // scroll to newest entry
-  battleLogEntries.scrollTop = battleLogEntries.scrollHeight;
+  renderBattleLog();
 }
 
 // render full gamescreen
