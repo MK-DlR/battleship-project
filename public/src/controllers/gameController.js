@@ -254,7 +254,11 @@ function attackOpponentBoard(x, y) {
     }
 
     checkEndgame(); // check for endgame conditions
-    return result; // return "hit", "miss", or error message
+    return {
+      result,
+      x: computerX,
+      y: computerY,
+    }; // return "hit", "miss", or error message along with attack coordinates
   } else {
     console.log("Player type error");
   }

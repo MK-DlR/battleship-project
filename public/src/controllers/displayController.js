@@ -218,15 +218,19 @@ function renderGameboards() {
 
                 if (nextPlayer.type === "computer") {
                   setTimeout(() => {
-                    const computerResult = attackOpponentBoard();
-                    console.log(`Computer move: ${computerResult}`);
+                    const computerAttack = attackOpponentBoard();
+                    console.log(`Computer move: ${computerAttack}`);
+
+                    const displayX = String.fromCharCode(65 + computerAttack.x);
+                    const displayY = computerAttack.y + 1;
 
                     // TODO: fix bug
-                    // battle log is showing player's move, not computer's
+                    // battle log is showing player's attack coord
+                    // not computer's
                     addBattleLogEntry(
                       getActivePlayer().player.name,
-                      result,
-                      coordinates,
+                      computerAttack.result,
+                      `${displayX}${displayY}`,
                     );
 
                     switchPlayerTurn();
