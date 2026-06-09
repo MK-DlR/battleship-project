@@ -563,9 +563,19 @@ function renderBattleLog() {
 
     if (log.result?.type === "ship_sunk") {
       text.textContent = `Sunk ${log.defenderName}'s ${log.shipName}`;
+    } else if (log.result === "hit") {
+      text.textContent = `Hit at ${log.coordinates}`;
+    } else if (log.result === "miss") {
+      text.textContent = `Miss at ${log.coordinates}`;
+    }
+
+    /*
+    if (log.result?.type === "ship_sunk") {
+      text.textContent = `Sunk ${log.defenderName}'s ${log.shipName}`;
     } else {
       text.textContent = `${log.result} at ${log.coordinates}`;
     }
+    */
 
     entry.appendChild(turn);
     entry.appendChild(text);
