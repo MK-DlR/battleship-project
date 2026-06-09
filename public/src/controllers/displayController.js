@@ -586,6 +586,18 @@ function addBattleLogEntry(
   shipName,
   defenderName,
 ) {
+  // format name based on game type
+  if (attackerName === "Player 1") {
+    attackerName = "P1";
+  } else if (attackerName === "Player 2") {
+    attackerName = "P2";
+  } else if (attackerName === "Computer") {
+    attackerName = "CPU";
+  } else {
+    attackerName = attackerName.toUpperCase();
+  }
+
+  // push entry to battle log
   battleLogs.push({
     attackerName,
     result,
