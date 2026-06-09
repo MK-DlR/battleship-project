@@ -595,7 +595,7 @@ function addBattleLogEntry(
   renderBattleLog();
 }
 
-// TODO: reset battle log
+// reset battle log
 function resetBattleLog() {
   battleLogs = [];
 }
