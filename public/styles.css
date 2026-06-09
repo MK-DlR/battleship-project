@@ -231,6 +231,11 @@ body {
   gap: 4px;
 }
 
+.ship-sunk {
+  font-weight: 600;
+  color: #D4AF6A;
+}
+
 /* set player buttons on home screen */
 .player-button-container {
   margin: 20px;
