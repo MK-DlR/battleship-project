@@ -19,7 +19,7 @@ import {
 let appState = {
   currentScreen: "home", // "home", "playing", or "passing"
   player1Name: "Player 1",
-  player2Name: "Computer", // set player 2 to computer by default
+  player2Name: "Player 2",
   player1Type: "human",
   player2Type: "computer", // set player 2 to computer by default
   scores: { player1: 0, player2: 0 },

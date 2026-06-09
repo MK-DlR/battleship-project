@@ -18,7 +18,7 @@ function newGame() {
 
   // use custom player data from appState, with fallbacks
   const player1Name = appState.player1Name || "Player 1";
-  const player2Name = appState.player2Name || "Computer";
+  const player2Name = appState.player2Name || "Player 2";
   const player1Type = appState.player1Type || "human";
   const player2Type = appState.player2Type || "computer";
 
