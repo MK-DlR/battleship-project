@@ -220,6 +220,15 @@ function renderGameboards() {
                   setTimeout(() => {
                     const computerResult = attackOpponentBoard();
                     console.log(`Computer move: ${computerResult}`);
+
+                    // TODO: fix bug
+                    // battle log is showing player's move, not computer's
+                    addBattleLogEntry(
+                      getActivePlayer().player.name,
+                      result,
+                      coordinates,
+                    );
+
                     switchPlayerTurn();
 
                     // re-render after computer finishes

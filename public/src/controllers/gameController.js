@@ -160,12 +160,14 @@ function attackOpponentBoard(x, y) {
   if (isGameOver) {
     return;
   }
+
   // human player attack
   if (getActivePlayer().player.type === "human") {
     const result = opponentGameboard.receiveAttack(x, y);
     checkEndgame(); // check for endgame conditions
     return result; // return "hit", "miss", or error message
   }
+
   // computer player attack
   if (getActivePlayer().player.type === "computer") {
     const validCoords = [];
@@ -182,6 +184,7 @@ function attackOpponentBoard(x, y) {
         }
       }
     }
+
     if (validCoords.length === 0) {
       return "No valid attacks left, start a new game.";
     } else {
@@ -201,16 +204,19 @@ function attackOpponentBoard(x, y) {
           [+1, 0], // east
           [-1, 0], // west
         ];
+
         // generate adjacent coordinates from successfulAttack
         let possibleAttacks = adjacentCoords.map(([offsetX, offsetY]) => [
           successfulAttack[0] + offsetX,
           successfulAttack[1] + offsetY,
         ]);
+
         // filter possibleAttacks against validCoords
         let filteredAttacks = possibleAttacks.filter(([x, y]) => {
           if (x < 0 || x > 9 || y < 0 || y > 9) return false;
           return validCoords.some(([vx, vy]) => vx === x && vy === y);
         });
+
         // then randomly select from filtered options
         let targetedCoord;
         if (filteredAttacks.length > 0) {
@@ -226,6 +232,7 @@ function attackOpponentBoard(x, y) {
         computerX = targetedCoord[0];
         computerY = targetedCoord[1];
       }
+
       // use coordinates to attack
       result = opponentGameboard.receiveAttack(computerX, computerY);
 
