@@ -165,6 +165,9 @@ function renderGameboards() {
                   getActivePlayer().player.name,
                   result,
                   coordinates,
+                  null,
+                  null,
+                  activePlayerIndex,
                 );
               } else if (result && result.type === "ship_sunk") {
                 const gameData = getCurrentGameData();
@@ -186,6 +189,7 @@ function renderGameboards() {
                   coordinates,
                   result.shipName,
                   opponentName,
+                  activePlayerIndex,
                 );
               } else {
                 // miss battle log call
@@ -193,6 +197,9 @@ function renderGameboards() {
                   getActivePlayer().player.name,
                   result,
                   coordinates,
+                  null,
+                  null,
+                  activePlayerIndex,
                 );
               }
 
@@ -236,12 +243,17 @@ function renderGameboards() {
                         `${displayX}${displayY}`,
                         computerResult.shipName,
                         opponentName,
+                        null,
+                        activePlayerIndex,
                       );
                     } else {
                       addBattleLogEntry(
                         getActivePlayer().player.name,
                         computerResult,
                         `${displayX}${displayY}`,
+                        null,
+                        null,
+                        activePlayerIndex,
                       );
                     }
 
@@ -551,26 +563,45 @@ function renderBattleLog() {
   battleLogEntries.innerHTML = "";
 
   for (const log of battleLogs) {
+    // create battle log entry
     const entry = document.createElement("div");
     entry.classList.add("battle-log-entry");
 
+    // create styled dot
+    const dot = document.createElement("div");
+    dot.classList.add("battle-log-dot");
+    // conditionally add class based on player
+    if (log.playerIndex === 0) {
+      dot.classList.add("battle-log-dot--p1");
+    } else {
+      dot.classList.add("battle-log-dot--p2");
+    }
+
+    // create battle log turn + text wrapper
+    const entryContent = document.createElement("div");
+    entryContent.classList.add("battle-log-entry-content");
+
+    // create battle log turn
     const turn = document.createElement("div");
     turn.classList.add("battle-log-turn");
     turn.textContent = log.attackerName;
 
+    // create battle log text content
     const text = document.createElement("div");
     text.classList.add("battle-log-text");
 
     if (log.result?.type === "ship_sunk") {
-      text.innerHTML = `<div class="ship-sunk">Sunk ${log.defenderName}'s ${log.shipName}</div>`;
+      text.innerHTML = `<div class="battle-log-sunk">Sunk ${log.defenderName}'s ${log.shipName}!</div>`;
     } else if (log.result === "hit") {
       text.textContent = `Hit at ${log.coordinates}`;
     } else if (log.result === "miss") {
       text.textContent = `Miss at ${log.coordinates}`;
     }
 
-    entry.appendChild(turn);
-    entry.appendChild(text);
+    entry.appendChild(dot);
+    entryContent.appendChild(turn);
+    entryContent.appendChild(text);
+    entry.appendChild(entryContent);
 
     battleLogEntries.appendChild(entry);
   }
@@ -585,6 +616,7 @@ function addBattleLogEntry(
   coordinates,
   shipName,
   defenderName,
+  playerIndex,
 ) {
   // format name based on game type
   if (attackerName === "Player 1") {
@@ -604,6 +636,7 @@ function addBattleLogEntry(
     coordinates,
     shipName,
     defenderName,
+    playerIndex,
   });
 
   renderBattleLog();

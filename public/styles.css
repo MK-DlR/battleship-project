@@ -231,9 +231,36 @@ body {
   gap: 4px;
 }
 
-.ship-sunk {
+.battle-log-turn {
+  color: #9E9890;
+}
+
+.battle-log-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.battle-log-dot--p1 {
+  background-color: #D4AF6A;
+}
+
+.battle-log-dot--p2 {
+  background-color: #1B2A4A;
+}
+
+.battle-log-entry {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+  border-bottom: 1px solid #C4B99A;
+}
+
+.battle-log-sunk {
   font-weight: 600;
-  color: #D4AF6A;
+  color: #B01020;
 }
 
 /* set player buttons on home screen */
