@@ -160,7 +160,7 @@ function renderGameboards() {
               (result && result.type === "ship_sunk")
             ) {
               if (result === "hit") {
-                // hit sunk battle log call
+                // hit battle log call
                 addBattleLogEntry(
                   getActivePlayer().player.name,
                   result,
@@ -185,6 +185,7 @@ function renderGameboards() {
                   result,
                   coordinates,
                   result.shipName,
+                  opponentName,
                 );
               } else {
                 // miss battle log call
@@ -224,14 +225,28 @@ function renderGameboards() {
                     const displayX = String.fromCharCode(65 + computerAttack.x);
                     const displayY = computerAttack.y + 1;
 
-                    // TODO: fix bug
-                    // battle log is showing player's attack coord
-                    // not computer's
-                    addBattleLogEntry(
-                      getActivePlayer().player.name,
-                      computerAttack.result,
-                      `${displayX}${displayY}`,
-                    );
+                    // WIP
+                    const computerResult = computerAttack.result;
+
+                    if (computerResult?.type === "ship_sunk") {
+                      const gameData = getCurrentGameData();
+                      const opponentIndex = activePlayerIndex === 0 ? 1 : 0;
+                      const opponentName = gameData[opponentIndex].player.name;
+
+                      addBattleLogEntry(
+                        getActivePlayer().player.name,
+                        computerResult,
+                        `${displayX}${displayY}`,
+                        computerResult.shipName,
+                        opponentName,
+                      );
+                    } else {
+                      addBattleLogEntry(
+                        getActivePlayer().player.name,
+                        computerResult,
+                        `${displayX}${displayY}`,
+                      );
+                    }
 
                     switchPlayerTurn();
 
@@ -549,10 +564,11 @@ function renderBattleLog() {
     const text = document.createElement("div");
     text.classList.add("battle-log-text");
 
-    const resultText =
-      typeof log.result === "object" ? log.result.type : log.result;
-
-    text.textContent = `${resultText} at ${log.coordinates}`;
+    if (log.result?.type === "ship_sunk") {
+      text.textContent = `Sunk ${log.defenderName}'s ${log.shipName}`;
+    } else {
+      text.textContent = `${log.result} at ${log.coordinates}`;
+    }
 
     entry.appendChild(turn);
     entry.appendChild(text);
@@ -564,12 +580,19 @@ function renderBattleLog() {
 }
 
 // add battle log entry
-function addBattleLogEntry(attackerName, result, coordinates, shipName) {
+function addBattleLogEntry(
+  attackerName,
+  result,
+  coordinates,
+  shipName,
+  defenderName,
+) {
   battleLogs.push({
     attackerName,
     result,
     coordinates,
     shipName,
+    defenderName,
   });
 
   renderBattleLog();
