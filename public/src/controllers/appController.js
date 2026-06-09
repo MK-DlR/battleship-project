@@ -9,9 +9,10 @@ import {
 } from "./gameController.js";
 import {
   renderHomescreen,
-  renderGamescreen,
-  resetScore,
   renderPassScreen,
+  resetScore,
+  resetBattleLog,
+  renderGamescreen,
 } from "./displayController.js";
 
 // define app state to track current screen
@@ -33,6 +34,7 @@ let appState = {
 function handleNewGame() {
   createNewGame(); // create fresh game data
   resetScore(); // reset player scores
+  resetBattleLog(); // clear battle log
 
   // reset ship placement state for player 1
   appState.shipsPlaced.player1 = false;
@@ -59,6 +61,7 @@ function handleNewGame() {
 // new round (same players, keep score)
 function handleNewRound() {
   createNewGame(); // create fresh game data
+  resetBattleLog(); // clear battle log
 
   // reset ship placement state for player 1
   appState.shipsPlaced.player1 = false;

@@ -595,6 +595,11 @@ function addBattleLogEntry(
   renderBattleLog();
 }
 
+// TODO: reset battle log
+function resetBattleLog() {
+  battleLogs = [];
+}
+
 // render full gamescreen
 function renderGamescreen() {
   gameContainer = document.createElement("div");
@@ -623,5 +628,6 @@ export {
   resetScore,
   renderBattleLog,
   addBattleLogEntry,
+  resetBattleLog,
   renderGamescreen,
 };
