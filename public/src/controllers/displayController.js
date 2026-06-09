@@ -220,12 +220,9 @@ function renderGameboards() {
                 if (nextPlayer.type === "computer") {
                   setTimeout(() => {
                     const computerAttack = attackOpponentBoard();
-                    console.log(`Computer move: ${computerAttack}`);
-
                     const displayX = String.fromCharCode(65 + computerAttack.x);
                     const displayY = computerAttack.y + 1;
 
-                    // WIP
                     const computerResult = computerAttack.result;
 
                     if (computerResult?.type === "ship_sunk") {
