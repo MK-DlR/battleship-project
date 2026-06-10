@@ -140,7 +140,7 @@ body {
 /* game container overrides */
 .game-container {
   width: 1000px;
-  height: 700px;
+  height: 650px;
   position: relative;
 }
 
@@ -186,7 +186,7 @@ body {
 .temp-button-container {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 /* new game button on home screen */
@@ -296,7 +296,7 @@ body {
 }
 
 .dark-button:hover {
-  filter: brightness(1.15);
+  filter: brightness(1.55);
 }
 
 /* dark button variant */
@@ -323,7 +323,7 @@ body {
   padding-top: 20px;
   margin: 0 32px;
   position: absolute;
-  bottom: 90px; /* fixed distance from bottom of game container */
+  bottom: 20px; /* fixed distance from bottom of game container */
   left: 0;
   right: 0;
 }
@@ -367,4 +367,44 @@ body {
 /* pass screen continue button */
 .continue-button {
   margin-top: 45px;
+}
+
+/* media queries */
+/* TEMP: tablet: 768px */
+@media (max-width: 1620px) {
+  .game-layout {
+    display: grid;
+    grid-template-areas:
+      "game game"
+      "buttons battlelog";
+    margin-top: 0;
+  }
+
+  .game-container {
+    width: 710px;
+    height: 1025px;
+    grid-area: game;
+  }
+
+  .main-score-container {
+    bottom: 20px;
+  }
+
+  .button-container {
+    grid-area: buttons;
+    justify-self: start;
+    height: 365px;
+    width: 292px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .battle-log-container {
+    grid-area: battlelog;
+    justify-self: end;
+  }
 }
