@@ -427,9 +427,8 @@ body {
   .button-container {
     grid-area: buttons;
     justify-self: start;
-    height: 365px;
+    height: 333px;
     width: 292px;
-    padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -440,5 +439,6 @@ body {
   .battle-log-container {
     grid-area: battlelog;
     justify-self: end;
+    height: 333px;
   }
 }
