@@ -546,6 +546,7 @@ function renderBattleLog(parent) {
     // create scrollable div for battle log
     const battleLogEntries = document.createElement("div");
     battleLogEntries.classList.add("battle-log-entries");
+    battleLogEntries.classList.add("custom-scrollbar");
 
     // append everything
     battleLogContainer.appendChild(battleLogHeader);
@@ -656,6 +657,10 @@ function renderGamescreen() {
   // create game container
   gameContainer = document.createElement("div");
   gameContainer.classList.add("game-container");
+
+  // create lower panel for media query
+  const lowerPanel = document.createElement("div");
+  lowerPanel.classList.add("lower-panel");
 
   // append everything
   mainContent.appendChild(gameLayout);
