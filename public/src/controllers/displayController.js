@@ -416,7 +416,7 @@ function renderTempButtons() {
 }
 
 // new round, home, and reset score buttons
-function renderButtons() {
+function renderButtons(parent) {
   // button container
   const buttonContainer = document.createElement("div");
   buttonContainer.classList.add("button-container");
@@ -443,7 +443,7 @@ function renderButtons() {
   resetScoreButton.addEventListener("click", resetScore);
 
   // append everything
-  mainContent.appendChild(buttonContainer);
+  parent.appendChild(buttonContainer);
   newRoundButton.appendChild(newRoundText);
   buttonContainer.appendChild(newRoundButton);
   newGameButton.appendChild(newGameText);
@@ -530,7 +530,7 @@ function resetScore() {
 }
 
 // render battlelog for side panel
-function renderBattleLog() {
+function renderBattleLog(parent) {
   let battleLogContainer = document.querySelector(".battle-log-container");
 
   if (!battleLogContainer) {
@@ -551,7 +551,7 @@ function renderBattleLog() {
     battleLogContainer.appendChild(battleLogHeader);
     battleLogContainer.appendChild(battleLogEntries);
 
-    mainContent.appendChild(battleLogContainer);
+    parent.appendChild(battleLogContainer);
   }
 
   const battleLogEntries = battleLogContainer.querySelector(
@@ -649,18 +649,23 @@ function resetBattleLog() {
 
 // render full gamescreen
 function renderGamescreen() {
+  // create full game layout
+  const gameLayout = document.createElement("div");
+  gameLayout.classList.add("game-layout");
+
+  // create game container
   gameContainer = document.createElement("div");
   gameContainer.classList.add("game-container");
 
   // append everything
-  mainContent.appendChild(gameContainer);
+  mainContent.appendChild(gameLayout);
+  renderButtons(gameLayout); // append before gameContainer so it displays on left
+  gameLayout.appendChild(gameContainer);
 
-  // call individual part functions to assemble full gamescreen
   renderTurn();
   renderGameboards();
   renderTempButtons();
-  renderButtons();
-  renderBattleLog();
+  renderBattleLog(gameLayout);
   renderScores();
 }
 
