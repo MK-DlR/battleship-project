@@ -30,6 +30,15 @@ body {
   padding-top: 20px;
 }
 
+/* board labels */
+.board-label {
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #9E9890;
+}
+
 /* axis labels - shared base styles */
 .column-labels, .row-labels {
   font-family: 'Cinzel', serif;
@@ -140,7 +149,7 @@ body {
 /* game container overrides */
 .game-container {
   width: 1000px;
-  height: 650px;
+  height: 680px;
   position: relative;
 }
 
@@ -416,7 +425,7 @@ body {
 
   .game-container {
     width: 710px;
-    height: 1025px;
+    height: 1085px;
     grid-area: game;
   }
 

@@ -308,6 +308,25 @@ function renderGameboards() {
   const player1Wrapper = createBoardWrapper(player1BoardContainer);
   const player2Wrapper = createBoardWrapper(player2BoardContainer);
 
+  // create conditional board labels
+  // TODO: fix bug that labels don't update correctly during p1vsp2 ship setup phase
+  const board1Label = document.createElement("div");
+  const board2Label = document.createElement("div");
+  board1Label.classList.add("board-label");
+  board2Label.classList.add("board-label");
+
+  if (activePlayerIndex === 0 || gameData[1].player.type === "computer") {
+    board1Label.textContent = "Your Fleet";
+    board2Label.textContent = "Enemy Waters";
+  } else {
+    board1Label.textContent = "Enemy Waters";
+    board2Label.textContent = "Your Fleet";
+  }
+
+  // append conditional board labels to wrappers
+  player1Wrapper.prepend(board1Label);
+  player2Wrapper.prepend(board2Label);
+
   // append boards to container
   gameboardsContainer.appendChild(player1Wrapper);
   gameboardsContainer.appendChild(player2Wrapper);
