@@ -39,7 +39,7 @@ function renderHomescreen() {
   const homeContainer = document.createElement("div");
   homeContainer.classList.add("home-container");
 
-  // "let's play" text
+  // create "let's play" text
   const title1 = document.createElement("h1");
   title1.classList.add("title1");
   title1.innerHTML = `Let's play<br>`;
@@ -54,19 +54,19 @@ function renderHomescreen() {
   const playerButtonContainer = document.createElement("div");
   playerButtonContainer.classList.add("player-button-container");
 
-  // new game button
+  // create new game button
   const newGameButton = document.createElement("button");
   newGameButton.textContent = "New Game";
   newGameButton.classList.add("dark-button");
   newGameButton.addEventListener("click", handleNewGame);
 
-  // new player 1 button
+  // create new player 1 button
   const newPlayerButton1 = document.createElement("button");
   newPlayerButton1.textContent = "Set Player 1";
   newPlayerButton1.classList.add("button");
   newPlayerButton1.addEventListener("click", addNewPlayer1);
 
-  // new player 2 button
+  // create new player 2 button
   const newPlayerButton2 = document.createElement("button");
   newPlayerButton2.textContent = "Set Player 2";
   newPlayerButton2.classList.add("button");
@@ -472,12 +472,12 @@ function renderScores() {
     gameContainer.appendChild(mainScoreContainer);
   }
 
-  // update content
+  // update p1 score content
   const player1Score = document.createElement("p");
   player1Score.innerHTML = `${player1Name}<br>
   <span style="color:#1B2A4A;">${appState.scores.player1}</span>`;
 
-  // update content
+  // update p2 score content
   const player2Score = document.createElement("p");
   player2Score.innerHTML = `${player2Name}<br>
   <span style="color:#1B2A4A;">${appState.scores.player2}</span>`;
