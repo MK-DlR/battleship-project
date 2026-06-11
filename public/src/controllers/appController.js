@@ -2,6 +2,7 @@
 
 // imports
 import { mainContent } from "../layout.js";
+import { resetBattleLog } from "./battleLogController.js";
 import {
   createNewGame,
   getCurrentGameData,
@@ -11,7 +12,6 @@ import {
   renderHomescreen,
   renderPassScreen,
   resetScore,
-  resetBattleLog,
   renderGamescreen,
 } from "./displayController.js";
 

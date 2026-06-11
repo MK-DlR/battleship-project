@@ -590,8 +590,5 @@ export {
   renderTurn,
   updateTurn,
   resetScore,
-  renderBattleLog,
-  addBattleLogEntry,
-  resetBattleLog,
   renderGamescreen,
 };
