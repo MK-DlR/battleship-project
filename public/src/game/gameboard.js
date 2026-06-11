@@ -10,6 +10,7 @@ function Gameboard() {
   const columns = 10;
   const board = [];
   let ships = [];
+
   // nested for loop to create 2D array for gameboard
   const createBoard = function () {
     for (let i = 0; i < rows; i++) {
@@ -21,6 +22,7 @@ function Gameboard() {
     return board;
   };
   createBoard();
+
   // helper functions to access board as board[x][y]
   const getCell = function (x, y) {
     return board[y][x]; // board is still [row][col]
@@ -74,6 +76,7 @@ function Gameboard() {
       return false;
     }
   };
+
   const missedAttacks = []; // track missed attack coordinates
 
   // take pair of coordinates and determine if attack is a hit

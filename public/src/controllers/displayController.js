@@ -39,9 +39,11 @@ function renderHomescreen() {
   const homeContainer = document.createElement("div");
   homeContainer.classList.add("home-container");
 
+  // "let's play" text
   const title1 = document.createElement("h1");
   title1.classList.add("title1");
   title1.innerHTML = `Let's play<br>`;
+
   const title2 = document.createElement("h1");
   title2.classList.add("title2");
   title2.textContent = "BATTLESHIP!!!";
