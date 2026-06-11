@@ -118,6 +118,7 @@ function randomizeShips2() {
   }
   appState.shipsPlaced.player2 = true;
 }
+
 // start game
 function startGame() {
   // check if both players have ships placed
