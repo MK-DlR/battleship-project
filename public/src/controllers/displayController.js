@@ -78,6 +78,11 @@ function renderHomescreen() {
   newPlayerButton2.classList.add("button");
   newPlayerButton2.addEventListener("click", addNewPlayer2);
 
+  // create credit link
+  const credit = document.createElement("div");
+  credit.classList.add("home-credit");
+  credit.innerHTML = `<a href="https://github.com/MK-DlR">Created by <i class="fa-brands fa-github"></i> MK-DlR</a>`;
+
   // append everything
   gameButtonContainer.appendChild(newGameButton);
   playerButtonContainer.appendChild(newPlayerButton1);
@@ -86,6 +91,7 @@ function renderHomescreen() {
   homeContainer.appendChild(title2);
   homeContainer.appendChild(gameButtonContainer);
   homeContainer.appendChild(playerButtonContainer);
+  homeContainer.appendChild(credit);
   mainContent.appendChild(homeContainer);
 }
 

@@ -191,6 +191,15 @@ body {
   font-style: italic;
 }
 
+/* home credit */
+.home-credit {
+  margin-top: 275px;
+}
+
+.home-credit a {
+  text-decoration: none;
+}
+
 /* ship placement buttons (randomize, confirm) */
 .temp-button-container {
   display: flex;
