@@ -39,7 +39,6 @@ import { addNewPlayer1, addNewPlayer2 } from "../helpers/playerSetup.js";
 import { shouldHideShips } from "../helpers/visibilityHelpers.js";
 
 let gameContainer;
-// let battleLogs = [];
 
 function renderHomescreen() {
   // create home screen elements
