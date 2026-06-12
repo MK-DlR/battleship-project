@@ -198,6 +198,12 @@ body {
 
 .home-credit a {
   text-decoration: none;
+  color: #1B2A4A;
+}
+
+.home-credit a:hover {
+  color: #D4AF6A;
+  transition: 0.4s;
 }
 
 /* ship placement buttons (randomize, confirm) */
