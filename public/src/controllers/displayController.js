@@ -320,7 +320,20 @@ function renderGameboards() {
   board1Label.classList.add("board-label");
   board2Label.classList.add("board-label");
 
-  if (activePlayerIndex === 0 || gameData[1].player.type === "computer") {
+  if (
+    // check if game is started
+    !appState.gameStarted &&
+    appState.shipsConfirmed.player1 &&
+    !appState.shipsConfirmed.player2 &&
+    gameData[1].player.type === "human"
+  ) {
+    // p2 placement phase - flip the labels
+    board1Label.textContent = "Enemy Waters";
+    board2Label.textContent = "Your Fleet";
+  } else if (
+    activePlayerIndex === 0 ||
+    gameData[1].player.type === "computer"
+  ) {
     board1Label.textContent = "Your Fleet";
     board2Label.textContent = "Enemy Waters";
   } else {
