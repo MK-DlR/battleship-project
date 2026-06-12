@@ -277,6 +277,19 @@ function renderGameboards() {
                       );
                     }
 
+                    if (checkEndgame()) {
+                      addBattleLogEntry(
+                        getActivePlayer().player.name,
+                        "game_over",
+                        null,
+                        null,
+                        null,
+                        activePlayerIndex,
+                      );
+
+                      return;
+                    }
+
                     switchPlayerTurn();
 
                     // re-render after computer finishes
