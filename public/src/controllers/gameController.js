@@ -256,12 +256,16 @@ function attackOpponentBoard(x, y) {
       }
     }
 
+    return { result, x: computerX, y: computerY, gameOver: checkEndgame() };
+
+    /*
     checkEndgame(); // check for endgame conditions
     return {
       result,
       x: computerX,
       y: computerY,
     }; // return "hit", "miss", or error message along with attack coordinates
+    */
   } else {
     console.log("Player type error");
   }
@@ -291,9 +295,14 @@ function checkEndgame() {
 
 // trigger game over
 function triggerEndgame() {
+  if (isGameOver) return; // prevents double firing
+
+  isGameOver = true;
+
   // display game over notification and winner
   // TODO: change to modal
   alert(`Game over! 🎉 ${getActivePlayer().player.name} wins! 🎉`);
+
   // increment player score
   getActivePlayer().player.score += 1;
 
