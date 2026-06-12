@@ -18,6 +18,7 @@ import {
   resetBattleLog,
 } from "./battleLogController.js";
 import {
+  getIsGameOver,
   getCurrentGameData,
   randomizeShips1,
   randomizeShips2,
@@ -587,9 +588,15 @@ function renderTurn() {
 
   // create container for turn
   const turnContainer = document.createElement("div");
-
   turnContainer.classList.add("turn-container");
-  turnContainer.innerHTML = `<span style="font-weight: 600">${activeName}'s turn</span>`;
+
+  // conditionally show winner or which player's turn
+  if (getIsGameOver()) {
+    turnContainer.classList.add("turn-container--winner");
+    turnContainer.innerHTML = `${activeName} wins!`;
+  } else {
+    turnContainer.innerHTML = `${activeName}'s turn`;
+  }
 
   // append everything
   gameContainer.appendChild(turnContainer);
@@ -608,7 +615,13 @@ function updateTurn() {
     return; // exit early if element doesn't exist
   }
 
-  turnContainer.innerHTML = `<span style="font-weight: 600">${activeName}'s turn</span>`;
+  // conditionally show winner or which player's turn
+  if (getIsGameOver()) {
+    turnContainer.classList.add("turn-container--winner");
+    turnContainer.innerHTML = `${activeName} wins!`;
+  } else {
+    turnContainer.innerHTML = `${activeName}'s turn`;
+  }
 }
 
 function resetScore() {

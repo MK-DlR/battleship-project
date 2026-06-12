@@ -65,6 +65,10 @@ let currentGameData = null;
 
 let isGameOver = false;
 
+function getIsGameOver() {
+  return isGameOver;
+}
+
 function getCurrentGameData() {
   return currentGameData;
 }
@@ -313,6 +317,7 @@ export {
   createFleet,
   newGame,
   placeAllShips,
+  getIsGameOver,
   getCurrentGameData,
   switchPlayerTurn,
   randomizeShips1,
