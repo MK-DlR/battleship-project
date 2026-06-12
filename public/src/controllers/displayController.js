@@ -221,6 +221,10 @@ function renderGameboards() {
                   activePlayerIndex,
                 );
 
+                // re-render board
+                mainContent.innerHTML = "";
+                renderGamescreen();
+
                 return;
               }
 
@@ -292,6 +296,10 @@ function renderGameboards() {
                         null,
                         activePlayerIndex,
                       );
+
+                      // re-render board
+                      mainContent.innerHTML = "";
+                      renderGamescreen();
 
                       return;
                     }
