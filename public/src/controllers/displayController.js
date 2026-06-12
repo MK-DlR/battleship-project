@@ -314,7 +314,6 @@ function renderGameboards() {
   const player2Wrapper = createBoardWrapper(player2BoardContainer);
 
   // create conditional board labels
-  // TODO: fix bug that labels don't update correctly during p1vsp2 ship setup phase
   const board1Label = document.createElement("div");
   const board2Label = document.createElement("div");
   board1Label.classList.add("board-label");
