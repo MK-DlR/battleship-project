@@ -355,6 +355,8 @@ function renderTempButtons() {
   if (appState.gameStarted === true) {
     return;
   } else {
+    const gameData = getCurrentGameData(); // get game info
+
     // button container
     const buttonContainer = document.createElement("div");
     buttonContainer.classList.add("temp-button-container");
@@ -364,10 +366,16 @@ function renderTempButtons() {
     // PHASE 1: Player 1 setup (always shows first)
     // player 1 randomize ship placement button
     if (appState.shipsConfirmed.player1 === false) {
+      const player1Name = gameData[0].player.name;
+
       const randomizePlacementButton1 = document.createElement("BUTTON");
       randomizePlacementButton1.classList.add("button");
       randomizePlacementButton1.id = "randomizePlacementButton1";
-      const randomizePlacementText1 = document.createTextNode("P1 Place Ships");
+
+      const randomizePlacementText1 = document.createTextNode(
+        `${player1Name} Place Ships`,
+      );
+
       randomizePlacementButton1.addEventListener("click", () => {
         randomizeShips1();
         mainContent.innerHTML = ""; // clear everything first
@@ -385,7 +393,8 @@ function renderTempButtons() {
     ) {
       const confirmButton1 = document.createElement("BUTTON");
       confirmButton1.classList.add("button");
-      confirmButton1.textContent = "Confirm P1 Ships";
+      confirmButton1.textContent = `Confirm Placement`;
+
       confirmButton1.addEventListener("click", () => {
         appState.shipsConfirmed.player1 = true;
 
@@ -419,10 +428,16 @@ function renderTempButtons() {
       appState.shipsConfirmed.player2 === false &&
       appState.player2Type === "human"
     ) {
+      const player2Name = gameData[1].player.name;
+
       const randomizePlacementButton2 = document.createElement("BUTTON");
       randomizePlacementButton2.classList.add("button");
       randomizePlacementButton2.id = "randomizePlacementButton2";
-      const randomizePlacementText2 = document.createTextNode("P2 Place Ships");
+
+      const randomizePlacementText2 = document.createTextNode(
+        `${player2Name} Place Ships`,
+      );
+
       randomizePlacementButton2.addEventListener("click", () => {
         randomizeShips2();
         mainContent.innerHTML = ""; // clear everything first
@@ -442,7 +457,7 @@ function renderTempButtons() {
     ) {
       const confirmButton2 = document.createElement("BUTTON");
       confirmButton2.classList.add("button");
-      confirmButton2.textContent = "Confirm P2 Ships";
+      confirmButton2.textContent = `Confirm Placement`;
       confirmButton2.addEventListener("click", () => {
         appState.shipsConfirmed.player2 = true;
         const gameData = getCurrentGameData();
