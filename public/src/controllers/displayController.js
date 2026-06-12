@@ -27,6 +27,7 @@ import {
   getActivePlayer,
   attackOpponentBoard,
   isBothPlayersHuman,
+  checkEndgame,
 } from "./gameController.js";
 import { renderPassScreen } from "./passController.js";
 
@@ -181,8 +182,7 @@ function renderGameboards() {
                 const opponentIndex = activePlayerIndex === 0 ? 1 : 0;
                 const opponentName = gameData[opponentIndex].player.name;
 
-                // handle ship sunk notification
-                console.log(`Ship sunk: ${result.shipName}`);
+                // TODO: update to modal
                 alert(
                   `${getActivePlayer().player.name} sunk ${opponentName}'s ${
                     result.shipName
@@ -210,6 +210,19 @@ function renderGameboards() {
                 );
               }
 
+              if (checkEndgame()) {
+                addBattleLogEntry(
+                  getActivePlayer().player.name,
+                  "game_over",
+                  null,
+                  null,
+                  null,
+                  activePlayerIndex,
+                );
+
+                return;
+              }
+
               // valid attack - switch turns
               switchPlayerTurn();
 
@@ -234,6 +247,11 @@ function renderGameboards() {
                 if (nextPlayer.type === "computer") {
                   setTimeout(() => {
                     const computerAttack = attackOpponentBoard();
+
+                    if (!computerAttack) {
+                      return;
+                    }
+
                     const displayX = String.fromCharCode(65 + computerAttack.x);
                     const displayY = computerAttack.y + 1;
 
@@ -399,7 +417,7 @@ function renderTempButtons() {
         appState.shipsConfirmed.player1 = true;
 
         if (appState.player2Type === "human") {
-          // show pass screen instead of just an alert
+          // show pass screen
           const gameData = getCurrentGameData();
           showPassScreen(gameData[1].player.name, 1);
         } else {

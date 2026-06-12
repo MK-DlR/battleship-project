@@ -70,6 +70,8 @@ function renderBattleLog(parent) {
       text.textContent = `Hit at ${log.coordinates}`;
     } else if (log.result === "miss") {
       text.textContent = `Miss at ${log.coordinates}`;
+    } else if (log.result === "game_over") {
+      text.innerHTML = `<div class="battle-log-win">Game over! 🎉 ${log.attackerName} wins! 🎉</div>`;
     }
 
     entry.appendChild(dot);

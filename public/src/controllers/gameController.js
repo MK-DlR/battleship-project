@@ -3,6 +3,7 @@
 // imports
 import { appState } from "./appController.js";
 
+import { addBattleLogEntry } from "./battleLogController.js";
 import { Gameboard } from "../game/gameboard.js";
 import { Player } from "../game/player.js";
 import { Ship } from "../game/ship.js";
@@ -165,7 +166,7 @@ function attackOpponentBoard(x, y) {
   // human player attack
   if (getActivePlayer().player.type === "human") {
     const result = opponentGameboard.receiveAttack(x, y);
-    checkEndgame(); // check for endgame conditions
+
     return result; // return "hit", "miss", or error message
   }
 
@@ -245,6 +246,7 @@ function attackOpponentBoard(x, y) {
         const computerName = getActivePlayer().player.name;
 
         // handle ship sunk notification
+        // TODO: change to modal
         alert(`${computerName} sunk ${opponentName}'s ${result.shipName}!`);
       }
 
@@ -280,16 +282,17 @@ function checkEndgame() {
   const opponentGameboard = currentGameData[opponentIndex].player.gameboard;
 
   if (opponentGameboard.allShipsSunk()) {
-    console.log("All ships sunk");
     triggerEndgame();
+    return true;
   } else {
-    console.log("Ships still present");
+    return false;
   }
 }
 
 // trigger game over
 function triggerEndgame() {
   // display game over notification and winner
+  // TODO: change to modal
   alert(`Game over! 🎉 ${getActivePlayer().player.name} wins! 🎉`);
   // increment player score
   getActivePlayer().player.score += 1;
@@ -320,4 +323,5 @@ export {
   getActivePlayer,
   createNewGame,
   attackOpponentBoard,
+  checkEndgame,
 };
