@@ -151,11 +151,6 @@ function renderGameboards() {
 
             const coordinates = displayX + displayY;
 
-            // log the coordinates and board
-            console.log(
-              `Cell clicked at: ${displayX}${displayY} on Board ${boardContainer.dataset.player}.`,
-            );
-
             // access gameboards
             getCurrentGameData();
 
