@@ -155,8 +155,10 @@ body {
 
 /* home and pass container overrides */
 .home-container, .pass-container {
-  padding-top: 250px;
+  margin-top: 100px;
+  padding-top: 100px;
   height: 550px;
+  width: 900px;
 }
 
 /* current turn indicator */
@@ -188,9 +190,10 @@ body {
 /* home container */
 .home-container {
   position: relative;
+  overflow: hidden;
 }
 
-/* home  title */
+/* home title */
 .title1 {
   font-family: 'Cinzel', serif;
   font-size: 25px;
@@ -203,7 +206,32 @@ body {
   font-style: italic;
 }
 
-/* home credit */
+.home-divider-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 auto 20px;
+  max-width: 320px;
+}
+
+.home-divider-row hr {
+  flex: 1;
+  border: none;
+  border-top: 1px solid #C4B99A;
+}
+
+/* svg */
+.ship-svg{
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.07;
+  pointer-events: none;
+  width: 560px;
+}
+
+/* credit */
 .home-credit {
   position: absolute;
   bottom: 20px;

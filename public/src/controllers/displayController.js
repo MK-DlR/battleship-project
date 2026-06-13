@@ -54,6 +54,41 @@ function renderHomescreen() {
   title2.classList.add("title2");
   title2.textContent = "BATTLESHIP!!!";
 
+  /* create decorative elements */
+  const homeDividerRow = document.createElement("div");
+  homeDividerRow.classList.add("home-divider-row");
+
+  const dividerLeft = document.createElement("hr");
+  const dividerRight = document.createElement("hr");
+
+  const compassSvg = document.createElement("div");
+  compassSvg.classList.add("compass-svg");
+  compassSvg.innerHTML = `<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="14" cy="14" r="3" fill="#C4B99A"/>
+    <line x1="14" y1="2" x2="14" y2="8" stroke="#C4B99A" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="14" y1="20" x2="14" y2="26" stroke="#C4B99A" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="2" y1="14" x2="8" y2="14" stroke="#C4B99A" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="20" y1="14" x2="26" y2="14" stroke="#C4B99A" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="5.5" y1="5.5" x2="9.5" y2="9.5" stroke="#C4B99A" stroke-width="1" stroke-linecap="round"/>
+    <line x1="18.5" y1="18.5" x2="22.5" y2="22.5" stroke="#C4B99A" stroke-width="1" stroke-linecap="round"/>
+    <line x1="22.5" y1="5.5" x2="18.5" y2="9.5" stroke="#C4B99A" stroke-width="1" stroke-linecap="round"/>
+    <line x1="9.5" y1="18.5" x2="5.5" y2="22.5" stroke="#C4B99A" stroke-width="1" stroke-linecap="round"/>
+  </svg>`;
+
+  const shipSvg = document.createElement("div");
+  shipSvg.classList.add("ship-svg");
+  shipSvg.innerHTML = `<svg width="560" height="120" viewBox="0 0 500 120" xmlns="http://www.w3.org/2000/svg">
+    <rect x="50" y="70" width="400" height="25" rx="4" fill="#1B2A4A"/>
+    <rect x="80" y="45" width="280" height="28" rx="3" fill="#1B2A4A"/>
+    <rect x="120" y="25" width="80" height="22" rx="2" fill="#1B2A4A"/>
+    <rect x="210" y="10" width="8" height="40" fill="#1B2A4A"/>
+    <rect x="280" y="18" width="6" height="32" fill="#1B2A4A"/>
+    <rect x="160" y="30" width="6" height="18" fill="#1B2A4A"/>
+    <polygon points="50,95 20,95 50,70" fill="#1B2A4A"/>
+    <polygon points="450,95 480,95 450,70" fill="#1B2A4A"/>
+    <rect x="0" y="95" width="500" height="8" rx="2" fill="#1B2A4A" opacity="0.5"/>
+  </svg>`;
+
   const gameButtonContainer = document.createElement("div");
   gameButtonContainer.classList.add("home-button-container");
 
@@ -83,14 +118,21 @@ function renderHomescreen() {
   credit.classList.add("home-credit");
   credit.innerHTML = `<a href="https://github.com/MK-DlR">Created by <i class="fa-brands fa-github"></i> MK-DlR</a>`;
 
+  // append decorative elements together
+  homeDividerRow.appendChild(dividerLeft);
+  homeDividerRow.appendChild(compassSvg);
+  homeDividerRow.appendChild(dividerRight);
+
   // append everything
   gameButtonContainer.appendChild(newGameButton);
   playerButtonContainer.appendChild(newPlayerButton1);
   playerButtonContainer.appendChild(newPlayerButton2);
   homeContainer.appendChild(title1);
   homeContainer.appendChild(title2);
+  homeContainer.appendChild(homeDividerRow);
   homeContainer.appendChild(gameButtonContainer);
   homeContainer.appendChild(playerButtonContainer);
+  homeContainer.appendChild(shipSvg);
   homeContainer.appendChild(credit);
   mainContent.appendChild(homeContainer);
 }
