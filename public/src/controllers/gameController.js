@@ -248,10 +248,6 @@ function attackOpponentBoard(x, y) {
         const opponentIndex = activePlayerIndex === 0 ? 1 : 0;
         const opponentName = gameData[opponentIndex].player.name;
         const computerName = getActivePlayer().player.name;
-
-        // handle ship sunk notification
-        // TODO: change to modal
-        alert(`${computerName} sunk ${opponentName}'s ${result.shipName}!`);
       }
 
       // store coordinates if attack is a hit

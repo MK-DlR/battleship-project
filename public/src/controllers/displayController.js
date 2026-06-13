@@ -225,13 +225,6 @@ function renderGameboards() {
                 const opponentIndex = activePlayerIndex === 0 ? 1 : 0;
                 const opponentName = gameData[opponentIndex].player.name;
 
-                // TODO: update to modal
-                alert(
-                  `${getActivePlayer().player.name} sunk ${opponentName}'s ${
-                    result.shipName
-                  }!`,
-                );
-
                 // ship sunk battle log call
                 addBattleLogEntry(
                   getActivePlayer().player.name,
