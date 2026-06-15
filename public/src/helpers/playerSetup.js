@@ -5,7 +5,7 @@ import { showInputModal } from "../controllers/modalController.js";
 
 function addNewPlayer1() {
   showInputModal(
-    "Enter player name",
+    "Enter player 1 name",
     (value) => {
       appState.player1Name = value;
       appState.player1Type = "human";
@@ -19,7 +19,7 @@ function addNewPlayer1() {
 
 function addNewPlayer2() {
   showInputModal(
-    "Enter player name",
+    "Enter player 2 name",
     (value) => {
       appState.player2Name = value;
       appState.player2Type = "human";
