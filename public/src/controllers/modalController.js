@@ -79,12 +79,24 @@ function showInputModal(title, onConfirm, onCancel) {
 
   showModal(); // show overlay
 
+  // clone and replace input element
+  const newInput = input.cloneNode(true);
+  input.parentNode.replaceChild(newInput, input);
+
+  newInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      const value = newInput.value.trim();
+      hideModal();
+      onConfirm(value);
+    }
+  });
+
   // clone and replace confirm button
   const newConfirm = confirmBtn.cloneNode(true);
   confirmBtn.parentNode.replaceChild(newConfirm, confirmBtn);
 
   newConfirm.addEventListener("click", () => {
-    const value = input.value.trim();
+    const value = newInput.value.trim();
     hideModal();
     onConfirm(value);
   });
