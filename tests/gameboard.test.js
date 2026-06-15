@@ -1,4 +1,4 @@
-// gameboard.test.js
+// tests/gameboard.test.js
 
 import { message, Gameboard } from "../public/game/gameboard.js";
 import { Ship } from "../public/game/ship.js";

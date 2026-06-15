@@ -1,4 +1,4 @@
-// ship.test.js
+// tests/ship.test.js
 import { message, Ship } from "../public/game/ship.js";
 
 test("ship module imports correctly", () => {

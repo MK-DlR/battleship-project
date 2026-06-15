@@ -1,4 +1,4 @@
-// gameController.test.js
+// tests/gameController.test.js
 
 import {
   message,

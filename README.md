@@ -148,7 +148,7 @@ project_functionality
 
 ## Roadmap
 
-- [ ] Upgrade CSS
+- [x] Upgrade CSS
 - [x] Make tablet friendly
 - [x] Add battle log
   - [x] Bug: Various battle log issues

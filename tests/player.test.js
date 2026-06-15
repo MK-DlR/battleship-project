@@ -1,4 +1,4 @@
-// player.test.js
+// tests/player.test.js
 
 import { message, Player } from "../public/game/player.js";
 import { Ship } from "../public/game/ship.js";
@@ -16,7 +16,7 @@ test("player class can create both real and computer players", () => {
   const computerPlayer = new Player(
     "computerPlayer",
     "computer",
-    compGameboard
+    compGameboard,
   ); // new player, computer
 
   expect(realPlayer.name).toBe("realPlayer"); // name
@@ -33,7 +33,7 @@ test("each player object contains its own gameboard", () => {
   const computerPlayer = new Player(
     "computerPlayer",
     "computer",
-    compGameboard
+    compGameboard,
   ); // new player, computer
   const ship1 = new Ship("Destroyer", 3, 0, false); // new destroyer ship for real player
   const ship2 = new Ship("Destroyer", 3, 0, false); // new destroyer ship for computer player
