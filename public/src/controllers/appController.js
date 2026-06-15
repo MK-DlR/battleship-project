@@ -14,6 +14,7 @@ import {
   resetScore,
   renderGamescreen,
 } from "./displayController.js";
+import { createModal } from "./modalController.js";
 
 // define app state to track current screen
 let appState = {
@@ -123,6 +124,8 @@ function initApp() {
     appState.shipsPlaced.player2 = true;
     appState.shipsConfirmed.player2 = true;
   }
+
+  createModal(); // initialize modal
 
   showHomeScreen(); // start on home screen
 }
