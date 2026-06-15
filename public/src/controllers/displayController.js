@@ -36,6 +36,7 @@ import { Ship } from "../game/ship.js";
 
 import { createBoardWrapper } from "../helpers/domHelpers.js";
 import { addNewPlayer1, addNewPlayer2 } from "../helpers/playerSetup.js";
+import { getTurnText } from "../helpers/turnHelpers.js";
 import { shouldHideShips } from "../helpers/visibilityHelpers.js";
 
 let gameContainer;
@@ -617,20 +618,14 @@ function renderScores() {
 // display current player turn
 function renderTurn() {
   const gameData = getCurrentGameData();
-  const activePlayer = gameData[activePlayerIndex].player;
-  const activeName = activePlayer.name; // get from Player instance
 
   // create container for turn
   const turnContainer = document.createElement("div");
   turnContainer.classList.add("turn-container");
 
-  // conditionally show winner or which player's turn
-  if (getIsGameOver()) {
-    turnContainer.classList.add("turn-container--winner");
-    turnContainer.innerHTML = `${activeName} wins!`;
-  } else {
-    turnContainer.innerHTML = `${activeName}'s turn`;
-  }
+  const { text, isWinner } = getTurnText(gameData);
+  if (isWinner) turnContainer.classList.add("turn-container--winner");
+  turnContainer.innerHTML = text;
 
   // append everything
   gameContainer.appendChild(turnContainer);
@@ -638,8 +633,6 @@ function renderTurn() {
 
 function updateTurn() {
   const gameData = getCurrentGameData();
-  const activePlayer = gameData[activePlayerIndex].player;
-  const activeName = activePlayer.name; // get from Player instance
 
   // find container for turn
   const turnContainer = document.querySelector(".turn-container");
@@ -649,13 +642,9 @@ function updateTurn() {
     return; // exit early if element doesn't exist
   }
 
-  // conditionally show winner or which player's turn
-  if (getIsGameOver()) {
-    turnContainer.classList.add("turn-container--winner");
-    turnContainer.innerHTML = `${activeName} wins!`;
-  } else {
-    turnContainer.innerHTML = `${activeName}'s turn`;
-  }
+  const { text, isWinner } = getTurnText(gameData);
+  if (isWinner) turnContainer.classList.add("turn-container--winner");
+  turnContainer.innerHTML = text;
 }
 
 function resetScore() {
