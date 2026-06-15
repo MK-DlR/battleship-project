@@ -68,7 +68,7 @@ function showInputModal(title, onConfirm, onCancel) {
   } = getModalElements();
 
   // set title text
-  modalTitle.textContent = "Enter player name";
+  modalTitle.textContent = title;
 
   // clear and show input field
   input.style.display = "block";
