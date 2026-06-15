@@ -3,7 +3,8 @@
 function createModal() {
   // create modal overlay
   const modalOverlay = document.createElement("div");
-  modalOverlay.classList.add("modal-overlay");
+  modalOverlay.id = "modal-overlay";
+  // modalOverlay.classList.add("modal-overlay");
   modalOverlay.style.display = "none"; // hidden by default
 
   // create modal box
@@ -12,32 +13,39 @@ function createModal() {
 
   // create modal title
   const modalTitle = document.createElement("div");
-  modalTitle.classList.add("modal-title");
+  modalTitle.textContent = "Title Placeholder";
+  modalTitle.id = "modal-title";
+  // modalTitle.classList.add("modal-title");
 
   // create modal message
   const modalMessage = document.createElement("div");
-  modalMessage.classList.add("modal-message");
+  modalMessage.textContent = "Message Placeholder";
+  modalMessage.id = "modal-message";
+  // modalMessage.classList.add("modal-message");
 
   // create modal input
-  const modalInput = document.createElement("INPUT");
-  modalInput.classList.add("modal-input");
+  const modalInput = document.createElement("input");
+  modalInput.id = "modal-input";
+  // modalInput.classList.add("modal-input");
 
   // create modal buttons container
   const modalButtons = document.createElement("div");
   modalButtons.classList.add("modal-buttons");
 
   // create confirm and cancel buttons
-  const confirmButton = document.createElement("BUTTON");
-  confirmButton.textContent = "Confirm";
-  confirmButton.classList.add("dark-button");
+  const modalConfirm = document.createElement("button");
+  modalConfirm.textContent = "Confirm";
+  modalConfirm.id = "modal-confirm";
+  modalConfirm.classList.add("dark-button");
 
-  const cancelButton = document.createElement("BUTTON");
-  cancelButton.textContent = "Cancel";
-  cancelButton.classList.add("button");
+  const modalCancel = document.createElement("button");
+  modalCancel.textContent = "Cancel";
+  modalCancel.id = "modal-cancel";
+  modalCancel.classList.add("button");
 
   // append buttons to modalButtons first
-  modalButtons.appendChild(confirmButton);
-  modalButtons.appendChild(cancelButton);
+  modalButtons.appendChild(modalConfirm);
+  modalButtons.appendChild(modalCancel);
 
   // append everything
   modalOverlay.appendChild(modalBox);

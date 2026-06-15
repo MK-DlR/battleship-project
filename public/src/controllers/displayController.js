@@ -443,7 +443,7 @@ function renderTempButtons() {
     if (appState.shipsConfirmed.player1 === false) {
       const player1Name = gameData[0].player.name;
 
-      const randomizePlacementButton1 = document.createElement("BUTTON");
+      const randomizePlacementButton1 = document.createElement("button");
       randomizePlacementButton1.classList.add("button");
       randomizePlacementButton1.id = "randomizePlacementButton1";
 
@@ -466,7 +466,7 @@ function renderTempButtons() {
       appState.shipsPlaced.player1 === true &&
       appState.shipsConfirmed.player1 === false
     ) {
-      const confirmButton1 = document.createElement("BUTTON");
+      const confirmButton1 = document.createElement("button");
       confirmButton1.classList.add("button");
       confirmButton1.textContent = `Confirm Placement`;
 
@@ -487,7 +487,7 @@ function renderTempButtons() {
 
     // PHASE 3: start game (only when both confirmed)
     if (appState.shipsConfirmed.player1 && appState.shipsConfirmed.player2) {
-      const startGameButton = document.createElement("BUTTON");
+      const startGameButton = document.createElement("button");
       startGameButton.classList.add("button");
       startGameButton.id = "startGameButton";
       const startGameText = document.createTextNode("Start Game");
@@ -505,7 +505,7 @@ function renderTempButtons() {
     ) {
       const player2Name = gameData[1].player.name;
 
-      const randomizePlacementButton2 = document.createElement("BUTTON");
+      const randomizePlacementButton2 = document.createElement("button");
       randomizePlacementButton2.classList.add("button");
       randomizePlacementButton2.id = "randomizePlacementButton2";
 
@@ -530,7 +530,7 @@ function renderTempButtons() {
       appState.shipsConfirmed.player2 === false &&
       appState.player2Type === "human"
     ) {
-      const confirmButton2 = document.createElement("BUTTON");
+      const confirmButton2 = document.createElement("button");
       confirmButton2.classList.add("button");
       confirmButton2.textContent = `Confirm Placement`;
       confirmButton2.addEventListener("click", () => {
@@ -550,21 +550,21 @@ function renderButtons(parent) {
   buttonContainer.classList.add("button-container");
 
   // new round button
-  const newRoundButton = document.createElement("BUTTON");
+  const newRoundButton = document.createElement("button");
   newRoundButton.classList.add("dark-button");
   newRoundButton.id = "newRoundButton";
   const newRoundText = document.createTextNode("New Round");
   newRoundButton.addEventListener("click", handleNewRound);
 
   // home button
-  const newGameButton = document.createElement("BUTTON");
+  const newGameButton = document.createElement("button");
   newGameButton.classList.add("dark-button");
   newGameButton.id = "newGameButton";
   const newGameText = document.createTextNode("New Game");
   newGameButton.addEventListener("click", showHomeScreen);
 
   // reset score button
-  const resetScoreButton = document.createElement("BUTTON");
+  const resetScoreButton = document.createElement("button");
   resetScoreButton.classList.add("dark-button");
   resetScoreButton.id = "resetScoreButton";
   const resetScoreText = document.createTextNode("Reset Score");
