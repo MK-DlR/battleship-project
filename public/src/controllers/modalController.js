@@ -67,20 +67,19 @@ function showInputModal(title, onConfirm, onCancel) {
     cancel,
   } = getModalElements();
 
-  // set title text
-  modalTitle.textContent = title;
+  modalTitle.textContent = title; // set title text
 
   // clear and show input field
   input.style.display = "block";
   input.value = "";
 
-  // hide message div
-  message.style.display = "none";
+  message.style.display = "none"; // hide message div
 
-  // show overlay
-  showModal();
+  cancel.style.display = "block"; // show cancel button
 
-  // clone confirm button
+  showModal(); // show overlay
+
+  // clone and replace confirm button
   const newConfirm = confirmBtn.cloneNode(true);
   confirmBtn.parentNode.replaceChild(newConfirm, confirmBtn);
 
@@ -90,7 +89,7 @@ function showInputModal(title, onConfirm, onCancel) {
     onConfirm(value);
   });
 
-  // clone cancel button
+  // clone and replace cancel button
   const newCancel = cancel.cloneNode(true);
   cancel.parentNode.replaceChild(newCancel, cancel);
 
@@ -103,33 +102,37 @@ function showInputModal(title, onConfirm, onCancel) {
   document.getElementById("modal-input").focus();
 }
 
-/*
 function showAlertModal(title, message, onConfirm) {
   // get elements by id
   const {
-    title: titleElement,
-    message,
+    title: alertTitle,
+    message: messageElement,
     input,
     confirm: confirmBtn,
     cancel,
   } = getModalElements();
 
   // set title and message text
+  alertTitle.textContent = title;
+  messageElement.textContent = message;
 
   input.style.display = "none"; // hide input field
 
-  // show message div
-  // set confirm button text to ok
+  messageElement.style.display = "flex"; // show message div
 
   cancel.style.display = "none"; // hide cancel button
 
-  // show overlay
+  showModal(); // show overlay
 
-  // set up confirm button click handler
-  // hide overlay, call onConfirm() if provided
+  // clone and replace confirm button
   const newConfirm = confirmBtn.cloneNode(true);
   confirmBtn.parentNode.replaceChild(newConfirm, confirmBtn);
-}
-*/
+  newConfirm.textContent = "OK";
 
-export { createModal, showInputModal /* showAlertModal */ };
+  newConfirm.addEventListener("click", () => {
+    hideModal();
+    if (onConfirm) onConfirm();
+  });
+}
+
+export { createModal, showInputModal, showAlertModal };

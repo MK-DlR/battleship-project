@@ -4,6 +4,8 @@
 import { appState } from "./appController.js";
 
 import { addBattleLogEntry } from "./battleLogController.js";
+import { showAlertModal } from "./modalController.js";
+
 import { Gameboard } from "../game/gameboard.js";
 import { Player } from "../game/player.js";
 import { Ship } from "../game/ship.js";
@@ -291,8 +293,7 @@ function triggerEndgame() {
   isGameOver = true;
 
   // display game over notification and winner
-  // TODO: change to modal
-  alert(`Game over! 🎉 ${getActivePlayer().player.name} wins! 🎉`);
+  showAlertModal("Game Over", `${getActivePlayer().player.name} wins! 🎉`);
 
   // increment player score
   getActivePlayer().player.score += 1;
