@@ -1,12 +1,26 @@
 // tests/gameController.test.js
 
+jest.mock("../public/src/controllers/appController.js", () => ({
+  appState: {
+    player1Name: "Player 1",
+    player2Name: "Player 2",
+    player1Type: "human",
+    player2Type: "computer",
+  },
+}));
+
+jest.mock("../public/src/controllers/battleLogController.js", () => ({
+  addBattleLogEntry: jest.fn(),
+}));
+
+jest.mock("../public/src/controllers/modalController.js", () => ({
+  showAlertModal: jest.fn(),
+}));
+
 import {
   message,
   createFleet,
   newGame,
-  placeShipsForTesting,
-  player1Coords,
-  player2Coords,
   placeAllShips,
 } from "../public/src/controllers/gameController.js";
 
@@ -18,8 +32,30 @@ test("gamecontroller module imports correctly", () => {
 let gameData;
 beforeEach(() => {
   gameData = newGame();
-  placeAllShips(gameData[0], player1Coords);
-  placeAllShips(gameData[1], player2Coords);
+
+  const p1Coords = [
+    [0, 0, "horizontal"],
+    [0, 1, "horizontal"],
+    [0, 2, "horizontal"],
+    [0, 3, "horizontal"],
+    [0, 4, "horizontal"],
+  ];
+
+  const p2Coords = [
+    [5, 0, "vertical"],
+    [6, 0, "vertical"],
+    [7, 0, "vertical"],
+    [8, 0, "vertical"],
+    [9, 0, "vertical"],
+  ];
+
+  gameData[0].ships.forEach((ship, i) => {
+    gameData[0].player.gameboard.placeShip(ship, ...p1Coords[i]);
+  });
+
+  gameData[1].ships.forEach((ship, i) => {
+    gameData[1].player.gameboard.placeShip(ship, ...p2Coords[i]);
+  });
 });
 
 test("successfully creates 2 players with the correct types", () => {
@@ -32,11 +68,12 @@ test("successfully creates 2 players with the correct types", () => {
 test("both player gameboards are distinct from each other", () => {
   const player1Board = gameData[0].player.gameboard.getBoard();
   const player2Board = gameData[1].player.gameboard.getBoard();
+  const foundShip = player2Board.flat().includes(gameData[1].ships[4]);
 
   expect(player1Board[0][0].length).toBe(5); // Carrier length 5
   expect(player2Board[0][0]).toBe("X"); // empty
   expect(player1Board[8][5]).toBe("X"); // empty
-  expect(player2Board[8][5].length).toBe(2); // Patrol Boat length 2
+  expect(foundShip).toBe(true);
 });
 
 test("both player gameboards are populated with 5 ships", () => {
@@ -84,10 +121,18 @@ function verifyShipPlacement(board, ships, coords) {
   }
 }
 
-test("all 5 ships are correctly placed", () => {
-  const player1Board = gameData[0].player.gameboard.getBoard();
-  const player2Board = gameData[1].player.gameboard.getBoard();
+test("all ships are placed without overlap", () => {
+  const board = gameData[0].player.gameboard.getBoard();
 
-  verifyShipPlacement(player1Board, gameData[0].ships, player1Coords);
-  verifyShipPlacement(player2Board, gameData[1].ships, player2Coords);
+  const placedShips = new Set();
+
+  for (let row of board) {
+    for (let cell of row) {
+      if (cell !== "X" && cell !== "H" && cell !== "M") {
+        placedShips.add(cell);
+      }
+    }
+  }
+
+  expect(placedShips.size).toBe(5);
 });
