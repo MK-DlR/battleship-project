@@ -1,7 +1,7 @@
 // tests/gameboard.test.js
 
-import { message, Gameboard } from "../public/game/gameboard.js";
-import { Ship } from "../public/game/ship.js";
+import { message, Gameboard } from "../public/src/game/gameboard.js";
+import { Ship } from "../public/src/game/ship.js";
 
 test("gameboard module imports correctly", () => {
   expect(message).toBe("Successfully linked gameboard"); // check file is linked

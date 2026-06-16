@@ -1,5 +1,6 @@
 // tests/ship.test.js
-import { message, Ship } from "../public/game/ship.js";
+
+import { message, Ship } from "../public/src/game/ship.js";
 
 test("ship module imports correctly", () => {
   expect(message).toBe("Successfully linked ship"); // check file is linked

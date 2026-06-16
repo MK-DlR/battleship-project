@@ -1,8 +1,8 @@
 // tests/player.test.js
 
-import { message, Player } from "../public/game/player.js";
-import { Ship } from "../public/game/ship.js";
-import { Gameboard } from "../public/game/gameboard.js";
+import { message, Player } from "../public/src/game/player.js";
+import { Ship } from "../public/src/game/ship.js";
+import { Gameboard } from "../public/src/game/gameboard.js";
 
 test("player module imports correctly", () => {
   expect(message).toBe("Successfully linked player"); // check file is linked

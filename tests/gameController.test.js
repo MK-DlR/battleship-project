@@ -8,7 +8,7 @@ import {
   player1Coords,
   player2Coords,
   placeAllShips,
-} from "../public/gameController.js";
+} from "../public/src/controllers/gameController.js";
 
 test("gamecontroller module imports correctly", () => {
   expect(message).toBe("Successfully linked gamecontroller"); // check file is linked
