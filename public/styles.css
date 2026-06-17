@@ -543,6 +543,45 @@ body {
 /* media queries */
 @media (max-width: 1660px) {
   .game-layout {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-areas:
+      "game game"
+      "buttons battlelog";
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .game-container {
+    grid-area: game;
+  }
+
+  .button-container {
+    grid-area: buttons;
+  }
+
+  .battle-log-container {
+    grid-area: battlelog;
+  }
+
+  .button-container {
+    justify-self: end;
+    margin-right: auto;
+  }
+  
+  .battle-log-container {
+    justify-self: start;
+    margin-left: auto;
+  }
+}
+
+/* landscape tablet */
+@media (max-width: 1024px) {
+  .home-container {
+    width: 710px;
+  }
+  
+  .game-layout {
     justify-content: center;
     display: grid;
     grid-template-areas:
@@ -552,8 +591,8 @@ body {
   }
 
   .game-container {
-    width: 710px;
-    height: 1085px;
+    width: 975px;
+    height: 680px;
     grid-area: game;
   }
 
@@ -581,17 +620,10 @@ body {
   }
 }
 
-/* phones + small tablets */
+/* portrait tablet */
 @media (max-width: 820px) {
-  .home-container {
-    width: 100%;
-  }
-}
-
-/* tablets / iPad landscape */
-@media (max-width: 1024px) {
   .game-container {
-    width: 975px;
-    height: 680px;
+    width: 710px;
+    height: 1085px;
   }
 }
