@@ -17,10 +17,11 @@ body {
 
 /* full game layout */
 .game-layout {
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 16px;
+  width: fit-content;
   margin: 5vh auto 0 auto;
 }
 
@@ -280,11 +281,13 @@ body {
 /* sidebar button container - new round, new game, reset score */
 .button-container {
   align-items: center;
+  margin-right: 40px;
   gap: 10px;
 }
 
 /* sidebar battle log display */
 .battle-log-container {
+  margin-left: 40px;
   gap: 8px;
 }
 
@@ -401,7 +404,6 @@ body {
 }
 
 /* modals */
-/* TODO */
 #modal-overlay {
   background: rgba(15, 20, 35, 0.6);
   position: fixed;
@@ -539,8 +541,9 @@ body {
 }
 
 /* media queries */
-@media (max-width: 1620px) {
+@media (max-width: 1660px) {
   .game-layout {
+    justify-content: center;
     display: grid;
     grid-template-areas:
       "game game"
@@ -575,5 +578,20 @@ body {
   .battle-log-container {
     grid-area: battlelog;
     justify-self: end;
+  }
+}
+
+/* portrait tablet */
+@media (max-width: 768px) {
+  .home-container {
+    width: 710px;
+  }
+}
+
+/* landscape tablet */
+@media (max-width: 1024px) {
+  .game-container {
+    width: 975px;
+    height: 680px;
   }
 }
