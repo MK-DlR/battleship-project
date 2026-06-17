@@ -4,6 +4,7 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 /* base body */
@@ -81,7 +82,6 @@ body {
   height: 30px;
   background-color: #E8E0D0; /* fallback color */
   border: 1px solid #C4B99A;
-  box-sizing: border-box; 
 }
 
 /* cell hover effect */
@@ -445,7 +445,6 @@ body {
   background: #E8E0D0;
   border: 1px solid #C4B99A;
   width: 100%;
-  box-sizing: border-box;
   padding: 8px 12px;
   border-radius: 4px;
   font-family: 'EB Garamond', serif;
@@ -540,7 +539,6 @@ body {
 }
 
 /* media queries */
-/* TEMP: tablet: 768px */
 @media (max-width: 1620px) {
   .game-layout {
     display: grid;
@@ -560,21 +558,22 @@ body {
     bottom: 20px;
   }
 
+  /* shared sizing for sidebar containers in narrow layout */
+  .button-container,
+  .battle-log-container {
+    height: 333px;
+  }
+
   .button-container {
     grid-area: buttons;
     justify-self: start;
-    height: 333px;
-    width: 292px;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 20px;
   }
-  
+
   .battle-log-container {
     grid-area: battlelog;
     justify-self: end;
-    height: 333px;
   }
 }
