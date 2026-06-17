@@ -668,10 +668,6 @@ function renderGamescreen() {
   gameContainer = document.createElement("div");
   gameContainer.classList.add("game-container");
 
-  // create lower panel for media query
-  const lowerPanel = document.createElement("div");
-  lowerPanel.classList.add("lower-panel");
-
   // append everything
   mainContent.appendChild(gameLayout);
   renderButtons(gameLayout); // append before gameContainer so it displays on left
