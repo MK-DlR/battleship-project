@@ -16,7 +16,7 @@
 <h3 align="center">Battleship</h3>
 
   <p align="center">
-    project_description
+    TDD-based naval themed Battleship game web app with PC vs CPU and local PC vs PC functionality, automatic attack logging, a score counter, and full playability on tablets.
     <br />
     <a href="https://github.com/MK-DlR/battleship-project"><strong>Explore the docs »</strong></a>
     <br />
@@ -84,40 +84,31 @@ To get a local copy up and running, follow these steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-
+- Node.js (recommended v22+)
 - npm
-  ```sh
-  npm install npm@latest -g
-  ```
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repository
    ```sh
    git clone https://github.com/MK-DlR/battleship-project.git
+   cd battleship-project
    ```
-3. Install NPM packages
+2. Install dependencies
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = "ENTER YOUR API";
-   ```
-5. Change git remote url to avoid accidental pushes to base project
+3. Start the application
    ```sh
-   git remote set-url origin MK-DlR/battleship-project
-   git remote -v # confirm the changes
+   npm start
    ```
+4. Open the app at `http://localhost:8080`
 
 ### Notes
 
-- Backend: (if applicable)
-- Frontend: (if applicable)
-- Authentication: (if applicable)
-- Misc comments/features
+- Built with: JavaScript + Jest (DOM manipulation, no frameworks)
+- Testing: Jest with Babel for ES module support
+- Run tests with `npm test`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -125,22 +116,19 @@ This is an example of how to list things you need to use the software and how to
 
 ## Usage
 
-project_description
+This is a Battleship-style game application where players can play against the computer or locally against another player, attempting to sink all of the opponent's ships first.
 
-project_functionality
+The application allows for randomized ship placement and hit/miss/ship sunk logging.
 
 ### How to Use the App
 
-1. Open the app at http://localhost:5173 or visit the [live demo](https://mk-dlr.github.io/battleship-project/)
-2. Step 2
-   - Nested step details
-3. Step 3
-
-### Default Setup Behavior
-
-- [EXAMPLE] A “Main Chat” channel is created automatically via the seed script
-- [EXAMPLE] A guest user account is also created for immediate access
-- [EXAMPLE] All users are automatically added to the default channel on creation
+1. Open the app at http://localhost:8080 or visit the [live demo](https://mk-dlr.github.io/battleship-project/)
+2. Play the game:
+   - PC vs CPU: Set your name (optional) and press "New Game", randomize and confirm your ship placement, then press "Start Game".
+   - Local PC vs PC: Set both player names and press "New Game", both players must randomize and confirm their ship placements, then press "Start Game".
+     - Player names can be left blank as long as each "Set Player" button is pressed and "Confirm" is selected for both.
+3. Sink all of the opponent's ships to complete the game.
+4. Upon game over, select "New Round" to play another round with the same players or "New Game" to change modes and/or names.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -214,7 +202,7 @@ Project Link: [Repository](https://github.com/MK-DlR/battleship-project) & [Live
 [license-url]: https://github.com/MK-DlR/battleship-project/blob/main/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/adrien-newman
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: images/screenshot.gif
 
 <!-- Shields.io badges. You can a comprehensive list with many more badges at: https://github.com/inttter/md-badges -->
 
