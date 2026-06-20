@@ -65,7 +65,7 @@
 
 ## About The Project
 
-[![Battleship Screen Shot][product-screenshot]](https://mk-dlr.github.io/battleship-project/)
+[![Let's Play Battleship Screen Shot][product-screenshot]](https://mk-dlr.github.io/battleship-project/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
